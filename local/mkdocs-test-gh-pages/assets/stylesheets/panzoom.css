@@ -1,4 +1,5 @@
 .panzoom-box {
+    position: relative;
     overflow: hidden;
     border-radius: 2px;
     /*border-color: grey;
@@ -6,13 +7,31 @@
     border-style: solid;*/
     margin-bottom: 5px;
     background-color: hsla(var(--md-hue), 15%, 18%, 1);
+    top: 0;
 }
 
-.panzoom-max {
+.mermaid {
+    top: 0;
+}
+
+.panzoom-icon {
+    width: 20px;
+    height: 20px;
+}
+
+.pan-zoom-hidden {
+    display: none;
 }
 
 .panzoom-min {
 }
 
 .panzoom-top-nav {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    z-index: 5;
 }
