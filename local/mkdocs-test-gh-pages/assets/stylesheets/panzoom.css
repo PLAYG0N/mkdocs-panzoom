@@ -1,0 +1,18 @@
+.panzoom-box {
+    overflow: hidden;
+    border-radius: 2px;
+    /*border-color: grey;
+    border-width: 1px;
+    border-style: solid;*/
+    margin-bottom: 5px;
+    background-color: hsla(var(--md-hue), 15%, 18%, 1);
+}
+
+.panzoom-max {
+}
+
+.panzoom-min {
+}
+
+.panzoom-top-nav {
+}
