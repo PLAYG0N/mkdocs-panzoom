@@ -17,11 +17,6 @@
 .panzoom-icon {
     width: 20px;
     height: 20px;
-    fill: var(--md-default-fg-color--lightest);
-}
-
-.panzoom-box:hover .panzoom-icon {
-    fill: var(--md-default-fg-color--light);
 }
 
 .panzoom-hidden {

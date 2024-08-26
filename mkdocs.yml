@@ -1,0 +1,31 @@
+site_name: PanZoom Plugin for MkDocs
+site_dir: public
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+
+# Extensions
+markdown_extensions:
+  - footnotes
+  - attr_list
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.magiclink
+  - pymdownx.tasklist
+  - pymdownx.emoji
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+plugins:
+  - search
+  - roamlinks
+  - panzoom
