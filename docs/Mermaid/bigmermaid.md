@@ -1,5 +1,7 @@
 # Big Mermaid
 
+## Example 1
+
 ```mermaid
 graph TD;
     A[Start] --> B{Initial Check};
@@ -86,6 +88,10 @@ graph TD;
     accounts --> dbPrimary & dbReplica
     read --> dbReplica & memoryCache[Memory Cache]
 ```
+
+## Example 2
+
+This is the second ecample.
 
 ```mermaid
 ---
