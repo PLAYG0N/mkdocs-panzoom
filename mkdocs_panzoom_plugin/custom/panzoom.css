@@ -15,8 +15,27 @@
 }
 
 .panzoom-icon {
-    width: 20px;
-    height: 20px;
+    width: 1.125em;
+    fill: var(--md-default-fg-color--lightest);
+    transition: 0.25s;
+}
+
+.panzoom-button {
+    width: 1.5em;
+    height: 1.5em;
+}
+
+button:hover .panzoom-icon {
+    fill: var(--md-accent-fg-color);
+}
+
+/*
+.panzoom-box:hover .panzoom-icon {
+    fill: var(--md-default-fg-color--light);
+}
+*/
+:hover > * > * > .panzoom-icon {
+    fill: var(--md-default-fg-color--light);
 }
 
 .panzoom-hidden {
@@ -34,4 +53,15 @@
     justify-content: flex-end;
     gap: 5px;
     z-index: 5;
+}
+
+.panzoom-fullscreen {
+    position: absolute;
+    max-width: 100vw;
+    max-height: 100vh;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 100;
 }

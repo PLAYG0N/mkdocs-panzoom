@@ -6,11 +6,11 @@ def create_panzoom_box(soup,config):
     panzoom_box = soup.new_tag("div",**{"class": "panzoom-box"})
     nav = soup.new_tag("nav", **{
         "class": "panzoom-top-nav",
-        "title": "material-fullscreen"
+        #"title": "material-fullscreen"
     })
 
     reset = soup.new_tag("button", **{
-        "class": "panzoom-reset"
+        "class": "panzoom-reset panzoom-button"
     })
 
     reset_svg = soup.new_tag("svg", **{
@@ -30,7 +30,7 @@ def create_panzoom_box(soup,config):
 
 
     max = soup.new_tag("button", **{
-        "class": "panzoom-max"
+        "class": "panzoom-max panzoom-button"
     })
 
     max_svg = soup.new_tag("svg", **{
@@ -48,7 +48,7 @@ def create_panzoom_box(soup,config):
     max.append(max_svg)
 
     min = soup.new_tag("button", **{
-        "class": "panzoom-min panzoom-hidden"
+        "class": "panzoom-min panzoom-button panzoom-hidden"
     })
 
     min_svg = soup.new_tag("svg", **{

@@ -1,10 +1,24 @@
 function add_buttons(box, instance) {
+  let reset = box.querySelector(".panzoom-reset");
   let max = box.querySelector(".panzoom-max");
-  max.addEventListener("click", function (e) {
-    instance.zoomTo(0, 0, 1);
-    console.log("clicked");
+  let min = box.querySelector(".panzoom-min");
+
+  reset.addEventListener("click", function (e) {
+    instance.moveTo(0, 0);
+    instance.zoomAbs(0, 0, 1);
   });
-  console.log(max);
+
+  max.addEventListener("click", function (e) {
+    box.classList.add("panzoom-fullscreen");
+    min.classList.remove("panzoom-hidden");
+    max.classList.add("panzoom-hidden");
+  });
+
+  min.addEventListener("click", function (e) {
+    box.classList.remove("panzoom-fullscreen");
+    max.classList.remove("panzoom-hidden");
+    min.classList.add("panzoom-hidden");
+  });
 }
 
 function activate_zoom_pan() {
@@ -14,10 +28,9 @@ function activate_zoom_pan() {
     elem = box.querySelector(".mermaid");
     //console.log(elem.nodeName);
     if (elem.nodeName == "DIV" && !elem.dataset.zoom) {
-      console.log("Added");
       elem.dataset.zoom = true;
       let instance = panzoom(elem, {
-        minZoom: 1,
+        minZoom: 0.9,
         beforeWheel: function (e) {
           var shouldIgnore = !e.altKey;
           return shouldIgnore;

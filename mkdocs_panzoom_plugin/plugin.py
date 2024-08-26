@@ -49,7 +49,7 @@ class PanZoomPlugin(BasePlugin):
         if exclude(page.file.src_path,excluded_pages):
             return
 
-        print(page.content)
+        #print(page.content)
 
         html_page = HTMLPage(output,config)
 
@@ -62,6 +62,7 @@ class PanZoomPlugin(BasePlugin):
 
         output_base_path = os.path.join(config["site_dir"], "assets")
         css_path = os.path.join(output_base_path, "stylesheets")
+        print(css_path)
         utils.copy_file(
             os.path.join(base_path, "custom", "panzoom.css"),
             os.path.join(css_path, "panzoom.css"),
