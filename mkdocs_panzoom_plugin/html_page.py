@@ -22,9 +22,10 @@ class HTMLPage:
         for element in self.containers:
             panzoom_box = create_panzoom_box(self.soup,self.config)
             #panzoom_box = PanZoomBox.PANZOOM_BOX
+            panzoom_container = self.soup.new_tag("div",**{"class": "panzoom-container"})
+            test = element.wrap(panzoom_box)
 
-            element.wrap(panzoom_box)
-
+            test.wrap(panzoom_container)
         #print(self.soup.prettify())
 
         # Include the css and js in the file
@@ -33,5 +34,5 @@ class HTMLPage:
         self.soup.body.append(create_js_script_plugin(self.soup))
 
     def _find_elements(self):
-
-        return self.soup.findAll(class_="mermaid")
+        images = self.soup.findAll("img")
+        return images + self.soup.findAll(class_="mermaid")

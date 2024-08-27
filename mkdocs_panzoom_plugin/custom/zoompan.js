@@ -9,6 +9,7 @@ function add_buttons(box, instance) {
   });
 
   max.addEventListener("click", function (e) {
+    //instance.setTransformOrigin({ x: 0.25, y: 0.25 });
     box.classList.add("panzoom-fullscreen");
     min.classList.remove("panzoom-hidden");
     max.classList.add("panzoom-hidden");
@@ -26,8 +27,21 @@ function activate_zoom_pan() {
   console.log(boxes);
   boxes.forEach((box) => {
     elem = box.querySelector(".mermaid");
+
+    // check if it is an image
+    if (elem == undefined) {
+      elem = box.querySelector("img");
+    }
+
+    if (elem == undefined) {
+      return;
+    }
+
     //console.log(elem.nodeName);
-    if (elem.nodeName == "DIV" && !elem.dataset.zoom) {
+    if (
+      (elem.nodeName == "DIV" || elem.nodeName == "IMG") &&
+      !elem.dataset.zoom
+    ) {
       elem.dataset.zoom = true;
       let instance = panzoom(elem, {
         minZoom: 0.9,
