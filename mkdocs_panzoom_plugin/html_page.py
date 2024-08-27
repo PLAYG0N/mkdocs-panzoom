@@ -21,11 +21,10 @@ class HTMLPage:
     def add_panzoom(self):
         for element in self.containers:
             panzoom_box = create_panzoom_box(self.soup,self.config)
-            #panzoom_box = PanZoomBox.PANZOOM_BOX
-            panzoom_container = self.soup.new_tag("div",**{"class": "panzoom-container"})
+            #panzoom_container = self.soup.new_tag("div",**{"class": "panzoom-container"})
             test = element.wrap(panzoom_box)
 
-            test.wrap(panzoom_container)
+            #test.wrap(panzoom_container)
         #print(self.soup.prettify())
 
         # Include the css and js in the file

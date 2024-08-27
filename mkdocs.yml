@@ -28,4 +28,6 @@ markdown_extensions:
 plugins:
   - search
   - roamlinks
-  - panzoom
+  - panzoom:
+      exclude:
+        - Mermaid/excluded.md
