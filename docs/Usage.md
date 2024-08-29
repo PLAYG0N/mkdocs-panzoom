@@ -1,5 +1,8 @@
 # Usage
 
+!!! info
+    The theme is currently optimized for mkdocs material.
+
 ```mermaid
 
 graph TD
