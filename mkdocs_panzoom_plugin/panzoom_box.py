@@ -65,8 +65,9 @@ def create_panzoom_box(soup,config):
     min.append(min_svg)
 
     nav.append(reset)
-    nav.append(max)
-    nav.append(min)
+    if config.get("full_screen",False)==True:
+        nav.append(max)
+        nav.append(min)
 
     panzoom_box.append(nav)
 

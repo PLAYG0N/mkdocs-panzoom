@@ -16,7 +16,7 @@ base_path = os.path.dirname(os.path.abspath(__file__))
 class PanZoomPlugin(BasePlugin):
     config_scheme = (
         ("mermaid", config_options.Type(bool, default=True)),
-        ("images", config_options.Type(bool, default=True)),
+        ("images", config_options.Type(bool, default=False)),
         ("full_screen", config_options.Type(bool, default=False)),
         ("include", config_options.Type(list, default=["*"])),
         ("exclude", config_options.Type(list, default=[])),
@@ -51,7 +51,7 @@ class PanZoomPlugin(BasePlugin):
 
         #print(page.content)
 
-        html_page = HTMLPage(output,config)
+        html_page = HTMLPage(output,self.config)
 
         html_page.add_panzoom()
 

@@ -19,6 +19,7 @@ markdown_extensions:
   - pymdownx.highlight
   - pymdownx.superfences
   - pymdownx.details
+  - pymdownx.keys
   - pymdownx.magiclink
   - pymdownx.tasklist
   - pymdownx.emoji
@@ -34,5 +35,8 @@ markdown_extensions:
 plugins:
   - search
   - panzoom:
+      images: true
+      mermaid: true
+      full_screen: true
       exclude:
         - Mermaid/excluded.md

@@ -33,5 +33,12 @@ class HTMLPage:
         self.soup.body.append(create_js_script_plugin(self.soup))
 
     def _find_elements(self):
-        images = self.soup.findAll("img")
-        return images + self.soup.findAll(class_="mermaid")
+        output = []
+
+        if self.config.get("images",False):
+
+            output += self.soup.findAll("img")
+
+        if self.config.get("mermaid",False):
+            output += self.soup.findAll(class_="mermaid")
+        return output
