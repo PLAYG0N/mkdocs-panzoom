@@ -22,7 +22,6 @@ markdown_extensions:
   - pymdownx.keys
   - pymdownx.magiclink
   - pymdownx.tasklist
-  - pymdownx.emoji
   - admonition
   - toc:
       permalink: true
