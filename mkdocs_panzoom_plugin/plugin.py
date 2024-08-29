@@ -17,7 +17,7 @@ class PanZoomPlugin(BasePlugin):
     config_scheme = (
         ("mermaid", config_options.Type(bool, default=True)),
         ("images", config_options.Type(bool, default=True)),
-        ("full_screen", config_options.Type(bool, default=True)),
+        ("full_screen", config_options.Type(bool, default=False)),
         ("include", config_options.Type(list, default=["*"])),
         ("exclude", config_options.Type(list, default=[])),
     )
