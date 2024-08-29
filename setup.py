@@ -1,15 +1,15 @@
 from setuptools import setup
 
-with open("Readme.md","r") as f:
+with open("README.md","r") as f:
     long_description = f.read()
 
 setup(
     name="mkdocs-panzoom-plugin",
     version="0.0.1",
-        description="MkDocs Plugin to enumerate the headings (h1-h6) across site pages",
+        description="MkDocs Plugin to enable pan & zoom on images and mermaid diagrams",
         long_description=long_description,
         long_description_content_type="text/markdown",
-        keywords="mkdocs zoom pan plugin",
+        keywords="mkdocs zoom pan plugin mermaid images",
         url="https://github.com/PLAYG0N/mkdocs-panzoom.git",
         author="PLAYG0N",
         author_email="playg0nofficial@gmail.com",
