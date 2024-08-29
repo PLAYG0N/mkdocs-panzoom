@@ -1,5 +1,6 @@
 
 from bs4 import BeautifulSoup
+from mkdocs import utils
 #from bs4.element import BeautifulSoup
 
 def create_panzoom_box(soup,config):
@@ -73,11 +74,14 @@ def create_panzoom_box(soup,config):
 
     return panzoom_box
 
-def create_css_link(soup):
-    return soup.new_tag("link", rel="stylesheet", href="/assets/stylesheets/panzoom.css")
+def create_css_link(soup,page):
+    href= utils.get_relative_url(utils.normalize_url("assets/stylesheets/panzoom.css"),page.url)
+    return soup.new_tag("link", rel="stylesheet", href=href)
 
-def create_js_script(soup):
-    return soup.new_tag("script", src="/assets/javascripts/panzoom.min.js")
+def create_js_script(soup,page):
+    src= utils.get_relative_url(utils.normalize_url("assets/javascripts/panzoom.min.js"),page.url)
+    return soup.new_tag("script", src=src)
 
-def create_js_script_plugin(soup):
-    return soup.new_tag("script", src="/assets/javascripts/zoompan.js")
+def create_js_script_plugin(soup,page):
+    src= utils.get_relative_url(utils.normalize_url("assets/javascripts/zoompan.js"),page.url)
+    return soup.new_tag("script", src=src)

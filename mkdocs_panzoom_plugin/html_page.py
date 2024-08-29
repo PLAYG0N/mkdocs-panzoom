@@ -8,9 +8,10 @@ from mkdocs_panzoom_plugin.panzoom_box import *
 #from mkdocs_panzoom_plugin.panzoom_box import PanZoomBox
 
 class HTMLPage:
-    def __init__(self, content:str, config):
+    def __init__(self, content:str, config, page):
         self.soup = BeautifulSoup(content,"html.parser")
         self.config = config
+        self.page = page
         self.containers = self._find_elements()
 
 
@@ -28,9 +29,9 @@ class HTMLPage:
         #print(self.soup.prettify())
 
         # Include the css and js in the file
-        self.soup.head.append(create_css_link(self.soup))
-        self.soup.body.append(create_js_script(self.soup))
-        self.soup.body.append(create_js_script_plugin(self.soup))
+        self.soup.head.append(create_css_link(self.soup,self.page))
+        self.soup.body.append(create_js_script(self.soup,self.page))
+        self.soup.body.append(create_js_script_plugin(self.soup,self.page))
 
     def _find_elements(self):
         output = []
