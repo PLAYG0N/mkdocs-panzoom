@@ -5,7 +5,7 @@ with open("README.md","r") as f:
 
 setup(
     name="mkdocs-panzoom-plugin",
-    version="0.0.3",
+    version="0.0.4",
         description="MkDocs Plugin to enable pan & zoom on images and mermaid diagrams",
         long_description=long_description,
         long_description_content_type="text/markdown",
@@ -16,6 +16,8 @@ setup(
         license="MIT",
         python_requires=">=3.7",
         install_requires=["mkdocs>=1.0.4", "beautifulsoup4>=4.9.0"],
+        # package_dir={"": "mkdocs_panzoom_plugin"},
+        # package_data={"custom": ["*.css","*.js" ,"*LICENCE"]},
         include_package_data=True,
         classifiers=[
             "Intended Audience :: Developers",

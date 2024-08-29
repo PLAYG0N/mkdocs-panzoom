@@ -1,0 +1,2 @@
+include mkdocs_panzoom_plugin/custom/*
+include mkdocs_panzoom_plugin/panzoom/*
