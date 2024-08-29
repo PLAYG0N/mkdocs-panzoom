@@ -2,6 +2,8 @@
 
 This plugin makes use of the [panzoom](https://github.com/anvaka/panzoom) ([LICENCE](./mkdocs_panzoom_plugin/panzoom/LICENCE)) library by [Andrei Kashcha](https://github.com/anvaka)
 
+> [Live Demo](https://playg0n.github.io/mkdocs-panzoom/)
+
 ## Setup
 
 `pip install mkdocs-panzoom-plugin`
