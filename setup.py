@@ -16,6 +16,7 @@ setup(
         license="MIT",
         python_requires=">=3.7",
         install_requires=["mkdocs>=1.0.4", "beautifulsoup4>=4.9.0"],
+        include_package_data=True,
         classifiers=[
             "Intended Audience :: Developers",
             "Intended Audience :: Information Technology",
