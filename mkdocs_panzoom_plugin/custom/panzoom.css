@@ -65,7 +65,8 @@ button:hover .panzoom-icon {
     left: 0;
     z-index: 100;
 }
-.panzoom-fullscreen:has(> img) {
+
+/* .panzoom-fullscreen:has(> img) {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,7 +75,7 @@ button:hover .panzoom-icon {
     display: flex;
     justify-content: center;
     align-items: center;
-}
+} */
 
 .panzoom-fullscreen img {
     max-width: 100%;
