@@ -15,6 +15,16 @@ plugins:
 
 ```
 
+!!! warning
+
+  Make sure to define the `site_url` otherwise it won't work!
+
+  **Example**:
+
+  ```yaml
+  site_url: https://playg0n.github.io/mkdocs-panzoom/
+  ```
+
 ## Usage
 
 Examples and usage are available in the [docs](https://playg0n.github.io/mkdocs-panzoom/).
