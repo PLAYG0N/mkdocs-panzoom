@@ -15,15 +15,14 @@ plugins:
 
 ```
 
-!!! warning
+> [!WARNING]
+>Make sure to define the `site_url` otherwise it won't work!
+>
+>**Example**:
 
-  Make sure to define the `site_url` otherwise it won't work!
-
-  **Example**:
-
-  ```yaml
-  site_url: https://playg0n.github.io/mkdocs-panzoom/
-  ```
+>```yaml
+>site_url: https://playg0n.github.io/mkdocs-panzoom/
+>```
 
 ## Usage
 
