@@ -1,11 +1,17 @@
 site_name: PanZoom Plugin for MkDocs
 site_dir: public
+repo_name: PLAYG0N/mkdocs-panzoom
+repo_url: https://github.com/PLAYG0N/mkdocs-panzoom
 
 theme:
   name: material
   palette:
     scheme: slate
-
+  features:
+    - content.code.copy
+    - navigation.indexes
+    - navigation.tabs
+    - navigation.top
 # Extensions
 markdown_extensions:
   - footnotes
