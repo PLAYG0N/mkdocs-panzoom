@@ -60,9 +60,8 @@ plugins:
 
 ### Enable Fullscreen
 
-!!! warning
-
-    This is still in development!
+> [!WARNING]
+>This is still in development!
 
 ```yml
 plugins:
