@@ -1,7 +1,7 @@
 # Usage
 
 !!! info
-    The theme is currently optimized for mkdocs material.
+    The theme is currently optimized for [material for mkdocs](https://squidfunk.github.io/mkdocs-material/).
 
 ```mermaid
 
