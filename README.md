@@ -38,7 +38,8 @@ This enables panzoom on mermaid diagrams.
 
 ```yml
 plugins:
-  mermaid: true # default true
+- panzoom:
+    mermaid: true # default true
 ```
 
 ### Images
@@ -47,8 +48,10 @@ This enables panzoom on images.
 
 ```yml
 plugins:
-  images: true # default true
+  - panzoom:
+      images: true # default true
 ```
+
 ### Exclude Pages
 
 ```yml

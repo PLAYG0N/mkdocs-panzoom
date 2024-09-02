@@ -35,19 +35,22 @@ Examples and usage are available in the [docs](https://playg0n.github.io/mkdocs-
 
 This enables panzoom on mermaid diagrams.
 
-```yaml
+```yml
 plugins:
-  mermaid: true # default true
+- panzoom:
+    mermaid: true # default true
 ```
 
 ### Images
 
 This enables panzoom on images.
 
-```yaml
+```yml
 plugins:
-  images: true # default true
+  - panzoom:
+      images: true # default true
 ```
+
 ### Exclude Pages
 
 ```yaml
