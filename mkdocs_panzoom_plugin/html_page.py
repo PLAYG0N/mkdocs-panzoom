@@ -25,6 +25,8 @@ class HTMLPage:
             #panzoom_container = self.soup.new_tag("div",**{"class": "panzoom-container"})
             test = element.wrap(panzoom_box)
 
+            panzoom_box.append(create_info_box(self.soup,self.config))
+
             #test.wrap(panzoom_container)
         #print(self.soup.prettify())
 

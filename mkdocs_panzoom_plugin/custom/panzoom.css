@@ -55,6 +55,11 @@ button:hover .panzoom-icon {
     z-index: 5;
 }
 
+.panzoom-info-box {
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
 .panzoom-fullscreen {
     position: absolute;
     max-width: 100vw;

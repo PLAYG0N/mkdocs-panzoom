@@ -2,10 +2,22 @@ function add_buttons(box, instance) {
   let reset = box.querySelector(".panzoom-reset");
   let max = box.querySelector(".panzoom-max");
   let min = box.querySelector(".panzoom-min");
+  let info = box.querySelector(".panzoom-info");
+  let info_box = box.querySelector(".panzoom-info-box");
 
   reset.addEventListener("click", function (e) {
     instance.moveTo(0, 0);
     instance.zoomAbs(0, 0, 1);
+  });
+  info.addEventListener("click", function (e) {
+    // console.log(box);
+    if (box.dataset.info == "true") {
+      box.dataset.info = false;
+      info_box.classList.add("panzoom-hidden");
+    } else {
+      box.dataset.info = true;
+      info_box.classList.remove("panzoom-hidden");
+    }
   });
   if (max != undefined) {
     max.addEventListener("click", function (e) {
@@ -26,7 +38,7 @@ function add_buttons(box, instance) {
 
 function activate_zoom_pan() {
   boxes = document.querySelectorAll(".panzoom-box");
-  console.log(boxes);
+  // console.log(boxes);
   boxes.forEach((box) => {
     elem = box.querySelector(".mermaid");
 
@@ -52,7 +64,8 @@ function activate_zoom_pan() {
           return shouldIgnore;
         },
         beforeMouseDown: function (e) {
-          var shouldIgnore = !e.altKey;
+          // console.log(e);
+          var shouldIgnore = !e.altKey && !e.button == 1;
           return shouldIgnore;
         },
       });
