@@ -91,7 +91,7 @@ graph TD;
 
 ## Example 2
 
-This is the second ecample.
+This is the second example.
 
 ```mermaid
 ---

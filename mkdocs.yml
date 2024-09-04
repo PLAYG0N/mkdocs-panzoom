@@ -24,6 +24,7 @@ theme:
     - content.code.copy
     - navigation.indexes
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.top
 # Extensions
 markdown_extensions:
