@@ -90,6 +90,7 @@ function activate_zoom_pan() {
           var shouldIgnore = !e.altKey && !e.button == 1;
           return shouldIgnore;
         },
+        zoomDoubleClickSpeed: 1,
       });
       add_buttons(box, instance);
     }
