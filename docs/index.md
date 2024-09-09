@@ -35,7 +35,7 @@ Examples and usage are available in the [docs](https://playg0n.github.io/mkdocs-
 
 This enables panzoom on mermaid diagrams.
 
-```yml
+```yaml
 plugins:
   - panzoom:
       mermaid: true # default true
@@ -45,7 +45,7 @@ plugins:
 
 This enables panzoom on images.
 
-```yml
+```yaml
 plugins:
   - panzoom:
       images: true # default true
@@ -55,7 +55,7 @@ plugins:
 
 This makes the hint on how to use it permanently visible.
 
-```yml
+```yaml
 plugins:
   - panzoom:
       always_show_hint: true # default false
