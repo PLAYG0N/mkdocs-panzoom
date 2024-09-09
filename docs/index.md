@@ -51,6 +51,16 @@ plugins:
       images: true # default true
 ```
 
+### Always show hint
+
+This makes the hint on how to use it permanently visible.
+
+```yml
+plugins:
+  - panzoom:
+      always_show_hint: true # default false
+```
+
 ### Exclude Pages
 
 ```yaml
