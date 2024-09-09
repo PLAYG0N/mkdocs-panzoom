@@ -1,3 +1,18 @@
+
+function minimize(e,box,max,min){
+  box.classList.remove("panzoom-fullscreen");
+  max.classList.remove("panzoom-hidden");
+  min.classList.add("panzoom-hidden");
+}
+
+function escapeFullScreen(e,box,max,min) {
+  console.log(e,box,);
+  
+  if (e.keyCode == 27){
+    minimize(e,box,max,min);
+  }
+}
+
 function add_buttons(box, instance) {
   let reset = box.querySelector(".panzoom-reset");
   let max = box.querySelector(".panzoom-max");
@@ -24,9 +39,11 @@ function add_buttons(box, instance) {
   if (max != undefined) {
     max.addEventListener("click", function (e) {
       //instance.setTransformOrigin({ x: 0.25, y: 0.25 });
+      // box.addEventListener("keydown", escapeFullScreen(e,box,max,min))
       box.classList.add("panzoom-fullscreen");
       min.classList.remove("panzoom-hidden");
       max.classList.add("panzoom-hidden");
+      box.focus();
     });
   }
   if (min != undefined) {
@@ -36,6 +53,9 @@ function add_buttons(box, instance) {
       min.classList.add("panzoom-hidden");
     });
   }
+  box.addEventListener("keydown",function(e){
+    escapeFullScreen(e,box,max,min);
+  });
 }
 
 function activate_zoom_pan() {

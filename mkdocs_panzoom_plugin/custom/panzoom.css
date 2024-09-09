@@ -52,7 +52,7 @@ button:hover .panzoom-icon {
     display: flex;
     justify-content: flex-end;
     gap: 5px;
-    z-index: 5;
+    z-index: 3;
 }
 
 .panzoom-info-box {
@@ -86,6 +86,12 @@ button:hover .panzoom-icon {
     justify-content: center;
     align-items: center;
 } */
+
+.panzoom-fullscreen .panzoom-info-box {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
 
 .panzoom-fullscreen img {
     max-width: 100%;
