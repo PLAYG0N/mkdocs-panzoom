@@ -18,6 +18,7 @@ class PanZoomPlugin(BasePlugin):
         ("mermaid", config_options.Type(bool, default=True)),
         ("images", config_options.Type(bool, default=False)),
         ("full_screen", config_options.Type(bool, default=False)),
+        ("always_show_hint", config_options.Type(bool, default=False)),
         ("include", config_options.Type(list, default=["*"])),
         ("exclude", config_options.Type(list, default=[])),
     )

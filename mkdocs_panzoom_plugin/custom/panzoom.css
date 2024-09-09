@@ -56,8 +56,13 @@ button:hover .panzoom-icon {
 }
 
 .panzoom-info-box {
-    margin-left: 10px;
-    margin-bottom: 5px;
+    position: relative;
+    padding-top: 15px;
+    font-size: 1em;
+    text-align: center;
+    z-index: 3;
+    background-color: var(--md-default-bg-color);
+    color: var(--md-default-fg-color--light);
 }
 
 .panzoom-fullscreen {

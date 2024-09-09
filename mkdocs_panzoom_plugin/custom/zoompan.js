@@ -9,16 +9,18 @@ function add_buttons(box, instance) {
     instance.moveTo(0, 0);
     instance.zoomAbs(0, 0, 1);
   });
-  info.addEventListener("click", function (e) {
-    // console.log(box);
-    if (box.dataset.info == "true") {
-      box.dataset.info = false;
-      info_box.classList.add("panzoom-hidden");
-    } else {
-      box.dataset.info = true;
-      info_box.classList.remove("panzoom-hidden");
-    }
-  });
+  if (info!=undefined){
+    info.addEventListener("click", function (e) {
+      // console.log(box);
+      if (box.dataset.info == "true") {
+        box.dataset.info = false;
+        info_box.classList.add("panzoom-hidden");
+      } else {
+        box.dataset.info = true;
+        info_box.classList.remove("panzoom-hidden");
+      }
+    });
+  }
   if (max != undefined) {
     max.addEventListener("click", function (e) {
       //instance.setTransformOrigin({ x: 0.25, y: 0.25 });

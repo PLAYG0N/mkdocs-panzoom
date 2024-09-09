@@ -4,15 +4,26 @@ from mkdocs import utils
 #from bs4.element import BeautifulSoup
 
 def create_info_box(soup,config):
-    info_box = soup.new_tag("div",**{
-        "class": "panzoom-info-box panzoom-hidden"
-    })
 
-    info_box.string = "Press Alt / Option key to Pan & Zoom"
+    always_hint = config.get("always_show_hint",False)
+
+    if always_hint:
+        info_box = soup.new_tag("div",**{
+            "class": "panzoom-info-box"
+        })
+    else:
+        info_box = soup.new_tag("div",**{
+            "class": "panzoom-info-box panzoom-hidden"
+        })
+
+    info_box.string = 'Press "Alt" / "Option" to enable Pan & Zoom'
 
     return info_box
 
 def create_panzoom_box(soup,config):
+
+    always_hint = config.get("always_show_hint",False)
+
     panzoom_box = soup.new_tag("div",**{"class": "panzoom-box"})
     nav = soup.new_tag("nav", **{
         "class": "panzoom-top-nav",
@@ -93,7 +104,10 @@ def create_panzoom_box(soup,config):
     min_svg.append(min_path)
     min.append(min_svg)
 
-    nav.append(info)
+    # remove info button on permanent info banner
+    if not always_hint:
+        nav.append(info)
+
     nav.append(reset)
     if config.get("full_screen",False)==True:
         nav.append(max)
