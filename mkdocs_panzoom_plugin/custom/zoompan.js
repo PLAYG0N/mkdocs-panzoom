@@ -80,7 +80,7 @@ function activate_zoom_pan() {
     ) {
       elem.dataset.zoom = true;
       let instance = panzoom(elem, {
-        minZoom: 0.9,
+        minZoom: 0.5,
         beforeWheel: function (e) {
           var shouldIgnore = !e.altKey;
           return shouldIgnore;
