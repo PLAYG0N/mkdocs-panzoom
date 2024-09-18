@@ -51,6 +51,7 @@ plugins:
       images: true
       mermaid: true
       full_screen: true
-      always_show_hint: false
+      always_show_hint: true
+      key: "alt"
       exclude:
         - Mermaid/excluded.md

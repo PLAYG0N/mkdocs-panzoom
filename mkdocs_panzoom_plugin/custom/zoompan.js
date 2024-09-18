@@ -63,6 +63,8 @@ function activate_zoom_pan() {
   // console.log(boxes);
   boxes.forEach((box) => {
     elem = box.querySelector(".mermaid");
+    
+    key = box.dataset.key;
 
     // check if it is an image
     if (elem == undefined) {
@@ -82,13 +84,29 @@ function activate_zoom_pan() {
       let instance = panzoom(elem, {
         minZoom: 0.5,
         beforeWheel: function (e) {
-          var shouldIgnore = !e.altKey;
-          return shouldIgnore;
+          switch (key) {
+            case "ctrl":
+              return !e.ctrlKey;
+            case "shift":
+              return !e.shiftKey;
+            case "alt":
+              return !e.altKey;
+            default:
+              return false && !e.button == 1;
+          }
         },
         beforeMouseDown: function (e) {
           // console.log(e);
-          var shouldIgnore = !e.altKey && !e.button == 1;
-          return shouldIgnore;
+          switch (key) {
+            case "ctrl":
+              return !e.ctrlKey && !e.button == 1;
+            case "shift":
+              return !e.shiftKey && !e.button  == 1;
+            case "alt":
+              return !e.altKey && !e.button   == 1;
+            default:
+              return false && !e.button == 1;
+          }
         },
         zoomDoubleClickSpeed: 1,
       });

@@ -14,6 +14,8 @@ graph TD
 
 ```
 
+The key for the activation can be [configuered or disabled](./index.md#use-different-key)!
+
 ## Mouse
 
 Press ++alt++ and grab the diagram with your mouse to move it. The same applies to the zooming press ++alt++ and scroll.

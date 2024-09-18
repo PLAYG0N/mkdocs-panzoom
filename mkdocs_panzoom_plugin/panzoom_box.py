@@ -25,6 +25,9 @@ def create_panzoom_box(soup,config):
     always_hint = config.get("always_show_hint",False)
 
     panzoom_box = soup.new_tag("div",**{"class": "panzoom-box"})
+
+    panzoom_box.attrs["data-key"] = config.get('key',"none")
+
     nav = soup.new_tag("nav", **{
         "class": "panzoom-top-nav",
         #"title": "material-fullscreen"

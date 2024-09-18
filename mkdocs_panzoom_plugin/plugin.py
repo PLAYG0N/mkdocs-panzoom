@@ -19,6 +19,7 @@ class PanZoomPlugin(BasePlugin):
         ("images", config_options.Type(bool, default=False)),
         ("full_screen", config_options.Type(bool, default=False)),
         ("always_show_hint", config_options.Type(bool, default=False)),
+        ("key", config_options.Type(str, default="alt")),
         ("include", config_options.Type(list, default=["*"])),
         ("exclude", config_options.Type(list, default=[])),
     )

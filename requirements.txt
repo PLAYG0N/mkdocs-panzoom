@@ -5,4 +5,5 @@ mkdocs>=1.1.2
 mkdocs-material>=8.1.7
 
 # Panzoom for mermaid and images
-mkdocs-panzoom-plugin
+# plugin gets built directly
+# mkdocs-panzoom-plugin

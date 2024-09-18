@@ -61,6 +61,21 @@ plugins:
       always_show_hint: true # default false
 ```
 
+### Use different key
+
+Options for activation key are:
+
+- alt
+- ctrl
+- shift
+- none
+
+```yaml
+plugins:
+  - panzoom:
+      key: "ctrl" # default alt
+```
+
 ### Exclude Pages
 
 ```yaml
