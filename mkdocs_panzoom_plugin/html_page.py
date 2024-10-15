@@ -11,7 +11,7 @@ class HTMLPage:
         self.soup = BeautifulSoup(content,"html.parser")
         self.config = config
         self.page = page
-        self.default_selectors = {"img", ".mermaid", "#my-very-special-test-element", ".hahah"}
+        self.default_selectors = {".mermaid", ".d2"}
         self.containers = self._find_elements()
 
 

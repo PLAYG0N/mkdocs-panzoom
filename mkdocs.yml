@@ -55,7 +55,4 @@ plugins:
       key: "alt"
       exclude:
         - Mermaid/excluded.md
-      # include_selectors:
-      #   - .d2
-      # exclude_selectors:
-      #   - .hahah
+  - d2
