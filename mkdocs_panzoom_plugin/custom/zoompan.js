@@ -6,7 +6,7 @@ function minimize(e,box,max,min){
 }
 
 function escapeFullScreen(e,box,max,min) {
-  console.log(e,box,);
+  // console.log(e,box,);
   
   if (e.keyCode == 27){
     minimize(e,box,max,min);
@@ -60,16 +60,31 @@ function add_buttons(box, instance) {
 
 function activate_zoom_pan() {
   boxes = document.querySelectorAll(".panzoom-box");
+
+  meta_tag = document.querySelector('meta[name="panzoom-data"]').content;
+  selectors = JSON.parse(meta_tag).selectors;
+  
+
   // console.log(boxes);
   boxes.forEach((box) => {
-    elem = box.querySelector(".mermaid");
     
     key = box.dataset.key;
+    
+    selectors.every((selector) => {
+      elem = box.querySelector(selector);
+      
+      if (elem != undefined) {
+        return false;
+      }
+      return true;
+    })
+    // elem = box.querySelector(".mermaid");
+    
 
-    // check if it is an image
-    if (elem == undefined) {
-      elem = box.querySelector("img");
-    }
+    // // check if it is an image
+    // if (elem == undefined) {
+    //   elem = box.querySelector("img");
+    // }
 
     if (elem == undefined) {
       return;

@@ -22,6 +22,8 @@ class PanZoomPlugin(BasePlugin):
         ("key", config_options.Type(str, default="alt")),
         ("include", config_options.Type(list, default=["*"])),
         ("exclude", config_options.Type(list, default=[])),
+        ("include_selectors", config_options.Type(list, default=[])),
+        ("exclude_selectors", config_options.Type(list, default=[])),
     )
 
     def on_config(self, config, **kwargs):
