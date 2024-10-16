@@ -32,24 +32,21 @@ Examples and usage are available in the [docs](https://playg0n.github.io/mkdocs-
 
 ## Config
 
-### Mermaid
+### Selectors
 
-This enables panzoom on mermaid diagrams.
+Mermaid and D2 are included by default, but you can add any arbitrary selector or exclude the default ones.
+To enable images add the `img` tag like below.
 
-```yml
+```yaml
 plugins:
   - panzoom:
-      mermaid: true # default true
-```
-
-### Images
-
-This enables panzoom on images.
-
-```yml
-plugins:
-  - panzoom:
-      images: true # default true
+      include_selectors:
+        - .myClass # class in html
+        - "#myId" # id in html
+        - "img" # tag in html
+      exclude_selectors:
+        - ".mermaid"
+        - ".d2"
 ```
 
 ### Exclude Pages

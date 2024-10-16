@@ -48,11 +48,13 @@ markdown_extensions:
 plugins:
   - search
   - panzoom:
-      images: true
-      mermaid: true
+      # images: true
+      # mermaid: true # old config
       full_screen: true
       always_show_hint: true
       key: "alt"
       exclude:
         - Mermaid/excluded.md
+      include_selectors:
+        - img
   - d2
