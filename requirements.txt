@@ -4,6 +4,9 @@ mkdocs>=1.1.2
 # Material theme
 mkdocs-material>=8.1.7
 
+# d2 diagram plugin
+mkdocs-d2-plugin
+D2>=0.6.3
 # Panzoom for mermaid and images
 # plugin gets built directly
 # mkdocs-panzoom-plugin

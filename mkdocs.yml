@@ -55,3 +55,4 @@ plugins:
       key: "alt"
       exclude:
         - Mermaid/excluded.md
+  - d2
