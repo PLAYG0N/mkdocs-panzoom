@@ -59,13 +59,13 @@ class HTMLPage:
             final_selectors.add("img")
 
 
-        if not self.config.get("mermaid",False):
+        if not self.config.get("mermaid",True):
             final_selectors.remove(".mermaid")
 
 
         self.config.update({"selectors": list(final_selectors)})
 
-        for selector in self.default_selectors:
+        for selector in self.config.get("selectors",[]):
             if selector.startswith("."):
                 output += self.soup.findAll(class_=selector.lstrip("."))
             elif selector.startswith("#"):
