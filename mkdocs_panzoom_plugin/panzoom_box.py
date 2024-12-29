@@ -6,6 +6,7 @@ from mkdocs import utils
 def create_info_box(soup,config):
 
     always_hint = config.get("always_show_hint",False)
+    key = config.get("key")
 
     if always_hint:
         info_box = soup.new_tag("div",**{
@@ -16,7 +17,14 @@ def create_info_box(soup,config):
             "class": "panzoom-info-box panzoom-hidden"
         })
 
-    info_box.string = 'Press "Alt" / "Option" to enable Pan & Zoom'
+    if key == "alt":
+        info_box.string = 'Press "Alt" / "Option" to enable Pan & Zoom'
+    elif key == "ctrl":
+        info_box.string = 'Press "Ctrl" to enable Pan & Zoom'
+    elif key == "shift":
+        info_box.string = 'Press "Shift" to enable Pan & Zoom'
+
+    # info_box.string = 'Press "Alt" / "Option" to enable Pan & Zoom'
 
     return info_box
 
@@ -83,10 +91,16 @@ def create_button_max(soup):
 
     return max
 
-def create_button_min(soup):
-    min = soup.new_tag("button", **{
-        "class": "panzoom-min panzoom-button panzoom-hidden"
-    })
+def create_button_min(soup,hidden=True):
+
+    if hidden:
+        min = soup.new_tag("button", **{
+            "class": "panzoom-min panzoom-button panzoom-hidden"
+        })
+    else:
+        min = soup.new_tag("button", **{
+            "class": "panzoom-min panzoom-button"
+        })
 
     min_svg = soup.new_tag("svg", **{
         "class": "panzoom-icon",
@@ -149,3 +163,22 @@ def create_js_script_plugin(soup,page):
 def create_fullscreen_modal(soup,config):
     modal = soup.new_tag("div",**{"class": "panzoom-fullscreen-modal", "id": "panzoom-fullscreen-modal"})
 
+    nav = soup.new_tag("nav", **{
+        "class": "panzoom-top-nav",
+        #"title": "material-fullscreen"
+    })
+
+    info = create_button_info(soup)
+    reset = create_button_reset(soup)
+    min = create_button_min(soup,False)
+
+    # remove info button on permanent info banner
+    if not config.get("always_show_hint",False):
+        nav.append(info)
+
+    nav.append(reset)
+    nav.append(min)
+
+    modal.append(nav)
+
+    return modal
