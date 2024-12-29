@@ -20,20 +20,7 @@ def create_info_box(soup,config):
 
     return info_box
 
-def create_panzoom_box(soup,config, id):
-
-    always_hint = config.get("always_show_hint",False)
-
-    panzoom_box = soup.new_tag("div",**{"class": "panzoom-box", "id": "panzoom"+str(id)})
-
-    panzoom_box.attrs["data-key"] = config.get('key',"none")
-
-    nav = soup.new_tag("nav", **{
-        "class": "panzoom-top-nav",
-        #"title": "material-fullscreen"
-    })
-
-
+def create_button_info(soup):
     info = soup.new_tag("button", **{
         "class": "panzoom-info panzoom-button"
     })
@@ -52,6 +39,9 @@ def create_panzoom_box(soup,config, id):
 
     info.append(info_svg)
 
+    return info
+
+def create_button_reset(soup):
     reset = soup.new_tag("button", **{
         "class": "panzoom-reset panzoom-button"
     })
@@ -70,8 +60,9 @@ def create_panzoom_box(soup,config, id):
 
     reset.append(reset_svg)
 
+    return reset
 
-
+def create_button_max(soup):
     max = soup.new_tag("button", **{
         "class": "panzoom-max panzoom-button"
     })
@@ -90,6 +81,9 @@ def create_panzoom_box(soup,config, id):
 
     max.append(max_svg)
 
+    return max
+
+def create_button_min(soup):
     min = soup.new_tag("button", **{
         "class": "panzoom-min panzoom-button panzoom-hidden"
     })
@@ -106,6 +100,26 @@ def create_panzoom_box(soup,config, id):
 
     min_svg.append(min_path)
     min.append(min_svg)
+
+    return min
+
+def create_panzoom_box(soup,config, id):
+
+    always_hint = config.get("always_show_hint",False)
+
+    panzoom_box = soup.new_tag("div",**{"class": "panzoom-box", "id": "panzoom"+str(id)})
+
+    panzoom_box.attrs["data-key"] = config.get('key',"none")
+
+    nav = soup.new_tag("nav", **{
+        "class": "panzoom-top-nav",
+        #"title": "material-fullscreen"
+    })
+
+    info = create_button_info(soup)
+    reset = create_button_reset(soup)
+    max = create_button_max(soup)
+    min = create_button_min(soup)
 
     # remove info button on permanent info banner
     if not always_hint:
@@ -131,3 +145,7 @@ def create_js_script(soup,page):
 def create_js_script_plugin(soup,page):
     src= utils.get_relative_url(utils.normalize_url("assets/javascripts/zoompan.js"),page.url)
     return soup.new_tag("script", src=src)
+
+def create_fullscreen_modal(soup,config):
+    modal = soup.new_tag("div",**{"class": "panzoom-fullscreen-modal", "id": "panzoom-fullscreen-modal"})
+
