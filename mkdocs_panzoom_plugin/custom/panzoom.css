@@ -29,11 +29,6 @@ button:hover .panzoom-icon {
     fill: var(--md-accent-fg-color);
 }
 
-/*
-.panzoom-box:hover .panzoom-icon {
-    fill: var(--md-default-fg-color--light);
-}
-*/
 :hover > * > * > .panzoom-icon {
     fill: var(--md-default-fg-color--light);
 }
@@ -76,16 +71,6 @@ button:hover .panzoom-icon {
     z-index: 100;
 }
 
-/* .panzoom-fullscreen:has(> img) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.panzoom-fullscreen:has(> .mermaid) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} */
 
 .panzoom-fullscreen .panzoom-info-box {
     position: absolute;

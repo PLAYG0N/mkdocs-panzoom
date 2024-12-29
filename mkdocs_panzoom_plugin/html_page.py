@@ -20,8 +20,8 @@ class HTMLPage:
 
 
     def add_panzoom(self):
-        for element in self.containers:
-            panzoom_box = create_panzoom_box(self.soup,self.config)
+        for idx, element in enumerate(self.containers):
+            panzoom_box = create_panzoom_box(self.soup,self.config,idx)
             #panzoom_container = self.soup.new_tag("div",**{"class": "panzoom-container"})
             test = element.wrap(panzoom_box)
 
