@@ -24,8 +24,6 @@ def create_info_box(soup,config):
     elif key == "shift":
         info_box.string = 'Press "Shift" to enable Pan & Zoom'
 
-    # info_box.string = 'Press "Alt" / "Option" to enable Pan & Zoom'
-
     return info_box
 
 def create_button_info(soup):
@@ -163,6 +161,8 @@ def create_js_script_plugin(soup,page):
 def create_fullscreen_modal(soup,config):
     modal = soup.new_tag("div",**{"class": "panzoom-fullscreen-modal", "id": "panzoom-fullscreen-modal"})
 
+    content = soup.new_tag("div",**{"class": "panzoom-fullscreen-modal-content", "id": "panzoom-fullscreen-modal-content"})
+
     nav = soup.new_tag("nav", **{
         "class": "panzoom-top-nav",
         #"title": "material-fullscreen"
@@ -173,12 +173,15 @@ def create_fullscreen_modal(soup,config):
     min = create_button_min(soup,False)
 
     # remove info button on permanent info banner
-    if not config.get("always_show_hint",False):
-        nav.append(info)
+    # if not config.get("always_show_hint",False):
+    # nav.append(info)
 
     nav.append(reset)
     nav.append(min)
 
     modal.append(nav)
+    modal.append(content)
+    # TODO: add info box
+    # modal.append(create_info_box(soup,config))
 
     return modal

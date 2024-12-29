@@ -32,6 +32,7 @@ class HTMLPage:
 
         # Include the css and js in the file
         self.soup.head.append(create_css_link(self.soup,self.page))
+        self.soup.body.append(create_fullscreen_modal(self.soup,self.config))
         self.soup.body.append(create_js_script(self.soup,self.page))
         self.soup.body.append(create_js_script_plugin(self.soup,self.page))
 
