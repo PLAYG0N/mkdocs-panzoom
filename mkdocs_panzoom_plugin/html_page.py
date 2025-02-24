@@ -65,14 +65,14 @@ class HTMLPage:
 
         self.config.update({"selectors": list(final_selectors)})
 
-        for selector in self.config.get("selectors",[]):
+        for selector in self.config.get("selectors", []):
             if selector.startswith("."):
-                output += self.soup.findAll(class_=selector.lstrip("."))
+                output += self.soup.find_all(class_=selector.lstrip("."))
             elif selector.startswith("#"):
                 id_element = self.soup.find(id=selector.lstrip("#"))
-                if not id_element is None:
+                if id_element is not None:
                     output.append(id_element)
             else:
-                output += self.soup.findAll(selector)
+                output += self.soup.find_all(selector)
 
         return output
