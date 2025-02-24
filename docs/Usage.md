@@ -14,7 +14,7 @@ graph TD
 
 ```
 
-The key for the activation can be [configuered or disabled](./index.md#use-different-key)!
+The key for the activation can be [configured or disabled](./index.md#use-different-key)!
 
 ## Mouse
 
