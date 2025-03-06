@@ -125,6 +125,7 @@ function activate_zoom_pan() {
         },
         zoomDoubleClickSpeed: 1,
       });
+      // instance.on()
       add_buttons(box, instance);
     }
     //console.log(elem);

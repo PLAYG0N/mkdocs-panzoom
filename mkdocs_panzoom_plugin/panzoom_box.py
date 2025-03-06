@@ -121,7 +121,7 @@ def create_panzoom_box(soup,config, id):
 
     always_hint = config.get("always_show_hint",False)
 
-    panzoom_box = soup.new_tag("div",**{"class": "panzoom-box", "id": "panzoom"+str(id)})
+    panzoom_box = soup.new_tag("div",**{"class": "panzoom-box", "id": "panzoom"+str(id), "oncontextmenu": "return false;"})
 
     panzoom_box.attrs["data-key"] = config.get('key',"none")
 
