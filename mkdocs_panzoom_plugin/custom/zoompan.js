@@ -131,9 +131,11 @@ function activate_zoom_pan() {
   });
 }
 
-const interval = setInterval(activate_zoom_pan, 1000);
-
-setTimeout(function () {
-  clearInterval(interval);
-  //console.log("Cleared");
-}, 5000);
+document$.subscribe(function() {
+  const interval = setInterval(activate_zoom_pan, 1000);
+  
+  setTimeout(function () {
+    clearInterval(interval);
+    //console.log("Cleared");
+  }, 5000);
+});
