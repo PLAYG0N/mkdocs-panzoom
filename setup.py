@@ -5,7 +5,7 @@ with open("README.md","r") as f:
 
 setup(
     name="mkdocs-panzoom-plugin",
-    version="0.1.6",
+    version="0.1.7",
         description="MkDocs Plugin to enable pan & zoom on images and mermaid diagrams",
         long_description=long_description,
         long_description_content_type="text/markdown",
