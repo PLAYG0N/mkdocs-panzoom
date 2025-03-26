@@ -133,7 +133,7 @@ function activate_zoom_pan() {
 let theme_tag = document.querySelector('meta[name="panzoom-theme"]');
 let theme = theme_tag.content;
 
-if (theme == "meterial") {
+if (theme == "material") {
   document$.subscribe(function () {
     const interval = setInterval(activate_zoom_pan, 1000);
 
