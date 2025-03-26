@@ -55,7 +55,7 @@ class PanZoomPlugin(BasePlugin):
 
         #print(page.content)
 
-        html_page = HTMLPage(output,self.config,page)
+        html_page = HTMLPage(output,self.config,page, config)
 
         html_page.add_panzoom()
 

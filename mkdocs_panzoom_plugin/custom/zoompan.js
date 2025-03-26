@@ -1,15 +1,14 @@
-
-function minimize(e,box,max,min){
+function minimize(e, box, max, min) {
   box.classList.remove("panzoom-fullscreen");
   max.classList.remove("panzoom-hidden");
   min.classList.add("panzoom-hidden");
 }
 
-function escapeFullScreen(e,box,max,min) {
+function escapeFullScreen(e, box, max, min) {
   // console.log(e,box,);
-  
-  if (e.keyCode == 27){
-    minimize(e,box,max,min);
+
+  if (e.keyCode == 27) {
+    minimize(e, box, max, min);
   }
 }
 
@@ -24,7 +23,7 @@ function add_buttons(box, instance) {
     instance.moveTo(0, 0);
     instance.zoomAbs(0, 0, 1);
   });
-  if (info!=undefined){
+  if (info != undefined) {
     info.addEventListener("click", function (e) {
       // console.log(box);
       if (box.dataset.info == "true") {
@@ -53,33 +52,31 @@ function add_buttons(box, instance) {
       min.classList.add("panzoom-hidden");
     });
   }
-  box.addEventListener("keydown",function(e){
-    escapeFullScreen(e,box,max,min);
+  box.addEventListener("keydown", function (e) {
+    escapeFullScreen(e, box, max, min);
   });
 }
 
 function activate_zoom_pan() {
   boxes = document.querySelectorAll(".panzoom-box");
 
-  meta_tag = document.querySelector('meta[name="panzoom-data"]').content;
-  selectors = JSON.parse(meta_tag).selectors;
-  
+  meta_tag = document.querySelector('meta[name="panzoom-data"]');
+
+  selectors = JSON.parse(meta_tag.content).selectors;
 
   // console.log(boxes);
   boxes.forEach((box) => {
-    
     key = box.dataset.key;
-    
+
     selectors.every((selector) => {
       elem = box.querySelector(selector);
-      
+
       if (elem != undefined) {
         return false;
       }
       return true;
-    })
+    });
     // elem = box.querySelector(".mermaid");
-    
 
     // // check if it is an image
     // if (elem == undefined) {
@@ -116,9 +113,9 @@ function activate_zoom_pan() {
             case "ctrl":
               return !e.ctrlKey && !e.button == 1;
             case "shift":
-              return !e.shiftKey && !e.button  == 1;
+              return !e.shiftKey && !e.button == 1;
             case "alt":
-              return !e.altKey && !e.button   == 1;
+              return !e.altKey && !e.button == 1;
             default:
               return false && !e.button == 1;
           }
@@ -132,11 +129,24 @@ function activate_zoom_pan() {
   });
 }
 
-document$.subscribe(function() {
+// handle themes differently
+let theme_tag = document.querySelector('meta[name="panzoom-theme"]');
+let theme = theme_tag.content;
+
+if (theme == "meterial") {
+  document$.subscribe(function () {
+    const interval = setInterval(activate_zoom_pan, 1000);
+
+    setTimeout(function () {
+      clearInterval(interval);
+      //console.log("Cleared");
+    }, 5000);
+  });
+} else {
   const interval = setInterval(activate_zoom_pan, 1000);
-  
+
   setTimeout(function () {
     clearInterval(interval);
     //console.log("Cleared");
   }, 5000);
-});
+}

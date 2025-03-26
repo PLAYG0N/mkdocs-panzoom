@@ -7,12 +7,13 @@ from mkdocs_panzoom_plugin import panzoom_box
 from mkdocs_panzoom_plugin.panzoom_box import *
 
 class HTMLPage:
-    def __init__(self, content:str, config, page):
+    def __init__(self, content:str, config, page, mkdocs_config):
         self.soup = BeautifulSoup(content,"html.parser")
         self.config = config
         self.page = page
         self.default_selectors = {".mermaid", ".d2"}
         self.containers = self._find_elements()
+        self.mkdocs_config = mkdocs_config
 
 
     def __str__(self):
@@ -43,7 +44,11 @@ class HTMLPage:
         meta_tag["content"] = json.dumps({
             "selectors": self.config.get("selectors")
             })
+        theme_tag = self.soup.new_tag("meta")
+        theme_tag["name"] = "panzoom-theme"
+        theme_tag["content"] = self.mkdocs_config.get("theme").name
         self.soup.head.append(meta_tag)
+        self.soup.head.append(theme_tag)
 
     def _find_elements(self):
         output = []
