@@ -130,10 +130,9 @@ function activate_zoom_pan() {
 }
 
 // handle themes differently
-let theme_tag = document.querySelector('meta[name="panzoom-theme"]');
-let theme = theme_tag.content;
+let pz_theme = document.querySelector('meta[name="panzoom-theme"]').content;
 
-if (theme == "material") {
+if (pz_theme == "material") {
   document$.subscribe(function () {
     const interval = setInterval(activate_zoom_pan, 1000);
 
