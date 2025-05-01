@@ -57,6 +57,6 @@ plugins:
         - Mermaid/excluded.md
       include_selectors:
         - img
-      # hint_location: top
+      hint_location: top
       # hint_location: bottom
   - d2
