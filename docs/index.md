@@ -48,7 +48,7 @@ plugins:
         - ".d2"
 ```
 
-### Always show hint
+### Hint
 
 This makes the hint on how to use it permanently visible.
 
@@ -56,6 +56,14 @@ This makes the hint on how to use it permanently visible.
 plugins:
   - panzoom:
       always_show_hint: true # default false
+```
+
+This changes the location of the hint
+
+```yaml
+plugins:
+   - panzoom:
+      hint_location: "top" # default bottom
 ```
 
 ### Use different key

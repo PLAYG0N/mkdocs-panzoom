@@ -49,6 +49,39 @@ plugins:
         - ".d2"
 ```
 
+### Hint
+
+This makes the hint on how to use it permanently visible.
+
+```yaml
+plugins:
+  - panzoom:
+      always_show_hint: true # default false
+```
+
+This changes the location of the hint
+
+```yaml
+plugins:
+   - panzoom:
+      hint_location: "top" # default bottom
+```
+
+### Use different key
+
+Options for activation key are:
+
+- alt
+- ctrl
+- shift
+- none
+
+```yaml
+plugins:
+  - panzoom:
+      key: "ctrl" # default alt
+```
+
 ### Exclude Pages
 
 ```yml
