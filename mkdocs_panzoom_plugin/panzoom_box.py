@@ -144,6 +144,12 @@ def create_panzoom_box(soup,config, id):
         nav.append(max)
         nav.append(min)
 
+    info_box = create_info_box(soup,config)
+
+    if config.get("hint_location", "bottom") == "top":
+        print("heeelp")
+        panzoom_box.append(info_box)
+    
     panzoom_box.append(nav)
 
     return panzoom_box
