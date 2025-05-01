@@ -50,9 +50,30 @@ button:hover .panzoom-icon {
     z-index: 3;
 }
 
+.panzoom-nav-infobox-top {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    top: 51px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    z-index: 3;
+}
+
 .panzoom-info-box {
     position: relative;
     padding-top: 15px;
+    font-size: 1em;
+    text-align: center;
+    z-index: 3;
+    background-color: var(--md-default-bg-color);
+    color: var(--md-default-fg-color--light);
+}
+
+.panzoom-info-box-top {
+    position: relative;
+    padding-bottom: 15px;
     font-size: 1em;
     text-align: center;
     z-index: 3;

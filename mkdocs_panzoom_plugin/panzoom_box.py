@@ -8,13 +8,18 @@ def create_info_box(soup,config):
     always_hint = config.get("always_show_hint",False)
     key = config.get("key")
 
+    if config.get("hint_location", "bottom") == "top":
+        css_class = "panzoom-info-box-top"
+    else:
+        css_class = "panzoom-info-box"
+
     if always_hint:
         info_box = soup.new_tag("div",**{
-            "class": "panzoom-info-box"
+            "class": css_class
         })
     else:
         info_box = soup.new_tag("div",**{
-            "class": "panzoom-info-box panzoom-hidden"
+            "class": css_class + " panzoom-hidden"
         })
 
     if key == "alt":
@@ -125,8 +130,13 @@ def create_panzoom_box(soup,config, id):
 
     panzoom_box.attrs["data-key"] = config.get('key',"none")
 
+    if config.get("hint_location", "bottom") == "top":
+        nav_class = "panzoom-nav-infobox-top"
+    else:
+        nav_class = "panzoom-top-nav"
+
     nav = soup.new_tag("nav", **{
-        "class": "panzoom-top-nav",
+        "class": nav_class,
         #"title": "material-fullscreen"
     })
 
