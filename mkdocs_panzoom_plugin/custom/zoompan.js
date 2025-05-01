@@ -1,15 +1,16 @@
 let panzoomScrollPosition = 0;
 
-function minimize(e, box, max, min) {
+function minimize(instance, box, max, min) {
   box.classList.remove("panzoom-fullscreen");
   max.classList.remove("panzoom-hidden");
   min.classList.add("panzoom-hidden");
+  panzoom_reset(instance)
   setTimeout(() => {
     window.scrollTo(0, panzoomScrollPosition);
   }, 0);
 }
 
-function maximize(e, box, max, min) {
+function maximize(instance, box, max, min) {
   panzoomScrollPosition =
     window.pageYOffset || document.documentElement.scrollTop;
 
@@ -18,11 +19,16 @@ function maximize(e, box, max, min) {
   min.classList.remove("panzoom-hidden");
 }
 
-function escapeFullScreen(e, box, max, min) {
+function escapeFullScreen(e, box, max, min, instance) {
 
   if (e.keyCode == 27) {
-    minimize(e, box, max, min);
+    minimize(instance, box, max, min);
   }
+}
+
+function panzoom_reset(instance) {
+  instance.moveTo(0, 0);
+  instance.zoomAbs(0, 0, 1);
 }
 
 function add_buttons(box, instance) {
@@ -33,8 +39,9 @@ function add_buttons(box, instance) {
   let info_box = box.querySelector(".panzoom-info-box");
 
   reset.addEventListener("click", function (e) {
-    instance.moveTo(0, 0);
-    instance.zoomAbs(0, 0, 1);
+    // instance.moveTo(0, 0);
+    // instance.zoomAbs(0, 0, 1);
+    panzoom_reset(instance);
   });
   if (info != undefined) {
     info.addEventListener("click", function (e) {
@@ -49,16 +56,16 @@ function add_buttons(box, instance) {
   }
   if (max != undefined) {
     max.addEventListener("click", function (e) {
-      maximize(e, box, max, min);
+      maximize(instance, box, max, min);
     });
   }
   if (min != undefined) {
     min.addEventListener("click", function (e) {
-      minimize(e, box, max, min);
+      minimize(instance, box, max, min);
     });
   }
   box.addEventListener("keydown", function (e) {
-    escapeFullScreen(e, box, max, min);
+    escapeFullScreen(e, box, max, min, instance);
   });
 }
 
