@@ -19,7 +19,6 @@ function maximize(e, box, max, min) {
 }
 
 function escapeFullScreen(e, box, max, min) {
-  // console.log(e,box,);
 
   if (e.keyCode == 27) {
     minimize(e, box, max, min);
@@ -39,7 +38,6 @@ function add_buttons(box, instance) {
   });
   if (info != undefined) {
     info.addEventListener("click", function (e) {
-      // console.log(box);
       if (box.dataset.info == "true") {
         box.dataset.info = false;
         info_box.classList.add("panzoom-hidden");
@@ -51,20 +49,11 @@ function add_buttons(box, instance) {
   }
   if (max != undefined) {
     max.addEventListener("click", function (e) {
-      //instance.setTransformOrigin({ x: 0.25, y: 0.25 });
-      // box.addEventListener("keydown", escapeFullScreen(e,box,max,min))
-      // box.classList.add("panzoom-fullscreen");
-      // min.classList.remove("panzoom-hidden");
-      // max.classList.add("panzoom-hidden");
-      // box.focus();
       maximize(e, box, max, min);
     });
   }
   if (min != undefined) {
     min.addEventListener("click", function (e) {
-      // box.classList.remove("panzoom-fullscreen");
-      // max.classList.remove("panzoom-hidden");
-      // min.classList.add("panzoom-hidden");
       minimize(e, box, max, min);
     });
   }
@@ -80,7 +69,6 @@ function activate_zoom_pan() {
 
   selectors = JSON.parse(meta_tag.content).selectors;
 
-  // console.log(boxes);
   boxes.forEach((box) => {
     key = box.dataset.key;
 
@@ -92,18 +80,11 @@ function activate_zoom_pan() {
       }
       return true;
     });
-    // elem = box.querySelector(".mermaid");
-
-    // // check if it is an image
-    // if (elem == undefined) {
-    //   elem = box.querySelector("img");
-    // }
 
     if (elem == undefined) {
       return;
     }
 
-    //console.log(elem.nodeName);
     if (
       (elem.nodeName == "DIV" || elem.nodeName == "IMG") &&
       !elem.dataset.zoom
@@ -124,7 +105,6 @@ function activate_zoom_pan() {
           }
         },
         beforeMouseDown: function (e) {
-          // console.log(e);
           switch (key) {
             case "ctrl":
               return !e.ctrlKey && !e.button == 1;
@@ -138,10 +118,8 @@ function activate_zoom_pan() {
         },
         zoomDoubleClickSpeed: 1,
       });
-      // instance.on()
       add_buttons(box, instance);
     }
-    //console.log(elem);
   });
 }
 
@@ -154,7 +132,6 @@ if (pz_theme == "material") {
 
     setTimeout(function () {
       clearInterval(interval);
-      //console.log("Cleared");
     }, 5000);
   });
 } else {
@@ -162,6 +139,5 @@ if (pz_theme == "material") {
 
   setTimeout(function () {
     clearInterval(interval);
-    //console.log("Cleared");
   }, 5000);
 }
