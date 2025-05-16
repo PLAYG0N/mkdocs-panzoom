@@ -93,9 +93,6 @@ plugins:
 
 ### Enable Fullscreen
 
-> [!WARNING]
->This is still in development!
-
 ```yml
 plugins:
   - panzoom:
