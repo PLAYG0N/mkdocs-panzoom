@@ -25,7 +25,6 @@ class HTMLPage:
             panzoom_box = create_panzoom_box(self.soup,self.config,idx)
             element.wrap(panzoom_box)
             if self.config.get("hint_location", "bottom") == "bottom":
-                print("heeelp")
                 panzoom_box.append(create_info_box(self.soup,self.config))
             # panzoom_box.append(create_info_box(self.soup,self.config))
 
