@@ -99,6 +99,10 @@ plugins:
       full_screen: True # default False
 ```
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=PLAYG0N/mkdocs-panzoom&type=Date)](https://www.star-history.com/#PLAYG0N/mkdocs-panzoom&Date)
+
 ## Credits
 
 The structure and some parts are from the [enumerate-headings-plugin](https://github.com/timvink/mkdocs-enumerate-headings-plugin) ([LICENCE](./licences/enumerate-headings-plugin))
