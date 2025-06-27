@@ -162,3 +162,5 @@ cython_debug/
 #.idea/
 
 public/
+performance_debug.yml
+docs/test/
