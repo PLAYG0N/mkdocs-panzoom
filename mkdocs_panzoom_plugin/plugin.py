@@ -2,7 +2,6 @@ import logging
 from collections import OrderedDict
 import os
 
-from mkdocs import plugins
 from mkdocs import utils
 from mkdocs.config import config_options, defaults
 from mkdocs.plugins import BasePlugin
@@ -20,7 +19,7 @@ class PanZoomPlugin(BasePlugin):
         ("full_screen", config_options.Type(bool, default=False)),
         ("always_show_hint", config_options.Type(bool, default=False)),
         ("key", config_options.Type(str, default="alt")),
-        ("include", config_options.Type(list, default=["*"])),
+        # ("include", config_options.Type(list, default=["*"])),
         ("exclude", config_options.Type(list, default=[])),
         ("include_selectors", config_options.Type(list, default=[])),
         ("exclude_selectors", config_options.Type(list, default=[])),
@@ -53,7 +52,6 @@ class PanZoomPlugin(BasePlugin):
 
         if exclude(page.file.src_path,excluded_pages):
             return
-
         html_page = HTMLPage(output,self.config,page, config)
 
         html_page.add_panzoom()
@@ -78,3 +76,5 @@ class PanZoomPlugin(BasePlugin):
                     os.path.join(base_path, "panzoom", "panzoom.min.js"),
                     os.path.join(js_path, "panzoom.min.js"),
                 )
+
+        # Profiler().print_stats()

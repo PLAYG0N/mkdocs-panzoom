@@ -33,7 +33,10 @@ setup(
         packages=["mkdocs_panzoom_plugin"],
         entry_points={
             "mkdocs.plugins": [
-                "panzoom=mkdocs_panzoom_plugin.plugin:PanZoomPlugin",
+                "panzoom=mkdocs_panzoom_plugin.plugin:PanZoomPlugin"
+            ],
+            "markdown.extensions": [
+                "panzoom=mkdocs_panzoom_plugin.markdown_extension:PanZoomExtension"
             ]
         },
 )

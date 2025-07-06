@@ -1,12 +1,16 @@
-import re
-import logging
 import json
-from bs4 import BeautifulSoup
+from bs4 import BeautifulSoup, SoupStrainer
+import lxml
+# import cchardet
 
-from mkdocs_panzoom_plugin import panzoom_box
 from mkdocs_panzoom_plugin.panzoom_box import *
 
+from line_profiler import profile
+
+only_needed_tags = SoupStrainer("")
+
 class HTMLPage:
+    @profile
     def __init__(self, content:str, config, page, mkdocs_config):
         self.soup = BeautifulSoup(content,"html.parser")
         self.config = config
@@ -19,13 +23,13 @@ class HTMLPage:
     def __str__(self):
         return str(self.soup)
 
-
+    @profile
     def add_panzoom(self):
         for idx, element in enumerate(self.containers):
-            panzoom_box = create_panzoom_box(self.soup,self.config,idx)
+            panzoom_box = PanZoomBox.create_panzoom_box(self.soup,self.config,idx)
             element.wrap(panzoom_box)
             if self.config.get("hint_location", "bottom") == "bottom":
-                panzoom_box.append(create_info_box(self.soup,self.config))
+                panzoom_box.append(PanZoomBox.create_info_box(self.soup,self.config))
             # panzoom_box.append(create_info_box(self.soup,self.config))
 
         # Include the css and js in the file
@@ -35,6 +39,7 @@ class HTMLPage:
 
         self._add_data_for_js()
 
+    @profile
     def _add_data_for_js(self):
         meta_tag = self.soup.new_tag("meta")
         meta_tag["name"] = "panzoom-data"
@@ -47,6 +52,7 @@ class HTMLPage:
         self.soup.head.append(meta_tag)
         self.soup.head.append(theme_tag)
 
+    @profile
     def _find_elements(self):
         output = []
         

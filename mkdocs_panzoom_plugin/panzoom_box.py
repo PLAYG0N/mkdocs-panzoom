@@ -3,7 +3,14 @@ from bs4 import BeautifulSoup
 from mkdocs import utils
 #from bs4.element import BeautifulSoup
 class PanZoomBox(object):
+    _info_box_cache = {}
+    _panzoom_box_cache = {}
+
+    @staticmethod
     def create_info_box(soup,config):
+        cache_key = "1" #hash(str(tuple(config.items())))
+        if cache_key in PanZoomBox._info_box_cache:
+            return PanZoomBox._info_box_cache[cache_key]
 
         always_hint = config.get("always_show_hint",False)
         key = config.get("key")
@@ -29,10 +36,11 @@ class PanZoomBox(object):
         elif key == "shift":
             info_box.string = 'Press "Shift" to enable Pan & Zoom'
 
-        # info_box.string = 'Press "Alt" / "Option" to enable Pan & Zoom'
+        PanZoomBox._info_box_cache[cache_key] = info_box
 
         return info_box
 
+    @staticmethod
     def create_button_info(soup):
         info = soup.new_tag("button", **{
             "class": "panzoom-info panzoom-button"
@@ -54,6 +62,7 @@ class PanZoomBox(object):
 
         return info
 
+    @staticmethod
     def create_button_reset(soup):
         reset = soup.new_tag("button", **{
             "class": "panzoom-reset panzoom-button"
@@ -75,6 +84,7 @@ class PanZoomBox(object):
 
         return reset
 
+    @staticmethod
     def create_button_max(soup):
         max = soup.new_tag("button", **{
             "class": "panzoom-max panzoom-button"
@@ -96,6 +106,7 @@ class PanZoomBox(object):
 
         return max
 
+    @staticmethod
     def create_button_min(soup,hidden=True):
 
         if hidden:
@@ -122,8 +133,13 @@ class PanZoomBox(object):
 
         return min
 
+    @staticmethod
     def create_panzoom_box(soup,config, id):
 
+        # cache_key = id #hash(str(tuple(config.items())))
+        # if cache_key in PanZoomBox._panzoom_box_cache:
+        #     # print("cache used", PanZoomBox._panzoom_box_cache[cache_key])
+        #     return PanZoomBox._panzoom_box_cache[cache_key]
         always_hint = config.get("always_show_hint",False)
 
         panzoom_box = soup.new_tag("div",**{"class": "panzoom-box", "id": "panzoom"+str(id), "oncontextmenu": "return false;"})
@@ -140,10 +156,10 @@ class PanZoomBox(object):
             #"title": "material-fullscreen"
         })
 
-        info = create_button_info(soup)
-        reset = create_button_reset(soup)
-        max = create_button_max(soup)
-        min = create_button_min(soup)
+        info = PanZoomBox.create_button_info(soup)
+        reset = PanZoomBox.create_button_reset(soup)
+        max = PanZoomBox.create_button_max(soup)
+        min = PanZoomBox.create_button_min(soup)
 
         # remove info button on permanent info banner
         if not always_hint:
@@ -154,13 +170,14 @@ class PanZoomBox(object):
             nav.append(max)
             nav.append(min)
 
-        info_box = create_info_box(soup,config)
+        info_box = PanZoomBox.create_info_box(soup,config)
 
         if config.get("hint_location", "bottom") == "top":
             panzoom_box.append(info_box)
         
         panzoom_box.append(nav)
 
+        # PanZoomBox._panzoom_box_cache[cache_key] = panzoom_box
         return panzoom_box
 
 def create_css_link(soup,page):
@@ -175,25 +192,25 @@ def create_js_script_plugin(soup,page):
     src= utils.get_relative_url(utils.normalize_url("assets/javascripts/zoompan.js"),page.url)
     return soup.new_tag("script", src=src)
 
-def create_fullscreen_modal(soup,config):
-    modal = soup.new_tag("div",**{"class": "panzoom-fullscreen-modal", "id": "panzoom-fullscreen-modal"})
+# def create_fullscreen_modal(soup,config):
+#     modal = soup.new_tag("div",**{"class": "panzoom-fullscreen-modal", "id": "panzoom-fullscreen-modal"})
 
-    nav = soup.new_tag("nav", **{
-        "class": "panzoom-top-nav",
-        #"title": "material-fullscreen"
-    })
+#     nav = soup.new_tag("nav", **{
+#         "class": "panzoom-top-nav",
+#         #"title": "material-fullscreen"
+#     })
 
-    info = create_button_info(soup)
-    reset = create_button_reset(soup)
-    min = create_button_min(soup,False)
+#     info = create_button_info(soup)
+#     reset = create_button_reset(soup)
+#     min = create_button_min(soup,False)
 
-    # remove info button on permanent info banner
-    if not config.get("always_show_hint",False):
-        nav.append(info)
+#     # remove info button on permanent info banner
+#     if not config.get("always_show_hint",False):
+#         nav.append(info)
 
-    nav.append(reset)
-    nav.append(min)
+#     nav.append(reset)
+#     nav.append(min)
 
-    modal.append(nav)
+#     modal.append(nav)
 
-    return modal
+#     return modal
