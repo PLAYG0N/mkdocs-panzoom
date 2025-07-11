@@ -1,7 +1,9 @@
 from markdown.extensions import Extension
 from markdown.treeprocessors import Treeprocessor
+from markdown.postprocessors import Postprocessor
 
 import xml.etree.ElementTree as etree
+import re
 
 
 class PanZoomExtension(Extension):
@@ -10,7 +12,7 @@ class PanZoomExtension(Extension):
             'full_screen': [False, 'Enables fullscreen'],
             'always_show_hint': [False, 'Permanently show hint'],
             'key': ['alt', 'Key to press to enable panzoom'],
-            'selectors': [[".mermaid", ".d2"], 'Selectors on which to enable panzoom'],
+            'selectors': [[".mermaid", ".d2", "img"], 'Selectors on which to enable panzoom'],
             'hint_location': ['bottom', 'Hint bottom/top'],
         }
         super().__init__(**kwargs)
@@ -19,7 +21,8 @@ class PanZoomExtension(Extension):
         md.registerExtension(self)
         # self.md = md
         # insert processors and patterns here
-        md.treeprocessors.register(PanZoomTreeprocessor(md = md, selectors = self.getConfig("selectors", [])), "panzoom", 9999)
+        # md.treeprocessors.register(PanZoomTreeprocessor(md = md, selectors = self.getConfig("selectors", [])), "panzoom", -1)
+        md.postprocessors.register(PanZoomPostprocessor(md=md,selectors=self.getConfig("selectors", [])), "panzoom", -1)
         # return super().extendMarkdown(md)
 
 class PanZoomTreeprocessor(Treeprocessor):
@@ -28,8 +31,8 @@ class PanZoomTreeprocessor(Treeprocessor):
         super().__init__(md)
 
     def run(self, root:etree.Element):
-        # print(etree.tostring(root,"unicode", "html"))
-        print(self.md.htmlStash.rawHtmlBlocks)
+        print(etree.tostring(root,"unicode", "html"))
+        # print(self.md.htmlStash.rawHtmlBlocks)
         self.containers = self.find_all(root)
         # print(self.containers)
         return super().run(root)
@@ -42,7 +45,30 @@ class PanZoomTreeprocessor(Treeprocessor):
             elif selector.startswith("#"):
                 _selector = ".//*[@id='%s']" % selector.lstrip("#")
             else:
-                _selector = ".//%s]" % selector
+                _selector = ".//%s" % selector
             output += root.findall(_selector)
+        
+        print(output)
 
         return output
+
+class PanZoomPostprocessor(Postprocessor):
+    def __init__(self, md = None, selectors = []):
+        self.selectors = selectors
+        super().__init__(md)
+    
+    def run(self, text):
+        print(text)
+        for selector in self.selectors:
+            if selector.startswith("."):
+                _selector =  re.compile()
+            elif selector.startswith("#"):
+                _selector = ".//*[@id='%s']" % selector.lstrip("#")
+            else:
+                _selector = ".//%s" % selector
+            
+        return text
+        # return super().run(text)
+
+def makeExtension(**kwargs):
+    return PanZoomExtension(**kwargs)
