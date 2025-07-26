@@ -82,6 +82,17 @@ plugins:
       key: "ctrl" # default alt
 ```
 
+### Set Initial Zoom Level
+
+This sets the initial zoom level for all diagrams and images.
+
+```yaml
+plugins:
+  - panzoom:
+      initial_zoom_level: 1.5 # default 1.0
+      zoom_step: 0.2 # default 0.3
+```
+
 ### Exclude Pages
 
 ```yml
@@ -105,6 +116,7 @@ plugins:
 plugins:
   - panzoom:
       show_zoom_buttons: true # default false
+      buttons_size: "1.1em" # default "1.25em"
 ```
 
 ## Star History

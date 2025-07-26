@@ -6,7 +6,7 @@ const SAVE_DEBOUNCE_DELAY_MS = 200; // Debounce delay for saving zoom state in m
 
 // Constants for zoom functionality
 const DEFAULT_ZOOM_LEVEL = 1.0; // Default browser zoom level (100%)
-const ZOOM_STEP = 0.5; // Zoom step for zoom in/out buttons
+const DEFAULT_ZOOM_STEP = 0.3; // Default zoom step for zoom in/out buttons
 
 // LocalStorage utility functions for saving zoom levels
 function getStorageKey(boxId) {
@@ -91,9 +91,9 @@ function panzoom_reset(instance, box) {
   instance.zoomAbs(0, 0, DEFAULT_ZOOM_LEVEL);
 }
 
-function panzoom_zoom_in(instance, box) {
+function panzoom_zoom_in(instance, box, zoomStep = DEFAULT_ZOOM_STEP) {
   const currentTransform = instance.getTransform();
-  const newScale = currentTransform.scale + ZOOM_STEP;
+  const newScale = currentTransform.scale + zoomStep;
 
   // Get the center of the box for zooming
   const rect = box.getBoundingClientRect();
@@ -103,9 +103,9 @@ function panzoom_zoom_in(instance, box) {
   instance.zoomAbs(centerX, centerY, newScale);
 }
 
-function panzoom_zoom_out(instance, box) {
+function panzoom_zoom_out(instance, box, zoomStep = DEFAULT_ZOOM_STEP) {
   const currentTransform = instance.getTransform();
-  const newScale = Math.max(currentTransform.scale - ZOOM_STEP, 0.1); // Prevent negative zoom
+  const newScale = Math.max(currentTransform.scale - zoomStep, 0.1); // Prevent negative zoom
 
   // Get the center of the box for zooming
   const rect = box.getBoundingClientRect();
@@ -115,7 +115,7 @@ function panzoom_zoom_out(instance, box) {
   instance.zoomAbs(centerX, centerY, newScale);
 }
 
-function add_buttons(box, instance) {
+function add_buttons(box, instance, zoomStep = DEFAULT_ZOOM_STEP) {
   let reset = box.querySelector(".panzoom-reset");
   let max = box.querySelector(".panzoom-max");
   let min = box.querySelector(".panzoom-min");
@@ -130,13 +130,13 @@ function add_buttons(box, instance) {
 
   if (zoom_in != undefined) {
     zoom_in.addEventListener("click", function (e) {
-      panzoom_zoom_in(instance, box);
+      panzoom_zoom_in(instance, box, zoomStep);
     });
   }
 
   if (zoom_out != undefined) {
     zoom_out.addEventListener("click", function (e) {
-      panzoom_zoom_out(instance, box);
+      panzoom_zoom_out(instance, box, zoomStep);
     });
   }
 
@@ -174,14 +174,28 @@ function activate_zoom_pan() {
   let panzoomData = {};
   let selectors = [".panzoom-content"]; // Default selector
   let initialZoomLevel = DEFAULT_ZOOM_LEVEL; // Default zoom level
+  let zoomStep = DEFAULT_ZOOM_STEP; // Default zoom step
+  let buttonsSize = "1.25em"; // Default button size
 
   try {
     panzoomData = JSON.parse(meta_tag.content);
     selectors = panzoomData.selectors || [];
     initialZoomLevel = panzoomData.initial_zoom_level ?? DEFAULT_ZOOM_LEVEL;
+    zoomStep = panzoomData.zoom_step ?? DEFAULT_ZOOM_STEP;
+    buttonsSize = panzoomData.buttons_size ?? "1.25em";
   } catch (e) {
     console.warn('Failed to parse panzoom data:', e);
   }
+
+  // Apply custom button size to all buttons
+  const style = document.createElement('style');
+  style.textContent = `
+    .panzoom-button {
+      width: ${buttonsSize} !important;
+      height: ${buttonsSize} !important;
+    }
+  `;
+  document.head.appendChild(style);
 
   boxes.forEach((box) => {
     let key = box.dataset.key;
@@ -268,7 +282,7 @@ function activate_zoom_pan() {
         }, SAVE_DEBOUNCE_DELAY_MS);
       });
 
-      add_buttons(box, instance);
+      add_buttons(box, instance, zoomStep);
     }
   });
 }

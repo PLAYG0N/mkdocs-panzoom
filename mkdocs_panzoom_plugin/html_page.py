@@ -40,7 +40,9 @@ class HTMLPage:
         meta_tag["name"] = "panzoom-data"
         meta_tag["content"] = json.dumps({
             "selectors": self.config.get("selectors"),
-            "initial_zoom_level": self.config.get("initial_zoom_level", 1.0)
+            "initial_zoom_level": self.config.get("initial_zoom_level", 1.0),
+            "zoom_step": self.config.get("zoom_step", 0.3),
+            "buttons_size": self.config.get("buttons_size", "1.25em")
             })
         theme_tag = self.soup.new_tag("meta")
         theme_tag["name"] = "panzoom-theme"

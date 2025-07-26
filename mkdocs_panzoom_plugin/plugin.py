@@ -27,6 +27,8 @@ class PanZoomPlugin(BasePlugin):
         ("exclude_selectors", config_options.Type(list, default=[])),
         ("hint_location", config_options.Type(str, default="bottom")),
         ("initial_zoom_level", config_options.Type(float, default=1.0)),
+        ("zoom_step", config_options.Type(float, default=0.3)),
+        ("buttons_size", config_options.Type(str, default="1.25em")),
     )
 
     def on_config(self, config, **kwargs):
