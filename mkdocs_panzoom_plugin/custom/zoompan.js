@@ -27,8 +27,20 @@ function escapeFullScreen(e, box, max, min, instance) {
 }
 
 function panzoom_reset(instance) {
+  // Get the initial zoom level from meta tag data
+  const meta_tag = document.querySelector('meta[name="panzoom-data"]');
+  let initialZoom = 1.0;
+  if (meta_tag) {
+    try {
+      const data = JSON.parse(meta_tag.content);
+      initialZoom = data.initial_zoom_level || 1.0;
+    } catch (e) {
+      console.warn('Failed to parse panzoom data:', e);
+    }
+  }
+
   instance.moveTo(0, 0);
-  instance.zoomAbs(0, 0, 1);
+  instance.zoomAbs(0, 0, initialZoom);
 }
 
 function add_buttons(box, instance) {
@@ -74,7 +86,11 @@ function activate_zoom_pan() {
 
   meta_tag = document.querySelector('meta[name="panzoom-data"]');
 
-  selectors = JSON.parse(meta_tag.content).selectors;
+  if (!meta_tag) return;
+
+  const panzoomData = JSON.parse(meta_tag.content);
+  const selectors = panzoomData.selectors;
+  const initialZoomLevel = panzoomData.initial_zoom_level || 1.0;
 
   boxes.forEach((box) => {
     key = box.dataset.key;
@@ -125,6 +141,12 @@ function activate_zoom_pan() {
         },
         zoomDoubleClickSpeed: 1,
       });
+
+      // Set the initial zoom level
+      if (initialZoomLevel !== 1.0) {
+        instance.zoomAbs(0, 0, initialZoomLevel);
+      }
+
       add_buttons(box, instance);
     }
   });
