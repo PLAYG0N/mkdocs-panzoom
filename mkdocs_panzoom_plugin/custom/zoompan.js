@@ -1,5 +1,11 @@
 let panzoomScrollPosition = 0;
 
+// Constants for localStorage state management
+const THIRTY_DAYS_IN_MS = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+
+// Constants for zoom functionality
+const DEFAULT_ZOOM_LEVEL = 1.0; // Default browser zoom level (100%)
+
 // LocalStorage utility functions for saving zoom levels
 function getStorageKey(boxId) {
   const pageUrl = window.location.pathname;
@@ -27,7 +33,7 @@ function loadZoomState(boxId) {
     if (saved) {
       const state = JSON.parse(saved);
       // Only use saved state if it's less than 30 days old
-      if (Date.now() - state.timestamp < 30 * 24 * 60 * 60 * 1000) {
+      if (Date.now() - state.timestamp < THIRTY_DAYS_IN_MS) {
         return state;
       }
     }
@@ -73,25 +79,14 @@ function escapeFullScreen(e, box, max, min, instance) {
 }
 
 function panzoom_reset(instance, box) {
-  // Get the initial zoom level from meta tag data
-  const meta_tag = document.querySelector('meta[name="panzoom-data"]');
-  let initialZoom = 1.0;
-  if (meta_tag) {
-    try {
-      const data = JSON.parse(meta_tag.content);
-      initialZoom = data.initial_zoom_level ?? 1.0;
-    } catch (e) {
-      console.warn('Failed to parse panzoom data:', e);
-    }
-  }
-
   // Clear saved zoom state when resetting
   if (box && box.id) {
     clearZoomState(box.id);
   }
 
+  // Reset to initial position and default browser zoom level
   instance.moveTo(0, 0);
-  instance.zoomAbs(0, 0, initialZoom);
+  instance.zoomAbs(0, 0, DEFAULT_ZOOM_LEVEL);
 }
 
 function add_buttons(box, instance) {
@@ -102,9 +97,7 @@ function add_buttons(box, instance) {
   let info_box = box.querySelector(".panzoom-info-box");
 
   reset.addEventListener("click", function (e) {
-    // instance.moveTo(0, 0);
-    // instance.zoomAbs(0, 0, 1);
-    panzoom_reset(instance, box);
+    panzoom_reset(instance, box); // Always reset to default browser zoom level
   });
   if (info != undefined) {
     info.addEventListener("click", function (e) {
@@ -124,33 +117,34 @@ function add_buttons(box, instance) {
   }
   if (min != undefined) {
     min.addEventListener("click", function (e) {
-      minimize(instance, box, max, min);
+      minimize(instance, box, max, min); // Always reset to default browser zoom level
     });
   }
   box.addEventListener("keydown", function (e) {
-    escapeFullScreen(e, box, max, min, instance);
+    escapeFullScreen(e, box, max, min, instance); // Always reset to default browser zoom level
   });
 }
 
 function activate_zoom_pan() {
-  boxes = document.querySelectorAll(".panzoom-box");
+  let boxes = document.querySelectorAll(".panzoom-box");
 
-  meta_tag = document.querySelector('meta[name="panzoom-data"]');
+  let meta_tag = document.querySelector('meta[name="panzoom-data"]');
 
   let panzoomData = {};
   let selectors = [".panzoom-content"]; // Default selector
-  let initialZoomLevel = 1.0; // Default zoom level
+  let initialZoomLevel = DEFAULT_ZOOM_LEVEL; // Default zoom level
 
   try {
     panzoomData = JSON.parse(meta_tag.content);
     selectors = panzoomData.selectors || [];
-    initialZoomLevel = panzoomData.initial_zoom_level ?? 1.0;
+    initialZoomLevel = panzoomData.initial_zoom_level ?? DEFAULT_ZOOM_LEVEL;
   } catch (e) {
     console.warn('Failed to parse panzoom data:', e);
   }
 
   boxes.forEach((box) => {
-    key = box.dataset.key;
+    let key = box.dataset.key;
+    let elem;
 
     selectors.every((selector) => {
       elem = box.querySelector(selector);
@@ -207,7 +201,7 @@ function activate_zoom_pan() {
         // Apply saved zoom state
         instance.zoomAbs(0, 0, savedState.scale);
         instance.moveTo(savedState.x, savedState.y);
-      } else if (initialZoomLevel !== 1.0) {
+      } else if (initialZoomLevel !== DEFAULT_ZOOM_LEVEL) {
         // Apply configured initial zoom level
         instance.zoomAbs(0, 0, initialZoomLevel);
       }
@@ -226,8 +220,8 @@ function activate_zoom_pan() {
 
       instance.on('pan', function() {
         // Debounce saving to avoid excessive localStorage writes
-        clearTimeout(saveTimeout);
-        saveTimeout = setTimeout(() => {
+        clearTimeout(panSaveTimeout);
+        panSaveTimeout = setTimeout(() => {
           const transform = instance.getTransform();
           saveZoomState(box.id, transform);
         }, 500);
