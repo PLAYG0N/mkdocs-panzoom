@@ -33,7 +33,7 @@ function panzoom_reset(instance) {
   if (meta_tag) {
     try {
       const data = JSON.parse(meta_tag.content);
-      initialZoom = data.initial_zoom_level || 1.0;
+      initialZoom = data.initial_zoom_level ?? 1.0;
     } catch (e) {
       console.warn('Failed to parse panzoom data:', e);
     }
@@ -93,7 +93,7 @@ function activate_zoom_pan() {
   try {
     panzoomData = JSON.parse(meta_tag.content);
     selectors = panzoomData.selectors || [];
-    initialZoomLevel = panzoomData.initial_zoom_level || 1.0;
+    initialZoomLevel = panzoomData.initial_zoom_level ?? 1.0;
   } catch (e) {
     console.warn('Failed to parse panzoom data:', e);
   }
