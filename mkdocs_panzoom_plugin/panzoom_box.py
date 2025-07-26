@@ -22,14 +22,14 @@ def create_info_box(soup,config):
             "class": css_class + " panzoom-hidden"
         })
 
-    if key == "alt":
-        info_box.string = 'Press "Alt" / "Option" to enable Pan & Zoom'
-    elif key == "ctrl":
-        info_box.string = 'Press "Ctrl" to enable Pan & Zoom'
-    elif key == "shift":
-        info_box.string = 'Press "Shift" to enable Pan & Zoom'
+    action_text = " to enable Pan & Zoom"
+    key_messages = {
+        "alt": f'Press "Alt" / "Option"{action_text}',
+        "ctrl": f'Press "Ctrl"{action_text}',
+        "shift": f'Press "Shift"{action_text}'
+    }
 
-    # info_box.string = 'Press "Alt" / "Option" to enable Pan & Zoom'
+    info_box.string = key_messages.get(key, f'Press modifier key{action_text}')    # info_box.string = 'Press "Alt" / "Option" to enable Pan & Zoom'
 
     return info_box
 
