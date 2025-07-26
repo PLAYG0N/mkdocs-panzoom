@@ -22,7 +22,7 @@ def create_info_box(soup,config):
             "class": css_class + " panzoom-hidden"
         })
 
-    action_text = " to enable Pan & Zoom"
+    action_text = " to disable Pan & Zoom (for text selection)"
     key_messages = {
         "alt": f'Press "Alt" / "Option"{action_text}',
         "ctrl": f'Press "Ctrl"{action_text}',

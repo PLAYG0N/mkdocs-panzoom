@@ -226,11 +226,11 @@ function activate_zoom_pan() {
         beforeWheel: function (e) {
           switch (key) {
             case "ctrl":
-              return !e.ctrlKey;
+              return e.ctrlKey;
             case "shift":
-              return !e.shiftKey;
+              return e.shiftKey;
             case "alt":
-              return !e.altKey;
+              return e.altKey;
             default:
               return false && !e.button == 1;
           }
@@ -238,11 +238,11 @@ function activate_zoom_pan() {
         beforeMouseDown: function (e) {
           switch (key) {
             case "ctrl":
-              return !e.ctrlKey && !e.button == 1;
+              return e.ctrlKey && !e.button == 1;
             case "shift":
-              return !e.shiftKey && !e.button == 1;
+              return e.shiftKey && !e.button == 1;
             case "alt":
-              return !e.altKey && !e.button == 1;
+              return e.altKey && !e.button == 1;
             default:
               return false && !e.button == 1;
           }

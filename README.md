@@ -69,7 +69,7 @@ plugins:
 
 ### Use different key
 
-Options for activation key are:
+Pan & Zoom is enabled by default. Options for the key to disable it (for text selection) are:
 
 - alt
 - ctrl
