@@ -2,6 +2,7 @@ let panzoomScrollPosition = 0;
 
 // Constants for localStorage state management
 const THIRTY_DAYS_IN_MS = 30 * 24 * 60 * 60 * 1000; // 30 days in milliseconds
+const SAVE_DEBOUNCE_DELAY_MS = 200; // Debounce delay for saving zoom state in milliseconds
 
 // Constants for zoom functionality
 const DEFAULT_ZOOM_LEVEL = 1.0; // Default browser zoom level (100%)
@@ -215,7 +216,7 @@ function activate_zoom_pan() {
         zoomSaveTimeout = setTimeout(() => {
           const transform = instance.getTransform();
           saveZoomState(box.id, transform);
-        }, 500);
+        }, SAVE_DEBOUNCE_DELAY_MS);
       });
 
       instance.on('pan', function() {
@@ -224,7 +225,7 @@ function activate_zoom_pan() {
         panSaveTimeout = setTimeout(() => {
           const transform = instance.getTransform();
           saveZoomState(box.id, transform);
-        }, 500);
+        }, SAVE_DEBOUNCE_DELAY_MS);
       });
 
       add_buttons(box, instance);
