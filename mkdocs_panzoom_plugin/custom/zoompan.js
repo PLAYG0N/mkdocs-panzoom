@@ -86,11 +86,18 @@ function activate_zoom_pan() {
 
   meta_tag = document.querySelector('meta[name="panzoom-data"]');
 
-  if (!meta_tag) return;
+  let selectors = [".panzoom-content"]; // Default selector
+  let initialZoomLevel = 1.0; // Default zoom level
 
-  const panzoomData = JSON.parse(meta_tag.content);
-  const selectors = panzoomData.selectors;
-  const initialZoomLevel = panzoomData.initial_zoom_level || 1.0;
+  if (meta_tag) {
+    try {
+      const panzoomData = JSON.parse(meta_tag.content);
+      selectors = panzoomData.selectors || selectors;
+      initialZoomLevel = panzoomData.initial_zoom_level || initialZoomLevel;
+    } catch (e) {
+      console.warn('Failed to parse panzoom data:', e);
+    }
+  }
 
   boxes.forEach((box) => {
     key = box.dataset.key;
