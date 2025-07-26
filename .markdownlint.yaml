@@ -1,0 +1,26 @@
+# https://github.com/DavidAnson/markdownlint/blob/main/schema/.markdownlint.yaml
+
+# MD046/code-block-style - Code block style example error: [Expected: indented; Actual: fenced]
+MD046: false
+
+# MD004/ul-style - Unordered list style [Expected: asterisk; Actual: dash]
+MD004:
+  style: "sublist"
+
+# MD013/line-length - Line length
+MD013:
+  # Number of characters
+  line_length: 140
+  # Number of characters for headings
+  heading_line_length: 140
+  # Number of characters for code blocks
+  code_block_line_length: 140
+
+# Spaces after list markers doesn't work with MkDocs `# (1)!` annotations
+MD030: false
+
+# Allow Inline HTML like <div class="annotate" markdown>
+MD033: false
+
+# Disable first-line-heading due to abbreviations.md
+# MD041: false

@@ -1,0 +1,171 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "mkdocs-panzoom-plugin"
+version = "0.2.2"
+description = "MkDocs Plugin to enable pan & zoom on images and mermaid diagrams"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "PLAYG0N", email = "playg0nofficial@gmail.com"},
+    {name = "elgalu", email = "elgalu3@gmail.com"},
+]
+keywords = ["mkdocs", "zoom", "pan", "plugin", "mermaid", "images"]
+classifiers = [
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.8"
+dependencies = [
+    "mkdocs>=1.0.4",
+    "beautifulsoup4>=4.9.0",
+]
+
+[dependency-groups]
+dev = [
+    "mkdocs-material>=9.6.7",
+    "mkdocs-d2-plugin",
+    "pre-commit",
+    "ruff>=0.12.0",
+    "mypy>=1.16.1",
+    "pytest>=8.4.1",
+    "pytest-cov>=6.2.1",
+    "pytest-html>=4.1.1",
+]
+docs = [
+    "mkdocs>=1.1.2",
+    "mkdocs-material>=9.6.7",
+    "mkdocs-d2-plugin",
+]
+
+[project.urls]
+Homepage = "https://github.com/elgalu/mkdocs-panzoom"
+Repository = "https://github.com/elgalu/mkdocs-panzoom.git"
+Documentation = "https://playg0n.github.io/mkdocs-panzoom/"
+Issues = "https://github.com/elgalu/mkdocs-panzoom/issues"
+
+[project.entry-points."mkdocs.plugins"]
+panzoom = "mkdocs_panzoom_plugin.plugin:PanZoomPlugin"
+
+[tool.hatch.build.targets.wheel]
+packages = ["mkdocs_panzoom_plugin"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"mkdocs_panzoom_plugin/custom" = "mkdocs_panzoom_plugin/custom"
+"mkdocs_panzoom_plugin/panzoom" = "mkdocs_panzoom_plugin/panzoom"
+
+[tool.uv]
+native-tls = true
+
+[tool.codespell]
+skip = 'uv.lock'
+
+[tool.ruff]
+line-length = 99
+target-version = "py38"
+
+[tool.ruff.format]
+# Use double quotes for strings
+quote-style = "double"
+# Use spaces around operators
+indent-style = "space"
+# Respect magic trailing commas
+skip-magic-trailing-comma = false
+# Automatically detect line endings
+line-ending = "auto"
+
+[tool.ruff.lint]
+# use ruff defaults: Flake8's F rules, along with a subset of the E rules, omitting any stylistic rules
+# that overlap with the use of a formatter, like Black.
+fixable = ["ALL"]
+select = [
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "C4", # flake8-comprehensions
+    "UP", # pyupgrade
+    "S",  # flake8-bandit
+    "PGH", # pygrep-hooks
+    "T100", # debug statements
+    "W291", # trailing whitespace
+    "W292", # no newline at end of file
+    "D",  # pydocstyle - enable docstring checks
+]
+ignore = [
+    "E501", # line too long, handled by formatter
+    "B008", # do not perform function calls in argument defaults
+    "C901", # too complex
+    "S101", # use of assert
+    # https://docs.astral.sh/ruff/rules/#pydocstyle-d
+    "D203", # 1 blank line required before class docstring (conflicts with D211)
+    "D213", # Multi-line docstring summary should start at the second line (conflicts with D212)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "pep257"
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
+
+[tool.mypy]
+python_version = "3.8"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+check_untyped_defs = true
+disallow_untyped_decorators = false
+no_implicit_optional = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+warn_no_return = true
+warn_unreachable = true
+strict_equality = true
+# Additional strict checks to match Pylance
+disallow_any_generics = true
+exclude = ["tests/.*"]
+
+[tool.pytest.ini_options]
+junit_family = "xunit2"
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+addopts = [
+    "-ra",
+    "-q",
+    "--strict-markers",
+    "--strict-config",
+    "--cov=mkdocs_panzoom_plugin",
+    "--cov-report=term-missing",
+    "--cov-report=html",
+    "--cov-report=xml",
+]
+
+[tool.coverage.run]
+source = ["mkdocs_panzoom_plugin"]
+omit = ["*/venv/*", "*/.venv/*", "*/tests/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+]
