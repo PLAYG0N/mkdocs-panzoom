@@ -213,11 +213,12 @@ function activate_zoom_pan() {
       }
 
       // Save zoom state when it changes
-      let saveTimeout;
+      let zoomSaveTimeout;
+      let panSaveTimeout;
       instance.on('zoom', function() {
         // Debounce saving to avoid excessive localStorage writes
-        clearTimeout(saveTimeout);
-        saveTimeout = setTimeout(() => {
+        clearTimeout(zoomSaveTimeout);
+        zoomSaveTimeout = setTimeout(() => {
           const transform = instance.getTransform();
           saveZoomState(box.id, transform);
         }, 500);
