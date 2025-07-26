@@ -122,6 +122,46 @@ def create_button_min(soup,hidden=True):
 
     return min
 
+def create_button_zoom_in(soup):
+    zoom_in = soup.new_tag("button", **{
+        "class": "panzoom-zoom-in panzoom-button"
+    })
+
+    zoom_in_svg = soup.new_tag("svg", **{
+        "class": "panzoom-icon",
+        "xmlns": "http://www.w3.org/2000/svg",
+        "viewBox": "0 0 448 512"
+    })
+
+    zoom_in_path = soup.new_tag("path", **{
+        "d": "M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"
+    })
+
+    zoom_in_svg.append(zoom_in_path)
+    zoom_in.append(zoom_in_svg)
+
+    return zoom_in
+
+def create_button_zoom_out(soup):
+    zoom_out = soup.new_tag("button", **{
+        "class": "panzoom-zoom-out panzoom-button"
+    })
+
+    zoom_out_svg = soup.new_tag("svg", **{
+        "class": "panzoom-icon",
+        "xmlns": "http://www.w3.org/2000/svg",
+        "viewBox": "0 0 448 512"
+    })
+
+    zoom_out_path = soup.new_tag("path", **{
+        "d": "M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"
+    })
+
+    zoom_out_svg.append(zoom_out_path)
+    zoom_out.append(zoom_out_svg)
+
+    return zoom_out
+
 def create_panzoom_box(soup,config, id):
 
     always_hint = config.get("always_show_hint",False)
@@ -144,12 +184,20 @@ def create_panzoom_box(soup,config, id):
     reset = create_button_reset(soup)
     max = create_button_max(soup)
     min = create_button_min(soup)
+    zoom_in = create_button_zoom_in(soup)
+    zoom_out = create_button_zoom_out(soup)
 
     # remove info button on permanent info banner
     if not always_hint:
         nav.append(info)
 
     nav.append(reset)
+
+    # Add zoom in/out buttons if enabled
+    if config.get("show_zoom_buttons", False):
+        nav.append(zoom_in)
+        nav.append(zoom_out)
+
     if config.get("full_screen",False)==True:
         nav.append(max)
         nav.append(min)
@@ -158,7 +206,7 @@ def create_panzoom_box(soup,config, id):
 
     if config.get("hint_location", "bottom") == "top":
         panzoom_box.append(info_box)
-    
+
     panzoom_box.append(nav)
 
     return panzoom_box
@@ -186,12 +234,20 @@ def create_fullscreen_modal(soup,config):
     info = create_button_info(soup)
     reset = create_button_reset(soup)
     min = create_button_min(soup,False)
+    zoom_in = create_button_zoom_in(soup)
+    zoom_out = create_button_zoom_out(soup)
 
     # remove info button on permanent info banner
     if not config.get("always_show_hint",False):
         nav.append(info)
 
     nav.append(reset)
+
+    # Add zoom in/out buttons if enabled
+    if config.get("show_zoom_buttons", False):
+        nav.append(zoom_in)
+        nav.append(zoom_out)
+
     nav.append(min)
 
     modal.append(nav)

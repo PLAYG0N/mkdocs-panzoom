@@ -108,6 +108,14 @@ plugins:
       full_screen: True # default False
 ```
 
+### Hide/Show Zoom in/out Buttons
+
+```yaml
+plugins:
+  - panzoom:
+      show_zoom_buttons: true # default false
+```
+
 ## Automatic Zoom State Persistence
 
 The plugin automatically saves the zoom level and pan position for each diagram to your browser's localStorage. This means:

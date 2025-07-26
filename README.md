@@ -99,6 +99,14 @@ plugins:
       full_screen: True # default False
 ```
 
+### Hide/Show Zoom in/out Buttons
+
+```yaml
+plugins:
+  - panzoom:
+      show_zoom_buttons: true # default false
+```
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=PLAYG0N/mkdocs-panzoom&type=Date)](https://www.star-history.com/#PLAYG0N/mkdocs-panzoom&Date)

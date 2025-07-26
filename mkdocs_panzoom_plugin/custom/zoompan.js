@@ -6,6 +6,7 @@ const SAVE_DEBOUNCE_DELAY_MS = 200; // Debounce delay for saving zoom state in m
 
 // Constants for zoom functionality
 const DEFAULT_ZOOM_LEVEL = 1.0; // Default browser zoom level (100%)
+const ZOOM_STEP = 0.2; // Zoom step for zoom in/out buttons
 
 // LocalStorage utility functions for saving zoom levels
 function getStorageKey(boxId) {
@@ -90,16 +91,55 @@ function panzoom_reset(instance, box) {
   instance.zoomAbs(0, 0, DEFAULT_ZOOM_LEVEL);
 }
 
+function panzoom_zoom_in(instance, box) {
+  const currentTransform = instance.getTransform();
+  const newScale = currentTransform.scale + ZOOM_STEP;
+
+  // Get the center of the box for zooming
+  const rect = box.getBoundingClientRect();
+  const centerX = rect.width / 2;
+  const centerY = rect.height / 2;
+
+  instance.zoomAbs(centerX, centerY, newScale);
+}
+
+function panzoom_zoom_out(instance, box) {
+  const currentTransform = instance.getTransform();
+  const newScale = Math.max(currentTransform.scale - ZOOM_STEP, 0.1); // Prevent negative zoom
+
+  // Get the center of the box for zooming
+  const rect = box.getBoundingClientRect();
+  const centerX = rect.width / 2;
+  const centerY = rect.height / 2;
+
+  instance.zoomAbs(centerX, centerY, newScale);
+}
+
 function add_buttons(box, instance) {
   let reset = box.querySelector(".panzoom-reset");
   let max = box.querySelector(".panzoom-max");
   let min = box.querySelector(".panzoom-min");
   let info = box.querySelector(".panzoom-info");
   let info_box = box.querySelector(".panzoom-info-box");
+  let zoom_in = box.querySelector(".panzoom-zoom-in");
+  let zoom_out = box.querySelector(".panzoom-zoom-out");
 
   reset.addEventListener("click", function (e) {
     panzoom_reset(instance, box); // Always reset to default browser zoom level
   });
+
+  if (zoom_in != undefined) {
+    zoom_in.addEventListener("click", function (e) {
+      panzoom_zoom_in(instance, box);
+    });
+  }
+
+  if (zoom_out != undefined) {
+    zoom_out.addEventListener("click", function (e) {
+      panzoom_zoom_out(instance, box);
+    });
+  }
+
   if (info != undefined) {
     info.addEventListener("click", function (e) {
       if (box.dataset.info == "true") {
