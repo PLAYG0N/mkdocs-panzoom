@@ -1,10 +1,56 @@
 let panzoomScrollPosition = 0;
 
+// LocalStorage utility functions for saving zoom levels
+function getStorageKey(boxId) {
+  const pageUrl = window.location.pathname;
+  return `panzoom-${pageUrl}-${boxId}`;
+}
+
+function saveZoomState(boxId, transform) {
+  try {
+    const key = getStorageKey(boxId);
+    localStorage.setItem(key, JSON.stringify({
+      x: transform.x,
+      y: transform.y,
+      scale: transform.scale,
+      timestamp: Date.now()
+    }));
+  } catch (e) {
+    console.warn('Failed to save zoom state to localStorage:', e);
+  }
+}
+
+function loadZoomState(boxId) {
+  try {
+    const key = getStorageKey(boxId);
+    const saved = localStorage.getItem(key);
+    if (saved) {
+      const state = JSON.parse(saved);
+      // Only use saved state if it's less than 30 days old
+      if (Date.now() - state.timestamp < 30 * 24 * 60 * 60 * 1000) {
+        return state;
+      }
+    }
+  } catch (e) {
+    console.warn('Failed to load zoom state from localStorage:', e);
+  }
+  return null;
+}
+
+function clearZoomState(boxId) {
+  try {
+    const key = getStorageKey(boxId);
+    localStorage.removeItem(key);
+  } catch (e) {
+    console.warn('Failed to clear zoom state from localStorage:', e);
+  }
+}
+
 function minimize(instance, box, max, min) {
   box.classList.remove("panzoom-fullscreen");
   max.classList.remove("panzoom-hidden");
   min.classList.add("panzoom-hidden");
-  panzoom_reset(instance)
+  panzoom_reset(instance, box)
   setTimeout(() => {
     window.scrollTo(0, panzoomScrollPosition);
   }, 0);
@@ -26,7 +72,7 @@ function escapeFullScreen(e, box, max, min, instance) {
   }
 }
 
-function panzoom_reset(instance) {
+function panzoom_reset(instance, box) {
   // Get the initial zoom level from meta tag data
   const meta_tag = document.querySelector('meta[name="panzoom-data"]');
   let initialZoom = 1.0;
@@ -37,6 +83,11 @@ function panzoom_reset(instance) {
     } catch (e) {
       console.warn('Failed to parse panzoom data:', e);
     }
+  }
+
+  // Clear saved zoom state when resetting
+  if (box && box.id) {
+    clearZoomState(box.id);
   }
 
   instance.moveTo(0, 0);
@@ -53,7 +104,7 @@ function add_buttons(box, instance) {
   reset.addEventListener("click", function (e) {
     // instance.moveTo(0, 0);
     // instance.zoomAbs(0, 0, 1);
-    panzoom_reset(instance);
+    panzoom_reset(instance, box);
   });
   if (info != undefined) {
     info.addEventListener("click", function (e) {
@@ -119,6 +170,8 @@ function activate_zoom_pan() {
       !elem.dataset.zoom
     ) {
       elem.dataset.zoom = true;
+
+      // Create panzoom instance
       let instance = panzoom(elem, {
         minZoom: 0.5,
         beforeWheel: function (e) {
@@ -148,10 +201,36 @@ function activate_zoom_pan() {
         zoomDoubleClickSpeed: 1,
       });
 
-      // Set the initial zoom level
-      if (initialZoomLevel !== 1.0) {
+      // Load saved zoom state or use initial zoom level
+      const savedState = loadZoomState(box.id);
+      if (savedState) {
+        // Apply saved zoom state
+        instance.zoomAbs(0, 0, savedState.scale);
+        instance.moveTo(savedState.x, savedState.y);
+      } else if (initialZoomLevel !== 1.0) {
+        // Apply configured initial zoom level
         instance.zoomAbs(0, 0, initialZoomLevel);
       }
+
+      // Save zoom state when it changes
+      let saveTimeout;
+      instance.on('zoom', function() {
+        // Debounce saving to avoid excessive localStorage writes
+        clearTimeout(saveTimeout);
+        saveTimeout = setTimeout(() => {
+          const transform = instance.getTransform();
+          saveZoomState(box.id, transform);
+        }, 500);
+      });
+
+      instance.on('pan', function() {
+        // Debounce saving to avoid excessive localStorage writes
+        clearTimeout(saveTimeout);
+        saveTimeout = setTimeout(() => {
+          const transform = instance.getTransform();
+          saveZoomState(box.id, transform);
+        }, 500);
+      });
 
       add_buttons(box, instance);
     }
