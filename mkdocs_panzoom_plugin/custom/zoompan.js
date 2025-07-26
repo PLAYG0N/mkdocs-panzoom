@@ -6,7 +6,7 @@ const SAVE_DEBOUNCE_DELAY_MS = 200; // Debounce delay for saving zoom state in m
 
 // Constants for zoom functionality
 const DEFAULT_ZOOM_LEVEL = 1.0; // Default browser zoom level (100%)
-const ZOOM_STEP = 0.2; // Zoom step for zoom in/out buttons
+const ZOOM_STEP = 0.5; // Zoom step for zoom in/out buttons
 
 // LocalStorage utility functions for saving zoom levels
 function getStorageKey(boxId) {
