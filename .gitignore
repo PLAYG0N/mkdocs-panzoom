@@ -164,3 +164,4 @@ cython_debug/
 public/
 performance_debug.yml
 docs/test/
+docs/.test/
