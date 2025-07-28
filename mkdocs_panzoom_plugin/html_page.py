@@ -8,7 +8,6 @@ from bs4 import BeautifulSoup, Tag
 
 from mkdocs_panzoom_plugin.panzoom_box import (
     create_css_link,
-    create_info_box,
     create_js_script,
     create_js_script_plugin,
     create_panzoom_box,
@@ -60,8 +59,6 @@ class HTMLPage:
             for idx, element in enumerate(self.containers):
                 panzoom_box = create_panzoom_box(self.soup, self.config, idx)
                 element.wrap(panzoom_box)
-                if self.config.get("hint_location", "bottom") == "bottom":
-                    panzoom_box.append(create_info_box(self.soup, self.config))
 
             # Include the css and js in the file - with error handling
             if self.soup.head is not None:
