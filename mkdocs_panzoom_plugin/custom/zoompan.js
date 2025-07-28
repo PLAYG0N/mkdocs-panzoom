@@ -257,22 +257,23 @@ function activate_zoom_pan() {
         zoomDoubleClickSpeed: 1,
       });
 
-      // Override the library's asymmetric getScaleMultiplier to provide symmetric zoom
-      const originalGetScaleMultiplier = instance.getScaleMultiplier;
-      if (originalGetScaleMultiplier) {
-        instance.getScaleMultiplier = function(delta) {
-          const sign = Math.sign(delta);
-          const deltaAdjustedSpeed = Math.min(0.25, Math.abs(zoomStep * delta / 128));
-
-          if (sign > 0) {
-            // Zoom out: use 1/(1 + step) for symmetry
-            return 1 / (1 + deltaAdjustedSpeed);
-          } else {
-            // Zoom in: use (1 + step)
-            return 1 + deltaAdjustedSpeed;
-          }
-        };
-      }
+      // Intercept keyboard zoom events to use our symmetric zoom functions
+      box.addEventListener('keydown', function(e) {
+        // Check for zoom keys: + (187, 107) and - (189, 109)
+        if (e.keyCode === 187 || e.keyCode === 107) {
+          // Plus key - zoom in
+          e.preventDefault();
+          e.stopPropagation();
+          panzoom_zoom_in(instance, box, zoomStep);
+          return false;
+        } else if (e.keyCode === 189 || e.keyCode === 109) {
+          // Minus key - zoom out
+          e.preventDefault();
+          e.stopPropagation();
+          panzoom_zoom_out(instance, box, zoomStep);
+          return false;
+        }
+      }, true); // Use capture phase to intercept before panzoom processes it
 
       // Load saved zoom state or use initial zoom level
       const savedState = loadZoomState(box.id);
