@@ -52,10 +52,6 @@ panzoom = "mkdocs_panzoom_plugin.plugin:PanZoomPlugin"
 [tool.hatch.build.targets.wheel]
 packages = ["mkdocs_panzoom_plugin"]
 
-[tool.hatch.build.targets.wheel.force-include]
-"mkdocs_panzoom_plugin/custom" = "mkdocs_panzoom_plugin/custom"
-"mkdocs_panzoom_plugin/panzoom" = "mkdocs_panzoom_plugin/panzoom"
-
 [tool.uv]
 native-tls = true
 
