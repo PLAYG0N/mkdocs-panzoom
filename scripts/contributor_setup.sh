@@ -624,14 +624,8 @@ function ensure_uv_sync() {
             util.die "❌ Failed to install dependencies with uv sync. Please check your pyproject.toml file."
         fi
         util.log.info "✅ Dependencies installed successfully with uv sync"
-    elif [ -f "requirements.txt" ]; then
-        util.log.info "⏳ Installing dependencies from requirements.txt..."
-        if ! uv pip install -r requirements.txt; then
-            util.die "❌ Failed to install dependencies from requirements.txt"
-        fi
-        util.log.info "✅ Dependencies installed from requirements.txt"
     else
-        util.log.warn "No pyproject.toml or requirements.txt found, skipping dependency installation"
+        util.log.warn "No pyproject.toml found, skipping dependency installation"
     fi
 }
 
@@ -1018,8 +1012,8 @@ ensure_pyinvoke_if_needed
 #--------------------------#
 ## https://d2lang.com/
 function ensure_d2_if_needed() {
-    # If mkdocs-d2-plugin is in requirements, then we need d2
-    if grep -q "mkdocs-d2-plugin" requirements.txt 2>/dev/null || grep -q "mkdocs-d2-plugin" pyproject.toml 2>/dev/null; then
+    # If mkdocs-d2-plugin is in pyproject.toml, then we need d2
+    if grep -q "mkdocs-d2-plugin" pyproject.toml 2>/dev/null; then
         if ! command -v d2 &>/dev/null; then
             local install_method
             if [ "$(uname)" == 'Darwin' ] && has_homebrew; then
