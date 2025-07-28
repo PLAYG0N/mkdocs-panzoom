@@ -93,9 +93,12 @@ function panzoom_reset(instance, box) {
 
 function panzoom_zoom_in(instance, box, zoomStep = DEFAULT_ZOOM_STEP) {
   const currentTransform = instance.getTransform();
-  // Match keyboard behavior: scale * (1 + zoomStep*100/128)
+  // Match panzoom library's getScaleMultiplier for positive delta (zoom in)
+  // getScaleMultiplier uses: 1 - sign * deltaAdjustedSpeed
+  // For zoom in (negative delta/sign): 1 - (-1) * deltaAdjustedSpeed = 1 + deltaAdjustedSpeed
   const deltaAdjustedSpeed = Math.min(0.25, Math.abs(zoomStep * 100 / 128));
-  const newScale = currentTransform.scale * (1 + deltaAdjustedSpeed);
+  const scaleMultiplier = 1 + deltaAdjustedSpeed;
+  const newScale = currentTransform.scale * scaleMultiplier;
 
   // Get the center of the box for zooming
   const rect = box.getBoundingClientRect();
@@ -107,9 +110,12 @@ function panzoom_zoom_in(instance, box, zoomStep = DEFAULT_ZOOM_STEP) {
 
 function panzoom_zoom_out(instance, box, zoomStep = DEFAULT_ZOOM_STEP) {
   const currentTransform = instance.getTransform();
-  // Match keyboard behavior: scale * (1 - zoomStep*100/128)
+  // Match panzoom library's getScaleMultiplier for negative delta (zoom out)
+  // getScaleMultiplier uses: 1 - sign * deltaAdjustedSpeed
+  // For zoom out (positive delta/sign): 1 - (+1) * deltaAdjustedSpeed = 1 - deltaAdjustedSpeed
   const deltaAdjustedSpeed = Math.min(0.25, Math.abs(zoomStep * 100 / 128));
-  const newScale = Math.max(currentTransform.scale * (1 - deltaAdjustedSpeed), 0.1); // Prevent negative zoom
+  const scaleMultiplier = 1 - deltaAdjustedSpeed;
+  const newScale = Math.max(currentTransform.scale * scaleMultiplier, 0.1); // Prevent negative zoom
 
   // Get the center of the box for zooming
   const rect = box.getBoundingClientRect();
