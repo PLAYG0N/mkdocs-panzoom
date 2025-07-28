@@ -169,3 +169,6 @@ cython_debug/
 .ruff_cache/
 
 public/
+performance_debug.yml
+docs/test/
+docs/.test/
