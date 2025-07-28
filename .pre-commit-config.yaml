@@ -21,35 +21,6 @@ repos:
       - id: ruff-format
         require_serial: false  # Enable parallel file processing
 
-  # Disabled back as we're using ruff-format instead
-  # - repo: https://github.com/ambv/black
-  #   rev: "24.10.0"
-  #   hooks:
-  #     - id: black
-  #
-  # Disabled flake8 as ruff covers most of its functionality
-  # - repo: https://github.com/PyCQA/flake8
-  #   rev: "7.1.1"
-  #   hooks:
-  #     - id: flake8
-  #
-  # Disabled autopep8 and yapf as they conflict with ruff-format
-  # - repo: https://github.com/hhatto/autopep8
-  #   rev: "v2.3.1"
-  #   hooks:
-  #     - id: autopep8
-  #
-  # - repo: https://github.com/google/yapf
-  #   rev: "v0.40.2"
-  #   hooks:
-  #     - id: yapf
-  #
-  # Disabled reorder-python-imports because it conflicts with ruff-format and is redundant
-  # - repo: https://github.com/asottile/reorder_python_imports
-  #   rev: "ae11ccbd838e90f7e2a16abbed9276e6a41cafbb"  # frozen: v3.12.0
-  #   hooks:
-  #     - id: reorder-python-imports
-
   - repo: https://github.com/asottile/pyupgrade
     rev: "v3.20.0"
     hooks:
@@ -86,14 +57,6 @@ repos:
         pass_filenames: false # or use with: require_serial
         # https://github.com/pre-commit/mirrors-pylint/issues/11
 
-      - id: pylint
-        name: pylint
-        entry: uv run --no-sync pylint
-        language: system
-        types: [python]
-        args: ["--rcfile=pyproject.toml"]
-        exclude: ^(scripts/pre-commit-hooks/|slurm-lifecycle-scripts/utils/)
-
       # Dependency management
       - id: uv-lock-check
         name: uv lock --check
@@ -112,58 +75,6 @@ repos:
         files: \.toml$
         require_serial: false  # Enable parallel file processing
 
-      # CloudFormation custom validation hooks (scripts/pre-commit-hooks/)
-      - id: cfn-type-quoting-convention
-        name: CloudFormation Type Field Quoting Convention
-        description: Check that CloudFormation Type fields use double quotes
-        entry: python scripts/pre-commit-hooks/cfn-type-quoting-check.py
-        language: system
-        files: '^deploy/cloud-formation/.*\.ya?ml$'
-        require_serial: false  # Enable parallel file processing
-
-      - id: cfn-resource-naming-convention
-        name: CloudFormation Resource Naming Convention
-        description: Ensure all CloudFormation resources end with "Resource"
-        entry: python3 scripts/pre-commit-hooks/cfn-resource-naming-check.py
-        language: system
-        files: ^deploy/cloud-formation/.*\.(yaml|yml)$
-        require_serial: false  # Enable parallel file processing
-
-      - id: cfn-tag-validation
-        name: CloudFormation Tag Validation
-        description: Validate CloudFormation resource tags against AWS service-specific requirements
-        entry: python3 scripts/pre-commit-hooks/cfn-tag-validation-check.py
-        language: system
-        files: ^deploy/cloud-formation/.*\.(yaml|yml)$
-        require_serial: false  # Enable parallel file processing
-
-      # License header management
-      - id: remove-mit0-headers
-        name: Remove MIT-0 License Headers
-        description: Automatically remove MIT-0 license headers from bash and Python files
-        entry: python3 scripts/pre-commit-hooks/remove-mit0-headers.py
-        language: system
-        files: '\.(py|sh)$|^[^.]*$'  # Python files, shell scripts, and files without extensions
-        require_serial: false  # Enable parallel file processing
-
-      # Documentation management
-      - id: fix-mkdocs-top-anchors
-        name: Fix MkDocs Top Anchors
-        description: Ensure all markdown documentation files have {#top} anchors on top-level headers
-        entry: python3 scripts/pre-commit-hooks/fix-mkdocs-top-anchors.py
-        language: system
-        files: '^docs/.*\.md$'  # Only markdown files in docs/ directory
-        require_serial: false  # Enable parallel file processing
-
-      # Kubernetes linting
-      - id: kube-linter
-        name: KubeLinter
-        description: KubeLinter static analysis lints K8s and Helm files.
-        entry: kube-linter
-        args: ["lint"]
-        language: system
-        types: [yaml]
-        files: ^deploy/kubernetes/.*\.ya?ml$
 
   - repo: https://github.com/codespell-project/codespell
     rev: "v2.4.1"
@@ -171,13 +82,11 @@ repos:
       - id: codespell
         additional_dependencies:
           - tomli
-        exclude: ^docs/extra/js/
 
   - repo: https://github.com/crate-ci/typos
     rev: "v1.34.0"
     hooks:
       - id: typos
-        exclude: ^docs/extra/js/
 
   - repo: https://github.com/adrienverge/yamllint
     rev: "v1.37.1"
@@ -210,33 +119,6 @@ repos:
         ]
         exclude: ^tests/
 
-  # Enable hadolint if you have Dockerfile(s) in your project
-  # https://github.com/hadolint/hadolint#configure
-  - repo: https://github.com/hadolint/hadolint
-    rev: "v2.13.1-beta"
-    hooks:
-      - id: hadolint
-        args: ["--ignore", "DL3007"]
-
-  # TODO: Enable tflint for Packer or Terraform projects
-  # See settings at .tflint.hcl
-  # https://github.com/terraform-linters/tflint/blob/master/docs/user-guide/config.md#configuring-tflint
-  # - repo: https://github.com/terraform-linters/tflint
-  #   rev: "ff7e99455440c3b473f76933044f2c7848aa1f9c" # frozen: v0.30.0
-  #   hooks:
-  #     - id: tflint
-  #       types: ["terraform"]
-  #       args: ["packer.pkr.hcl"]
-
-  # https://github.com/aws-cloudformation/cfn-lint#config-file
-  - repo: https://github.com/aws-cloudformation/cfn-python-lint
-    rev: "v1.38.0"
-    hooks:
-      - id: cfn-python-lint
-        files: ^deploy/cloud-formation/.*\.ya?ml$
-        require_serial: false  # Enable parallel file processing
-        # args: ["--ignore-checks", "W1031,E1001"]
-
   - repo: https://github.com/igorshubovych/markdownlint-cli
     rev: "v0.45.0"
     hooks:
@@ -244,12 +126,6 @@ repos:
         # Apply to all markdown files in the repository
         files: \.md$
         require_serial: false  # Enable parallel file processing
-
-  # Not recommended: doctoc, as mkdocs already generates a table of contents on the right side panel.
-  # - repo: https://github.com/thlorenz/doctoc
-  #   rev: "v2.2.0"
-  #   hooks:
-  #     - id: doctoc
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: "v5.0.0"
@@ -277,7 +153,6 @@ repos:
       - id: mixed-line-ending
       - id: end-of-file-fixer
       - id: trailing-whitespace
-        exclude: ^docs/extra/js/
 
   - repo: https://github.com/shellcheck-py/shellcheck-py
     rev: v0.10.0.1

@@ -1,53 +1,63 @@
-"""
-Module to assist exclude certain files being processed by plugin.
+"""Module to assist exclude certain files being processed by plugin.
+
 Inspired by https://github.com/apenwarr/mkdocs-exclude
 """
-import os
+
 import fnmatch
-from typing import List
+import os
 
 
-def include(src_path: str, globs: List[str]) -> bool:
-    """
-    Determine if a src_path should be included.
+def include(src_path: str, globs: list[str]) -> bool:
+    """Determine if a src_path should be included.
+
     Supports globs (e.g. folder/* or *.md).
 
     Args:
+    ----
         src_path (src): Path of file
         globs (list): list of globs of file paths to include
-    Returns:
+
+    Returns
+    -------
         (bool): whether src_path should be excluded
+
     """
     return matches_nix_path(src_path, globs)
 
 
-def exclude(src_path: str, globs: List[str]) -> bool:
-    """
-    Determine if a src_path should be excluded.
+def exclude(src_path: str, globs: list[str]) -> bool:
+    """Determine if a src_path should be excluded.
 
     Args:
+    ----
         src_path (src): Path of file
         globs (list): list of globs of file paths to include
-    Returns:
+
+    Returns
+    -------
         (bool): whether src_path should be excluded
+
     """
     return matches_nix_path(src_path, globs)
 
 
-def matches_nix_path(src_path: str, globs: List[str]) -> bool:
-    """
-    Determines if a src_path matches one of the provided glob patterns.
+def matches_nix_path(src_path: str, globs: list[str]) -> bool:
+    """Check if a src_path matches one of the provided glob patterns.
+
     Supports globs (e.g. folder/* or *.md).
     Credits: code inspired by / adapted from
     https://github.com/apenwarr/mkdocs-exclude/blob/master/mkdocs_exclude/plugin.py
 
     Args:
+    ----
         src_path (src): Path of file
         globs (list): list of globs of file paths to include
-    Returns:
-        (bool): whether src_path should be excluded
-    """
 
+    Returns
+    -------
+        (bool): whether src_path should be excluded
+
+    """
     assert isinstance(src_path, str)
     assert isinstance(globs, list)
 

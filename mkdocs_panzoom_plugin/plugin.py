@@ -1,19 +1,25 @@
-import logging
-from collections import OrderedDict
-import os
+"""MkDocs plugin for adding pan and zoom functionality to images and diagrams."""
 
-from mkdocs import plugins
+import logging
+import os
+from collections import OrderedDict
+
 from mkdocs import utils
-from mkdocs.config import config_options, defaults
-from mkdocs.plugins import BasePlugin
+from mkdocs.config import config_options
 from mkdocs.exceptions import ConfigurationError
-from mkdocs_panzoom_plugin.exclude import exclude,include
+from mkdocs.plugins import BasePlugin
+
+from mkdocs_panzoom_plugin.exclude import exclude
 from mkdocs_panzoom_plugin.html_page import HTMLPage
+
 
 logger = logging.getLogger("mkdocs.plugin")
 base_path = os.path.dirname(os.path.abspath(__file__))
 
+
 class PanZoomPlugin(BasePlugin):
+    """MkDocs plugin that adds pan and zoom functionality to images and mermaid diagrams."""
+
     config_scheme = (
         ("mermaid", config_options.Type(bool, default=True)),
         ("images", config_options.Type(bool, default=False)),
@@ -32,7 +38,7 @@ class PanZoomPlugin(BasePlugin):
     )
 
     def on_config(self, config, **kwargs):
-
+        """Configure the plugin and validate settings."""
         plugins = [*OrderedDict(config["plugins"])]
 
         def check_position(plugin, plugins):
@@ -42,31 +48,28 @@ class PanZoomPlugin(BasePlugin):
                         "[panzoom-plugin] The panzoom-plugin should be defined after " + plugin
                     )
 
-        check_plugins = [
-            "mermaid2"
-        ]
+        check_plugins = ["mermaid2"]
 
         for p in check_plugins:
-            check_position(p,plugins)
+            check_position(p, plugins)
 
         return config
 
     def on_post_page(self, output: str, /, *, page, config):
+        """Process page after HTML generation to add pan-zoom functionality."""
+        excluded_pages = self.config.get("exclude", [])
 
-        excluded_pages = self.config.get("exclude",[])
-
-        if exclude(page.file.src_path,excluded_pages):
+        if exclude(page.file.src_path, excluded_pages):
             return
 
-        html_page = HTMLPage(output,self.config,page, config)
+        html_page = HTMLPage(output, self.config, page, config)
 
         html_page.add_panzoom()
 
         return str(html_page)
 
     def on_post_build(self, *, config):
-        """Copy files to the assets"""
-
+        """Copy files to the assets."""
         output_base_path = os.path.join(config["site_dir"], "assets")
         css_path = os.path.join(output_base_path, "stylesheets")
         utils.copy_file(
@@ -79,6 +82,6 @@ class PanZoomPlugin(BasePlugin):
             os.path.join(js_path, "zoompan.js"),
         )
         utils.copy_file(
-                    os.path.join(base_path, "panzoom", "panzoom.min.js"),
-                    os.path.join(js_path, "panzoom.min.js"),
-                )
+            os.path.join(base_path, "panzoom", "panzoom.min.js"),
+            os.path.join(js_path, "panzoom.min.js"),
+        )

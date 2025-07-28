@@ -1,5 +1,6 @@
 """Test the main plugin functionality."""
-from typing import Any, Dict
+
+from typing import Any
 
 from mkdocs_panzoom_plugin.plugin import PanZoomPlugin
 
@@ -20,13 +21,23 @@ def test_plugin_config_scheme() -> None:
     plugin = PanZoomPlugin()
 
     # Check that config scheme exists and has expected keys
-    config_scheme = dict(plugin.config_scheme)  # type: ignore
+    config_scheme = dict(plugin.config_scheme)  # type: ignore[attr-defined]
 
     expected_keys = [
-        'mermaid', 'images', 'full_screen', 'always_show_hint',
-        'show_zoom_buttons', 'key', 'include', 'exclude',
-        'include_selectors', 'exclude_selectors', 'hint_location',
-        'initial_zoom_level', 'zoom_step', 'buttons_size'
+        "mermaid",
+        "images",
+        "full_screen",
+        "always_show_hint",
+        "show_zoom_buttons",
+        "key",
+        "include",
+        "exclude",
+        "include_selectors",
+        "exclude_selectors",
+        "hint_location",
+        "initial_zoom_level",
+        "zoom_step",
+        "buttons_size",
     ]
 
     for key in expected_keys:
@@ -36,8 +47,8 @@ def test_plugin_config_scheme() -> None:
 def test_plugin_on_config() -> None:
     """Test plugin on_config method."""
     plugin = PanZoomPlugin()
-    config: Dict[str, Any] = {'site_url': 'https://example.com', 'plugins': []}
+    config: dict[str, Any] = {"site_url": "https://example.com", "plugins": []}
 
     # This should not raise an exception
-    result = plugin.on_config(config)  # type: ignore
+    result = plugin.on_config(config)  # type: ignore[call-arg]
     assert result is None or isinstance(result, dict)

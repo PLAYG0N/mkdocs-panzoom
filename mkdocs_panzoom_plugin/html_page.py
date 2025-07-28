@@ -1,49 +1,61 @@
-import re
-import logging
+"""HTML page processing module for the mkdocs-panzoom plugin."""
+
 import json
+
 from bs4 import BeautifulSoup
 
-from mkdocs_panzoom_plugin import panzoom_box
-from mkdocs_panzoom_plugin.panzoom_box import *
+from mkdocs_panzoom_plugin.panzoom_box import (
+    create_css_link,
+    create_info_box,
+    create_js_script,
+    create_js_script_plugin,
+    create_panzoom_box,
+)
+
 
 class HTMLPage:
-    def __init__(self, content:str, config, page, mkdocs_config):
-        self.soup = BeautifulSoup(content,"html.parser")
+    """HTML page processor that adds pan-zoom functionality to images and diagrams."""
+
+    def __init__(self, content: str, config, page, mkdocs_config):
+        """Initialize HTMLPage with content and configuration."""
+        self.soup = BeautifulSoup(content, "html.parser")
         self.config = config
         self.page = page
         self.default_selectors = {".mermaid", ".d2"}
         self.containers = self._find_elements()
         self.mkdocs_config = mkdocs_config
 
-
     def __str__(self):
+        """Return the HTML content as a string."""
         return str(self.soup)
 
-
     def add_panzoom(self):
+        """Add pan-zoom functionality to identified containers."""
         for idx, element in enumerate(self.containers):
-            panzoom_box = create_panzoom_box(self.soup,self.config,idx)
+            panzoom_box = create_panzoom_box(self.soup, self.config, idx)
             element.wrap(panzoom_box)
             if self.config.get("hint_location", "bottom") == "bottom":
-                panzoom_box.append(create_info_box(self.soup,self.config))
+                panzoom_box.append(create_info_box(self.soup, self.config))
             # panzoom_box.append(create_info_box(self.soup,self.config))
 
         # Include the css and js in the file
-        self.soup.head.append(create_css_link(self.soup,self.page))
-        self.soup.body.append(create_js_script(self.soup,self.page))
-        self.soup.body.append(create_js_script_plugin(self.soup,self.page))
+        self.soup.head.append(create_css_link(self.soup, self.page))
+        self.soup.body.append(create_js_script(self.soup, self.page))
+        self.soup.body.append(create_js_script_plugin(self.soup, self.page))
 
         self._add_data_for_js()
 
     def _add_data_for_js(self):
         meta_tag = self.soup.new_tag("meta")
         meta_tag["name"] = "panzoom-data"
-        meta_tag["content"] = json.dumps({
-            "selectors": self.config.get("selectors"),
-            "initial_zoom_level": self.config.get("initial_zoom_level", 1.0),
-            "zoom_step": self.config.get("zoom_step", 0.3),
-            "buttons_size": self.config.get("buttons_size", "1.25em")
-            })
+        meta_tag["content"] = json.dumps(
+            {
+                "selectors": self.config.get("selectors"),
+                "initial_zoom_level": self.config.get("initial_zoom_level", 1.0),
+                "zoom_step": self.config.get("zoom_step", 0.3),
+                "buttons_size": self.config.get("buttons_size", "1.25em"),
+            }
+        )
         theme_tag = self.soup.new_tag("meta")
         theme_tag["name"] = "panzoom-theme"
         theme_tag["content"] = self.mkdocs_config.get("theme").name
@@ -60,13 +72,11 @@ class HTMLPage:
         final_selectors = self.default_selectors.difference(excluded_selectors)
         final_selectors.update(included_selectors)
 
-        if self.config.get("images",False):
+        if self.config.get("images", False):
             final_selectors.add("img")
 
-
-        if not self.config.get("mermaid",True):
+        if not self.config.get("mermaid", True):
             final_selectors.remove(".mermaid")
-
 
         self.config.update({"selectors": list(final_selectors)})
 
