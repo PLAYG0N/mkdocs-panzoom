@@ -52,7 +52,7 @@ class HTMLPage:
             {
                 "selectors": self.config.get("selectors"),
                 "initial_zoom_level": self.config.get("initial_zoom_level", 1.0),
-                "zoom_step": self.config.get("zoom_step", 0.3),
+                "zoom_step": self.config.get("zoom_step", 0.2),
                 "buttons_size": self.config.get("buttons_size", "1.25em"),
             }
         )

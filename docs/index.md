@@ -89,7 +89,7 @@ This sets the initial zoom level for all diagrams and images.
 plugins:
   - panzoom:
       initial_zoom_level: 1.5 # default 1.0
-      zoom_step: 0.2 # default 0.3
+      zoom_step: 0.1 # default 0.2
 ```
 
 ### Exclude Pages
