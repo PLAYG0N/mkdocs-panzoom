@@ -93,7 +93,7 @@ function panzoom_reset(instance, box) {
 
 function panzoom_zoom_in(instance, box, zoomStep = DEFAULT_ZOOM_STEP) {
   const currentTransform = instance.getTransform();
-  const newScale = currentTransform.scale + zoomStep;
+  const newScale = currentTransform.scale * (1 + zoomStep);
 
   // Get the center of the box for zooming
   const rect = box.getBoundingClientRect();
@@ -105,7 +105,7 @@ function panzoom_zoom_in(instance, box, zoomStep = DEFAULT_ZOOM_STEP) {
 
 function panzoom_zoom_out(instance, box, zoomStep = DEFAULT_ZOOM_STEP) {
   const currentTransform = instance.getTransform();
-  const newScale = Math.max(currentTransform.scale - zoomStep, 0.1); // Prevent negative zoom
+  const newScale = Math.max(currentTransform.scale / (1 + zoomStep), 0.1); // Prevent negative zoom
 
   // Get the center of the box for zooming
   const rect = box.getBoundingClientRect();
@@ -223,6 +223,7 @@ function activate_zoom_pan() {
       // Create panzoom instance
       let instance = panzoom(elem, {
         minZoom: 0.5,
+        zoomSpeed: zoomStep,
         beforeWheel: function (e) {
           switch (key) {
             case "ctrl":
