@@ -783,7 +783,6 @@ function ensure_hadolint_if_needed() {
                 fi
                 util.log.info "✅ hadolint installed successfully via Homebrew"
             else
-                # ...existing Linux installation code...
                 local hadolint_version="v2.12.0"  # You can update this to latest version
                 local hadolint_url="https://github.com/hadolint/hadolint/releases/download/${hadolint_version}/hadolint-Linux-x86_64"
                 local install_dir="$HOME/.local/bin"
@@ -1014,199 +1013,69 @@ function ensure_pyinvoke_if_needed() {
 
 ensure_pyinvoke_if_needed
 
-#-----------------------------------------#
-#--- Ensure NodeJS for MkDocs JS needs ---#
-#-----------------------------------------#
-## https://github.com/DavidAnson/markdownlint
-function ensure_nodejs_if_needed() {
-    if [ -f "mkdocs.yml" ] || [ -f "docs/robots.txt" ]; then
-        if ! command -v node &>/dev/null; then
+#--------------------------#
+#--- Ensure D2 if needed ---#
+#--------------------------#
+## https://d2lang.com/
+function ensure_d2_if_needed() {
+    # If mkdocs-d2-plugin is in requirements, then we need d2
+    if grep -q "mkdocs-d2-plugin" requirements.txt 2>/dev/null || grep -q "mkdocs-d2-plugin" pyproject.toml 2>/dev/null; then
+        if ! command -v d2 &>/dev/null; then
             local install_method
             if [ "$(uname)" == 'Darwin' ] && has_homebrew; then
-                install_method="Homebrew (brew install node)"
+                install_method="Homebrew (brew install d2)"
             else
-                install_method="nvm (Node Version Manager)"
+                install_method="official installer (curl -fsSL https://d2lang.com/install.sh | sh)"
             fi
 
-            if ! util.ask_confirmation "NodeJS is required for this project. Install NodeJS using ${install_method}?"; then
-                util.log.warn "⚠️ NodeJS installation declined. Some project features may not work."
+            if ! util.ask_confirmation "mkdocs-d2-plugin requires d2. Install d2 using ${install_method}?"; then
+                util.log.warn "⚠️ d2 installation declined. D2 diagrams will not be rendered."
                 return 0
             fi
 
-            util.log.info "⏳ NodeJS is required for this project but not installed, installing it..."
+            util.log.info "⏳ d2 is not installed, installing it..."
 
             if [ "$(uname)" == 'Darwin' ] && has_homebrew; then
-                util.log.info "⏳ Installing NodeJS using Homebrew..."
-                if ! brew install node; then
-                    util.log.error "❌ Failed to install NodeJS using Homebrew."
-                    util.log.error "  Alternative: Download from https://nodejs.org/"
-                    exit 54
+                if ! brew install d2; then
+                    util.log.error "❌ Failed to install d2 using Homebrew."
+                    exit 50
                 fi
-                util.log.info "✅ NodeJS installed successfully via Homebrew"
+                util.log.info "✅ d2 installed successfully via Homebrew"
             else
-                # ...existing Linux nvm installation code...
-                util.log.info "⏳ Installing NodeJS for Linux using nvm..."
                 if command -v curl &>/dev/null; then
-                    # Download and install nvm
-                    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+                    if ! curl -fsSL https://d2lang.com/install.sh | sh; then
+                        util.log.error "❌ Failed to install d2 using official installer."
+                        exit 50
+                    fi
                 elif command -v wget &>/dev/null; then
-                    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+                     if ! wget -qO- https://d2lang.com/install.sh | sh; then
+                        util.log.error "❌ Failed to install d2 using official installer."
+                        exit 50
+                    fi
                 else
-                    util.die "❌ Neither curl nor wget is available. Please install one of them or install nvm manually."
+                    util.die "❌ Neither curl nor wget is available. Please install one of them or install d2 manually."
                 fi
-
-                # Source nvm for the current script session
-                export NVM_DIR="$HOME/.nvm"
-                # shellcheck source=/dev/null
-                [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-
-                # Install Node.js version 24
-                if ! nvm install 24; then
-                    util.log.error "❌ Failed to install NodeJS version 24 using nvm."
-                    util.log.error "  Please check your network connection or nvm installation."
-                    exit 54
-                fi
-                util.log.info "✅ NodeJS installed successfully via nvm"
+                util.log.info "✅ d2 installed successfully via official installer"
             fi
 
-            # Verify NodeJS installation
-            # Refresh command cache after installation
-            hash -r 2>/dev/null || true
-
-            if ! command -v node &>/dev/null; then
-                util.log.error "❌ Failed to verify NodeJS installation after installing via nvm."
-                util.die "  Please run 'source ~/.bashrc' or restart your shell and try again."
+            # Verify installation
+            if ! command -v d2 &>/dev/null; then
+                util.die "❌ Failed to verify d2 installation"
             fi
         else
-            util.log.info "✅ NodeJS is already available: $(node --version)"
-        fi
-
-        if ! command -v npm &>/dev/null; then
-            util.log.warn "npm command not found, but it should have been installed with Node.js via nvm."
-            util.log.warn "This might indicate a PATH issue. Trying to proceed..."
-        else
-            util.log.info "✅ npm is already available: $(npm --version)"
-        fi
-
-        util.log.info "✅ NodeJS and npm are available"
-    else
-        util.log.info "This project doesn't seem to need NodeJS."
-    fi
-}
-
-ensure_nodejs_if_needed
-
-#--------------#
-#--- AWS CLI ---#
-#--------------#
-## Helper function to install AWS CLI v2 depending on OS and architecture
-function install_aws_cli() {
-    local device
-    local arch
-    device=$(uname)
-    arch=$(uname -m)
-
-    util.log.info "⏳ Installing AWS CLI v2..."
-
-    if [[ $device == *"Darwin"* ]]; then
-        util.log.info "⏳ Installing AWS CLI v2 for macOS..."
-        if command -v curl &>/dev/null; then
-            if ! curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"; then
-                util.die "❌ Failed to download AWS CLI v2 installer for macOS"
-            fi
-            if ! sudo installer -pkg AWSCLIV2.pkg -target /; then
-                util.die "❌ Failed to install AWS CLI v2 for macOS"
-            fi
-            rm -f AWSCLIV2.pkg
-            util.log.info "✅ AWS CLI v2 installed successfully for macOS"
-        else
-            util.die "❌ curl is required to download AWS CLI v2 installer"
-        fi
-    elif [[ $device == *"Linux"* ]]; then
-        util.log.info "⏳ Installing AWS CLI v2 for Linux ($arch)..."
-        local aws_url
-        if [[ $arch == *"x86_64"* ]]; then
-            aws_url="https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
-        elif [[ $arch == *"aarch64"* ]]; then
-            aws_url="https://awscli.amazonaws.com/awscli-exe-linux-aarch64.zip"
-        else
-            util.die "❌ Unsupported Linux architecture: $arch. Please check https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html to install manually"
-        fi
-
-        # Check for required tools
-        if ! command -v curl &>/dev/null; then
-            util.die "❌ curl is required to download AWS CLI v2 installer"
-        fi
-        if ! command -v unzip &>/dev/null; then
-            util.die "❌ unzip is required to extract AWS CLI v2 installer"
-        fi
-
-        # Download and install
-        if ! curl "$aws_url" -o "awscliv2.zip"; then
-            util.die "❌ Failed to download AWS CLI v2 installer for Linux"
-        fi
-        if ! unzip awscliv2.zip; then
-            rm -f awscliv2.zip
-            util.die "❌ Failed to extract AWS CLI v2 installer"
-        fi
-        if ! sudo ./aws/install --update; then
-            rm -rf aws awscliv2.zip
-            util.die "❌ Failed to install AWS CLI v2 for Linux"
-        fi
-        rm -rf aws awscliv2.zip
-        util.log.info "✅ AWS CLI v2 installed successfully for Linux"
-    fi
-}
-
-## Ensure AWS CLI v2 is available
-function ensure_aws_cli() {
-    if ! command -v aws &>/dev/null; then
-        util.log.info "⏳ AWS CLI is not installed, installing it..."
-
-        if ! util.ask_confirmation "Install AWS CLI v2?"; then
-            util.die "❌ AWS CLI installation declined by user. Cannot continue without AWS CLI for this project."
-        fi
-
-        install_aws_cli
-
-        # Verify installation
-        if ! command -v aws &>/dev/null; then
-            util.die "❌ Failed to install AWS CLI v2. Please install it manually: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html"
+            util.log.info "✅ d2 is already available"
         fi
     else
-        # Check if it's AWS CLI v2
-        local aws_version
-        aws_version=$(aws --version 2>&1 | head -n1)
-        if [[ "$aws_version" =~ aws-cli/2\. ]]; then
-            util.log.info "✅ AWS CLI v2 is already installed: $aws_version"
-        elif [[ "$aws_version" =~ aws-cli/1\. ]]; then
-            util.log.warn "⚠️ AWS CLI v1 detected: $aws_version"
-            util.log.warn "This project requires AWS CLI v2. AWS CLI v1 is deprecated."
-
-            if util.ask_confirmation "Upgrade to AWS CLI v2?"; then
-                install_aws_cli
-
-                # Verify the upgrade
-                aws_version=$(aws --version 2>&1 | head -n1)
-                if [[ "$aws_version" =~ aws-cli/2\. ]]; then
-                    util.log.info "✅ Successfully upgraded to AWS CLI v2: $aws_version"
-                else
-                    util.die "❌ Failed to upgrade to AWS CLI v2"
-                fi
-            else
-                util.log.warn "⚠️ Continuing with AWS CLI v1, but some features may not work correctly"
-            fi
-        else
-            util.log.info "✅ AWS CLI is available: $aws_version"
-        fi
+        util.log.info "This project doesn't seem to be using d2."
     fi
 }
 
-ensure_aws_cli
+ensure_d2_if_needed
 
-#------------#
-#--- DONE ---#
-#------------#
+#-------------------------------------------------------------------------------
+#--- Final success message ---
+#-------------------------------------------------------------------------------
+util.log.newline
 util.log.info ""
 util.log.info "#-------------------------------------------------------------#"
 util.log.info "# SUCCESS! Environment setup completed successfully!          #"
