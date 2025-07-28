@@ -93,9 +93,7 @@ function panzoom_reset(instance, box) {
 
 function panzoom_zoom_in(instance, box, zoomStep = DEFAULT_ZOOM_STEP) {
   const currentTransform = instance.getTransform();
-  // Match panzoom library's getScaleMultiplier for positive delta (zoom in)
-  // getScaleMultiplier uses: 1 - sign * deltaAdjustedSpeed
-  // For zoom in (negative delta/sign): 1 - (-1) * deltaAdjustedSpeed = 1 + deltaAdjustedSpeed
+  // Use symmetric zoom: multiply by (1 + step)
   const deltaAdjustedSpeed = Math.min(0.25, Math.abs(zoomStep * 100 / 128));
   const scaleMultiplier = 1 + deltaAdjustedSpeed;
   const newScale = currentTransform.scale * scaleMultiplier;
@@ -110,11 +108,9 @@ function panzoom_zoom_in(instance, box, zoomStep = DEFAULT_ZOOM_STEP) {
 
 function panzoom_zoom_out(instance, box, zoomStep = DEFAULT_ZOOM_STEP) {
   const currentTransform = instance.getTransform();
-  // Match panzoom library's getScaleMultiplier for negative delta (zoom out)
-  // getScaleMultiplier uses: 1 - sign * deltaAdjustedSpeed
-  // For zoom out (positive delta/sign): 1 - (+1) * deltaAdjustedSpeed = 1 - deltaAdjustedSpeed
+  // Use symmetric zoom: divide by (1 + step), which is equivalent to multiply by 1/(1 + step)
   const deltaAdjustedSpeed = Math.min(0.25, Math.abs(zoomStep * 100 / 128));
-  const scaleMultiplier = 1 - deltaAdjustedSpeed;
+  const scaleMultiplier = 1 / (1 + deltaAdjustedSpeed);
   const newScale = Math.max(currentTransform.scale * scaleMultiplier, 0.1); // Prevent negative zoom
 
   // Get the center of the box for zooming
@@ -260,6 +256,23 @@ function activate_zoom_pan() {
         },
         zoomDoubleClickSpeed: 1,
       });
+
+      // Override the library's asymmetric getScaleMultiplier to provide symmetric zoom
+      const originalGetScaleMultiplier = instance.getScaleMultiplier;
+      if (originalGetScaleMultiplier) {
+        instance.getScaleMultiplier = function(delta) {
+          const sign = Math.sign(delta);
+          const deltaAdjustedSpeed = Math.min(0.25, Math.abs(zoomStep * delta / 128));
+
+          if (sign > 0) {
+            // Zoom out: use 1/(1 + step) for symmetry
+            return 1 / (1 + deltaAdjustedSpeed);
+          } else {
+            // Zoom in: use (1 + step)
+            return 1 + deltaAdjustedSpeed;
+          }
+        };
+      }
 
       // Load saved zoom state or use initial zoom level
       const savedState = loadZoomState(box.id);
