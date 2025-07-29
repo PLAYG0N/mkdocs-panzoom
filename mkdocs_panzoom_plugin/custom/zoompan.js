@@ -122,6 +122,7 @@ function panzoom_zoom_out(instance, box, zoomStep = DEFAULT_ZOOM_STEP) {
 }
 
 function add_buttons(box, instance, zoomStep = DEFAULT_ZOOM_STEP) {
+  // Use scoped selectors to ensure we only affect elements within this specific box
   let reset = box.querySelector(".panzoom-reset");
   let max = box.querySelector(".panzoom-max");
   let min = box.querySelector(".panzoom-min");
@@ -130,42 +131,70 @@ function add_buttons(box, instance, zoomStep = DEFAULT_ZOOM_STEP) {
   let zoom_in = box.querySelector(".panzoom-zoom-in");
   let zoom_out = box.querySelector(".panzoom-zoom-out");
 
+  // Debug: Ensure we have the correct box context
+  if (!box.id) {
+    console.warn("Panzoom box missing ID, this could cause scoping issues");
+  }
+
   reset.addEventListener("click", function (e) {
+    e.preventDefault();
+    e.stopPropagation();
     panzoom_reset(instance, box); // Always reset to default browser zoom level
   });
 
   if (zoom_in != undefined) {
     zoom_in.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
       panzoom_zoom_in(instance, box, zoomStep);
     });
   }
 
   if (zoom_out != undefined) {
     zoom_out.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
       panzoom_zoom_out(instance, box, zoomStep);
     });
   }
 
   if (info != undefined) {
     info.addEventListener("click", function (e) {
+      // Prevent event propagation to avoid interfering with other buttons
+      e.preventDefault();
+      e.stopPropagation();
+
+      // Ensure we only target the info box within THIS specific panzoom box
       if (info_box != undefined) {
-        if (box.dataset.info == "true") {
-          box.dataset.info = false;
-          info_box.classList.add("panzoom-hidden");
+        // Double-check that the info_box belongs to the current box
+        if (info_box.closest('.panzoom-box') === box) {
+          // Use the box's specific dataset to track state per box
+          const isInfoVisible = box.dataset.info === "true";
+
+          if (isInfoVisible) {
+            box.dataset.info = "false";
+            info_box.classList.add("panzoom-hidden");
+          } else {
+            box.dataset.info = "true";
+            info_box.classList.remove("panzoom-hidden");
+          }
         } else {
-          box.dataset.info = true;
-          info_box.classList.remove("panzoom-hidden");
+          console.warn("Info box does not belong to the current panzoom box, skipping toggle");
         }
       }
     });
   }
   if (max != undefined) {
     max.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
       maximize(instance, box, max, min);
     });
   }
   if (min != undefined) {
     min.addEventListener("click", function (e) {
+      e.preventDefault();
+      e.stopPropagation();
       minimize(instance, box, max, min); // Always reset to default browser zoom level
     });
   }

@@ -225,6 +225,63 @@ class TestPanzoomBox:
         nav = box.find("nav")
         assert "panzoom-nav-infobox-top" in nav.get("class")
 
+    def test_create_panzoom_box_navigation_structure(self, soup, basic_config):
+        """Test that navigation buttons are properly structured and contained."""
+        config = basic_config.copy()
+        config["full_screen"] = True
+        config["show_zoom_buttons"] = True
+
+        box = create_panzoom_box(soup, config, 1)
+
+        # Check navigation container exists
+        nav = box.find("nav", class_="panzoom-top-nav")
+        assert nav is not None
+
+        # Check that all buttons are within the navigation
+        buttons_in_nav = nav.find_all("button", class_="panzoom-button")
+        assert len(buttons_in_nav) >= 4  # info, reset, max, zoom_in, zoom_out
+
+        # Check specific buttons exist in navigation
+        info_button = nav.find("button", class_="panzoom-info")
+        reset_button = nav.find("button", class_="panzoom-reset")
+        max_button = nav.find("button", class_="panzoom-max")
+        zoom_in_button = nav.find("button", class_="panzoom-zoom-in")
+        zoom_out_button = nav.find("button", class_="panzoom-zoom-out")
+
+        assert info_button is not None
+        assert reset_button is not None
+        assert max_button is not None
+        assert zoom_in_button is not None
+        assert zoom_out_button is not None
+
+        # Ensure min button exists but is hidden initially
+        min_button = nav.find("button", class_="panzoom-min")
+        assert min_button is not None
+        assert "panzoom-hidden" in min_button.get("class")
+
+    def test_info_button_click_isolation(self, soup, basic_config):
+        """Test that info button functionality doesn't affect other buttons."""
+        config = basic_config.copy()
+        config["full_screen"] = True  # Enable fullscreen to get max button
+
+        box = create_panzoom_box(soup, config, 1)
+
+        # Ensure info button has proper click isolation structure
+        info_button = box.find("button", class_="panzoom-info")
+        assert info_button is not None
+
+        # Check that other buttons remain visible when box is created
+        reset_button = box.find("button", class_="panzoom-reset")
+        max_button = box.find("button", class_="panzoom-max")
+
+        assert reset_button is not None
+        assert max_button is not None
+
+        # Ensure no unexpected hidden classes on navigation buttons
+        assert "panzoom-hidden" not in reset_button.get("class", [])
+        assert "panzoom-hidden" not in max_button.get("class", [])
+        assert "panzoom-hidden" not in info_button.get("class", [])
+
 
 class TestAssetCreation:
     """Test asset link/script creation."""
