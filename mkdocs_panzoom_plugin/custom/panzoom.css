@@ -1,7 +1,15 @@
 .panzoom-box {
     position: relative;
     overflow: hidden;
-    border-radius: 2px;
+  .panzoom-nav-infobox-top {
+    position: absolute;
+    right: 10px;
+    top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+    z-index: 3;
+}radius: 2px;
     /*border-color: grey;
     border-width: 1px;
     border-style: solid;*/
@@ -58,14 +66,13 @@ button:hover .panzoom-icon {
     display: flex;
     justify-content: flex-end;
     gap: 5px;
-    z-index: 3;
+    z-index: 4;
 }
 
 .panzoom-nav-infobox-top {
     position: absolute;
     right: 10px;
-    top: 10px;
-    top: 51px;
+    top: 35px;
     display: flex;
     justify-content: flex-end;
     gap: 5px;

@@ -51,7 +51,7 @@ plugins:
       # images: true
       # mermaid: true # old config
       full_screen: true
-      always_show_hint: false
+      always_show_hint: true
       show_zoom_buttons: true
       key: "alt"
       exclude:
@@ -59,5 +59,5 @@ plugins:
       include_selectors:
         - img
       # hint_location: top
-      # hint_location: bottom
+      hint_location: bottom
   - d2

@@ -221,9 +221,46 @@ class TestPanzoomBox:
 
         box = create_panzoom_box(soup, config, 1)
 
-        # Navigation should have different class
+        # When always_show_hint is False (default), navigation should use
+        # panzoom-top-nav regardless of hint_location for better UX
+        nav = box.find("nav")
+        assert "panzoom-top-nav" in nav.get("class")
+
+    def test_create_panzoom_box_hint_location_top_always_show(self, soup, basic_config):
+        """Test creating panzoom box with hint at top and always visible."""
+        config = basic_config.copy()
+        config["hint_location"] = "top"
+        config["always_show_hint"] = True
+
+        box = create_panzoom_box(soup, config, 1)
+
+        # When always_show_hint is True and hint_location is top,
+        # navigation should use panzoom-nav-infobox-top to avoid overlap
         nav = box.find("nav")
         assert "panzoom-nav-infobox-top" in nav.get("class")
+
+        # Info box should be visible (no hidden class)
+        info_box = box.find("div", class_="panzoom-info-box-top")
+        assert info_box is not None
+        assert "panzoom-hidden" not in info_box.get("class", [])
+
+    def test_create_panzoom_box_hint_location_bottom_always_show(self, soup, basic_config):
+        """Test creating panzoom box with hint at bottom and always visible."""
+        config = basic_config.copy()
+        config["hint_location"] = "bottom"
+        config["always_show_hint"] = True
+
+        box = create_panzoom_box(soup, config, 1)
+
+        # When always_show_hint is True and hint_location is bottom,
+        # navigation should use panzoom-top-nav (buttons at corner)
+        nav = box.find("nav")
+        assert "panzoom-top-nav" in nav.get("class")
+
+        # Info box should be visible (no hidden class)
+        info_box = box.find("div", class_="panzoom-info-box")
+        assert info_box is not None
+        assert "panzoom-hidden" not in info_box.get("class", [])
 
     def test_create_panzoom_box_navigation_structure(self, soup, basic_config):
         """Test that navigation buttons are properly structured and contained."""

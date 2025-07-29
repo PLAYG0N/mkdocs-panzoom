@@ -184,9 +184,10 @@ class TestHintButtonBug:
 
         box = create_panzoom_box(soup, config, 0)
 
-        # Should use different nav class
-        nav = box.find("nav", class_="panzoom-nav-infobox-top")
-        assert nav is not None, "Should use panzoom-nav-infobox-top class when hint is at top"
+        # When always_show_hint is False (from full_config), navigation should use
+        # panzoom-top-nav for better UX (buttons at corner)
+        nav = box.find("nav", class_="panzoom-top-nav")
+        assert nav is not None, "Should use panzoom-top-nav class when always_show_hint is False"
 
         # Should use different info box class
         info_box = box.find("div", class_="panzoom-info-box-top")

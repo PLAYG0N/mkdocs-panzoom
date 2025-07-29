@@ -127,7 +127,6 @@ function add_buttons(box, instance, zoomStep = DEFAULT_ZOOM_STEP) {
   let max = box.querySelector(".panzoom-max");
   let min = box.querySelector(".panzoom-min");
   let info = box.querySelector(".panzoom-info");
-  let info_box = box.querySelector(".panzoom-info-box, .panzoom-info-box-top");
   let zoom_in = box.querySelector(".panzoom-zoom-in");
   let zoom_out = box.querySelector(".panzoom-zoom-out");
 
@@ -160,26 +159,18 @@ function add_buttons(box, instance, zoomStep = DEFAULT_ZOOM_STEP) {
 
   if (info != undefined) {
     info.addEventListener("click", function (e) {
-      // Prevent event propagation to avoid interfering with other buttons
       e.preventDefault();
       e.stopPropagation();
 
-      // Ensure we only target the info box within THIS specific panzoom box
-      if (info_box != undefined) {
-        // Double-check that the info_box belongs to the current box
-        if (info_box.closest('.panzoom-box') === box) {
-          // Use the box's specific dataset to track state per box
-          const isInfoVisible = box.dataset.info === "true";
+      // Find the info box in this container
+      const infoBox = box.querySelector(".panzoom-info-box, .panzoom-info-box-top");
 
-          if (isInfoVisible) {
-            box.dataset.info = "false";
-            info_box.classList.add("panzoom-hidden");
-          } else {
-            box.dataset.info = "true";
-            info_box.classList.remove("panzoom-hidden");
-          }
+      if (infoBox) {
+        // Simple class-based toggle that matches how other buttons work
+        if (infoBox.classList.contains("panzoom-hidden")) {
+          infoBox.classList.remove("panzoom-hidden");
         } else {
-          console.warn("Info box does not belong to the current panzoom box, skipping toggle");
+          infoBox.classList.add("panzoom-hidden");
         }
       }
     });

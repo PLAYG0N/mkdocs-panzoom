@@ -27,7 +27,8 @@ share/python-wheels/
 MANIFEST
 
 # uv
-.venv/
+.venv
+venv
 uv.lock
 
 # PyInstaller

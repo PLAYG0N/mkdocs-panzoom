@@ -217,7 +217,10 @@ def create_panzoom_box(soup: BeautifulSoup, config: dict[str, Any], id: int | st
 
     panzoom_box.attrs["data-key"] = config.get("key", "none")
 
-    if config.get("hint_location", "bottom") == "top":
+    # Navigation class logic:
+    # - If always_show_hint is True AND hint_location is "top": push buttons down to avoid overlap
+    # - In all other cases: buttons at top-right corner for best UX
+    if always_hint and config.get("hint_location", "bottom") == "top":
         nav_class = "panzoom-nav-infobox-top"
     else:
         nav_class = "panzoom-top-nav"
