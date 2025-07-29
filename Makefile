@@ -1,10 +1,15 @@
 SHELL := /bin/bash
-.PHONY: setup all hooks check clean env build serve jupyter
+.PHONY: setup all hooks check clean env build serve jupyter test
 
 setup:
 	./scripts/contributor_setup.sh
 
-check:
+test:
+	@source .venv/bin/activate; \
+	echo "Running tests..."; \
+	uv run pytest tests/ -v --cov=mkdocs_panzoom_plugin --cov-report=term-missing --cov-report=html --cov-report=xml
+
+check: test
 	@source .venv/bin/activate; \
 	if [ -n "$$CI" ]; then \
 		uvx --from 'pre-commit' pre-commit run --all-files --origin HEAD --source origin/HEAD; \

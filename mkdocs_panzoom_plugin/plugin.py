@@ -42,7 +42,23 @@ class PanZoomPlugin(BasePlugin):
 
     def on_config(self, config: MkDocsConfig, **kwargs: Any) -> MkDocsConfig:
         """Configure the plugin and validate settings."""
-        plugins = [*OrderedDict(config["plugins"])]
+        # Handle case where plugins might be missing or different types
+        if "plugins" not in config:
+            return config
+
+        plugins_config = config["plugins"]
+        plugins_dict: OrderedDict[str, Any]
+        if isinstance(plugins_config, list):
+            # Convert list to OrderedDict for processing
+            plugins_dict = OrderedDict(
+                (p, {}) if isinstance(p, str) else (p, {}) for p in plugins_config
+            )
+        elif isinstance(plugins_config, dict):
+            plugins_dict = OrderedDict(plugins_config)
+        else:
+            plugins_dict = plugins_config
+
+        plugins = [*plugins_dict]
 
         def check_position(plugin: str, plugins: list[str]) -> None:
             """Check if the panzoom plugin is positioned correctly relative to other plugins."""

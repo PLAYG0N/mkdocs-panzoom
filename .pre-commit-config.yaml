@@ -53,8 +53,9 @@ repos:
         entry: uv run --no-sync pytest
         language: system
         types: [python]
-        files: ^tests\/.*test_.*\.py$
-        pass_filenames: false # or use with: require_serial
+        files: ^(tests\/.*test_.*\.py|mkdocs_panzoom_plugin\/.*\.py)$
+        pass_filenames: false
+        args: ["-v", "--cov=mkdocs_panzoom_plugin", "--cov-report=term-missing", "--tb=short"]
         # https://github.com/pre-commit/mirrors-pylint/issues/11
 
       # Dependency management

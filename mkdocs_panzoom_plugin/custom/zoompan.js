@@ -126,7 +126,7 @@ function add_buttons(box, instance, zoomStep = DEFAULT_ZOOM_STEP) {
   let max = box.querySelector(".panzoom-max");
   let min = box.querySelector(".panzoom-min");
   let info = box.querySelector(".panzoom-info");
-  let info_box = box.querySelector(".panzoom-info-box");
+  let info_box = box.querySelector(".panzoom-info-box, .panzoom-info-box-top");
   let zoom_in = box.querySelector(".panzoom-zoom-in");
   let zoom_out = box.querySelector(".panzoom-zoom-out");
 
@@ -148,12 +148,14 @@ function add_buttons(box, instance, zoomStep = DEFAULT_ZOOM_STEP) {
 
   if (info != undefined) {
     info.addEventListener("click", function (e) {
-      if (box.dataset.info == "true") {
-        box.dataset.info = false;
-        info_box.classList.add("panzoom-hidden");
-      } else {
-        box.dataset.info = true;
-        info_box.classList.remove("panzoom-hidden");
+      if (info_box != undefined) {
+        if (box.dataset.info == "true") {
+          box.dataset.info = false;
+          info_box.classList.add("panzoom-hidden");
+        } else {
+          box.dataset.info = true;
+          info_box.classList.remove("panzoom-hidden");
+        }
       }
     });
   }
