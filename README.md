@@ -120,6 +120,18 @@ plugins:
       buttons_size: "1.1em" # default "1.25em"
 ```
 
+## Automatic Zoom State Persistence
+
+The plugin automatically saves the zoom level and pan position for each diagram to your browser's localStorage. This means:
+
+- **Persistent Settings**: Your preferred zoom level and position for each diagram are remembered across page reloads
+- **Per-Diagram Memory**: Each diagram on a page maintains its own zoom state independently
+- **Automatic Cleanup**: Saved states older than 30 days are automatically cleared
+- **Reset Functionality**: Using the reset button clears the saved state for that diagram and returns to the configured initial zoom level
+
+This feature works automatically - no additional configuration is required. The zoom states are stored locally in your browser
+and are not shared between different browsers or devices.
+
 ## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=PLAYG0N/mkdocs-panzoom&type=Date)](https://www.star-history.com/#PLAYG0N/mkdocs-panzoom&Date)
