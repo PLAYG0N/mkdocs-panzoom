@@ -39,7 +39,8 @@ class HTMLPage:
         meta_tag = self.soup.new_tag("meta")
         meta_tag["name"] = "panzoom-data"
         meta_tag["content"] = json.dumps({
-            "selectors": self.config.get("selectors")
+            "selectors": self.config.get("selectors"),
+            "initial_zoom_level": self.config.get("initial_zoom_level", 1.0)
             })
         theme_tag = self.soup.new_tag("meta")
         theme_tag["name"] = "panzoom-theme"
@@ -49,13 +50,13 @@ class HTMLPage:
 
     def _find_elements(self):
         output = []
-        
+
         # get final set of selectors
         included_selectors = set(self.config.get("include_selectors", [])) | set()
         excluded_selectors = set(self.config.get("exclude_selectors", [])) | set()
 
         final_selectors = self.default_selectors.difference(excluded_selectors)
-        final_selectors.update(included_selectors) 
+        final_selectors.update(included_selectors)
 
         if self.config.get("images",False):
             final_selectors.add("img")
