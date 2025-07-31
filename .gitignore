@@ -166,3 +166,4 @@ performance_debug.yml
 docs/test/
 docs/.test/
 todo.md
+tests/

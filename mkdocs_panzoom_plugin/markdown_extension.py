@@ -58,15 +58,17 @@ class PanZoomPostprocessor(Postprocessor):
         super().__init__(md)
     
     def run(self, text):
-        print(text)
+        # print(text)
         for selector in self.selectors:
             if selector.startswith("."):
-                _selector =  re.compile()
+                _selector =  re.compile(f"<(\w+)[^>]*class\s*=\s*[\"']([^\"']*\b)?{selector.lstrip(".")}(\b[^\"']*)?[\"'][^>]*>")
             elif selector.startswith("#"):
                 _selector = ".//*[@id='%s']" % selector.lstrip("#")
             else:
                 _selector = ".//%s" % selector
             
+            re.search()
+
         return text
         # return super().run(text)
 
