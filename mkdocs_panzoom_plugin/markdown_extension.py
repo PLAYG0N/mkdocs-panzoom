@@ -28,6 +28,7 @@ class PanZoomExtension(Extension):
     
     def extendMarkdown(self, md):
         md.registerExtension(self)
+        print(self.getConfigs())
         # insert processors and patterns here
         md.postprocessors.register(PanZoomPostprocessor(self.getConfigs(),md=md), "panzoom", -1)
         # return super().extendMarkdown(md)

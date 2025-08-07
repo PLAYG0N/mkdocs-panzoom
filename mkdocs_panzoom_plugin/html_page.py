@@ -86,7 +86,7 @@ class HTMLPage:
         return output
 
 
-def create_meta_tags(config, mkdocs_config):
+def create_meta_tags(config):
     json_content = json.dumps({"selectors": config.get("selectors")})
-    return f"""<meta name="panzoom-theme" content="{mkdocs_config.get('theme').name}">
+    return f"""<meta name="panzoom-theme" content="{config.get('theme').name}">
 <meta name="panzoom-data" content='{json_content}'>"""

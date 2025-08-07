@@ -53,18 +53,31 @@ class PanZoomPlugin(BasePlugin):
         # get final set of selectors
         included_selectors = set(self.config.get("include_selectors", [])) | set()
         excluded_selectors = set(self.config.get("exclude_selectors", [])) | set()
-
         final_selectors = self.default_selectors.difference(excluded_selectors)
         final_selectors.update(included_selectors) 
 
-        if self.config.get("images",False):
+        if config.get("images",False):
             final_selectors.add("img")
-
-
-        if not self.config.get("mermaid",True):
+        if not config.get("mermaid",True):
             final_selectors.remove(".mermaid")
 
+        config.update({"selectors": list(final_selectors)})
         self.config.update({"selectors": list(final_selectors)})
+        local_config:dict = self.config
+
+        local_config.pop("mermaid")
+        local_config.pop("images")
+        local_config.pop("exclude")
+        local_config.pop("include_selectors")
+        local_config.pop("exclude_selectors")
+        mdx_configs: dict = config.get("mdx_configs")
+        mdx_configs.update({"panzoom": local_config})
+
+        mdx_extensions = config.get("markdown_extensions")
+        mdx_extensions.append("panzoom")
+
+        config.update({"mdx_configs": mdx_configs})
+        config.update({"markdown_extensions": mdx_extensions})
 
         return config
 
@@ -74,10 +87,8 @@ class PanZoomPlugin(BasePlugin):
 
         if exclude(page.file.src_path,excluded_pages):
             return
-        # html_page = HTMLPage(output,self.config,page, config)
 
-        # html_page.add_panzoom()
-        html_page = re.sub(r"(<\/head>)", f"{create_meta_tags(self.config, config)} \\1", output, count=1) 
+        html_page = re.sub(r"(<\/head>)", f"{create_meta_tags(config)} \\1", output, count=1) 
         return str(html_page)
 
     def on_post_build(self, *, config):
