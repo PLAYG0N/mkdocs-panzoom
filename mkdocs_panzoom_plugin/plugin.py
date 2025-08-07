@@ -8,7 +8,7 @@ from mkdocs.config import config_options, defaults
 from mkdocs.plugins import BasePlugin
 from mkdocs.exceptions import ConfigurationError
 from mkdocs_panzoom_plugin.exclude import exclude,include
-from mkdocs_panzoom_plugin.html_page import HTMLPage, create_meta_tags
+from mkdocs_panzoom_plugin.html_page import create_meta_tags
 
 logger = logging.getLogger("mkdocs.plugin")
 base_path = os.path.dirname(os.path.abspath(__file__))
