@@ -1,10 +1,19 @@
 from markdown.extensions import Extension
 from markdown.treeprocessors import Treeprocessor
 from markdown.postprocessors import Postprocessor
+from mkdocs_panzoom_plugin.panzoom_box import create_panzoom_box
 
 import xml.etree.ElementTree as etree
 import re
 
+CLASS_PART1 = r"(<(\w+)[^>]*class\s*=\s*[\"']([^\"']*\b)?"
+CLASS_PART2 = r"(\b[^\"']*)?[\"'][^>]*>(?:.|\n)*?</\2>)"
+
+ID_PART1 = r"(<(\w+)[^>]*id\s*=\s*[\"']"
+ID_PART2 = r"[\"'][^>]*>(?:.|\n)*?<\/\2>)"
+
+def TAG(tag:str):
+    return f"((?:<({tag})[^\\/>]*>(?:.|\\n)*?<\\/\\2>)|(?:<({tag})[^>]*\\/>))"
 
 class PanZoomExtension(Extension):
     def __init__(self, **kwargs):
@@ -22,7 +31,7 @@ class PanZoomExtension(Extension):
         # self.md = md
         # insert processors and patterns here
         # md.treeprocessors.register(PanZoomTreeprocessor(md = md, selectors = self.getConfig("selectors", [])), "panzoom", -1)
-        md.postprocessors.register(PanZoomPostprocessor(md=md,selectors=self.getConfig("selectors", [])), "panzoom", -1)
+        md.postprocessors.register(PanZoomPostprocessor(self.getConfigs(),md=md), "panzoom", -1)
         # return super().extendMarkdown(md)
 
 class PanZoomTreeprocessor(Treeprocessor):
@@ -53,22 +62,28 @@ class PanZoomTreeprocessor(Treeprocessor):
         return output
 
 class PanZoomPostprocessor(Postprocessor):
-    def __init__(self, md = None, selectors = []):
-        self.selectors = selectors
+    def __init__(self, config:dict, md = None, ):
+        self.selectors = config.get("selectors", [])
+        self.config = config
         super().__init__(md)
     
     def run(self, text):
         # print(text)
+        sub = create_panzoom_box(config=self.config, id=0)
         for selector in self.selectors:
             if selector.startswith("."):
-                _selector =  re.compile(f"<(\w+)[^>]*class\s*=\s*[\"']([^\"']*\b)?{selector.lstrip(".")}(\b[^\"']*)?[\"'][^>]*>")
+                pattern =  re.compile(f"{CLASS_PART1}{selector.lstrip('.')}{CLASS_PART2}")
             elif selector.startswith("#"):
-                _selector = ".//*[@id='%s']" % selector.lstrip("#")
+                pattern = re.compile(f"{ID_PART1}{selector.lstrip('#')}{ID_PART2}")
             else:
-                _selector = ".//%s" % selector
+                pattern = re.compile(TAG(selector))
+                print(pattern)
+                print(re.match(pattern,text))
             
-            re.search()
+            text = re.sub(pattern, sub, text, count=0)
+            # re.search()
 
+        print(text)
         return text
         # return super().run(text)
 

@@ -25,17 +25,17 @@ class HTMLPage:
 
     @profile
     def add_panzoom(self):
-        for idx, element in enumerate(self.containers):
-            panzoom_box = PanZoomBox.create_panzoom_box(self.soup,self.config,idx)
-            element.wrap(panzoom_box)
-            if self.config.get("hint_location", "bottom") == "bottom":
-                panzoom_box.append(PanZoomBox.create_info_box(self.soup,self.config))
+        # for idx, element in enumerate(self.containers):
+        #     panzoom_box = PanZoomBox.create_panzoom_box(self.soup,self.config,idx)
+        #     element.wrap(panzoom_box)
+        #     if self.config.get("hint_location", "bottom") == "bottom":
+        #         panzoom_box.append(PanZoomBox.create_info_box(self.soup,self.config))
             # panzoom_box.append(create_info_box(self.soup,self.config))
 
         # Include the css and js in the file
-        self.soup.head.append(create_css_link(self.soup,self.page))
-        self.soup.body.append(create_js_script(self.soup,self.page))
-        self.soup.body.append(create_js_script_plugin(self.soup,self.page))
+        # self.soup.head.append(create_css_link(self.soup,self.page))
+        # self.soup.body.append(create_js_script(self.soup,self.page))
+        # self.soup.body.append(create_js_script_plugin(self.soup,self.page))
 
         self._add_data_for_js()
 
@@ -84,3 +84,9 @@ class HTMLPage:
                 output += self.soup.find_all(selector)
 
         return output
+
+
+def create_meta_tags(config, mkdocs_config):
+    json_content = json.dumps({"selectors": config.get("selectors")})
+    return f"""<meta name="panzoom-theme" content="{mkdocs_config.get('theme').name}">
+<meta name="panzoom-data" content='{json_content}'>"""

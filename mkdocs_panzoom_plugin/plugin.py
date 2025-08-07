@@ -1,13 +1,14 @@
 import logging
 from collections import OrderedDict
 import os
+import re
 
 from mkdocs import utils
 from mkdocs.config import config_options, defaults
 from mkdocs.plugins import BasePlugin
 from mkdocs.exceptions import ConfigurationError
 from mkdocs_panzoom_plugin.exclude import exclude,include
-from mkdocs_panzoom_plugin.html_page import HTMLPage
+from mkdocs_panzoom_plugin.html_page import HTMLPage, create_meta_tags
 
 logger = logging.getLogger("mkdocs.plugin")
 base_path = os.path.dirname(os.path.abspath(__file__))
@@ -25,6 +26,7 @@ class PanZoomPlugin(BasePlugin):
         ("exclude_selectors", config_options.Type(list, default=[])),
         ("hint_location", config_options.Type(str, default="bottom")),
     )
+    default_selectors = {".mermaid", ".d2"}
 
     def on_config(self, config, **kwargs):
 
@@ -44,6 +46,26 @@ class PanZoomPlugin(BasePlugin):
         for p in check_plugins:
             check_position(p,plugins)
 
+        config["extra_css"].append("assets/stylesheets/panzoom.css")
+        config["extra_javascript"].append("assets/javascripts/panzoom.min.js")
+        config["extra_javascript"].append("assets/javascripts/zoompan.js")
+
+        # get final set of selectors
+        included_selectors = set(self.config.get("include_selectors", [])) | set()
+        excluded_selectors = set(self.config.get("exclude_selectors", [])) | set()
+
+        final_selectors = self.default_selectors.difference(excluded_selectors)
+        final_selectors.update(included_selectors) 
+
+        if self.config.get("images",False):
+            final_selectors.add("img")
+
+
+        if not self.config.get("mermaid",True):
+            final_selectors.remove(".mermaid")
+
+        self.config.update({"selectors": list(final_selectors)})
+
         return config
 
     def on_post_page(self, output: str, /, *, page, config):
@@ -52,10 +74,10 @@ class PanZoomPlugin(BasePlugin):
 
         if exclude(page.file.src_path,excluded_pages):
             return
-        html_page = HTMLPage(output,self.config,page, config)
+        # html_page = HTMLPage(output,self.config,page, config)
 
-        html_page.add_panzoom()
-
+        # html_page.add_panzoom()
+        html_page = re.sub(r"(<\/head>)", f"{create_meta_tags(self.config, config)} \\1", output, count=1) 
         return str(html_page)
 
     def on_post_build(self, *, config):

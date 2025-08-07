@@ -44,7 +44,12 @@ markdown_extensions:
         - name: mermaid
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
-  - panzoom
+  - panzoom:
+      full_screen: true
+      always_show_hint: true
+      key: "alt"
+      # hint_location: top
+      # hint_location: bottom
 
 hooks:
   - hooks/performance_debug.py
