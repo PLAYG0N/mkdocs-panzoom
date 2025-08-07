@@ -28,38 +28,9 @@ class PanZoomExtension(Extension):
     
     def extendMarkdown(self, md):
         md.registerExtension(self)
-        # self.md = md
         # insert processors and patterns here
-        # md.treeprocessors.register(PanZoomTreeprocessor(md = md, selectors = self.getConfig("selectors", [])), "panzoom", -1)
         md.postprocessors.register(PanZoomPostprocessor(self.getConfigs(),md=md), "panzoom", -1)
         # return super().extendMarkdown(md)
-
-class PanZoomTreeprocessor(Treeprocessor):
-    def __init__(self, md = None, selectors = []):
-        self.selectors = selectors
-        super().__init__(md)
-
-    def run(self, root:etree.Element):
-        print(etree.tostring(root,"unicode", "html"))
-        # print(self.md.htmlStash.rawHtmlBlocks)
-        self.containers = self.find_all(root)
-        # print(self.containers)
-        return super().run(root)
-
-    def find_all(self,root:etree.Element):
-        output = []
-        for selector in self.selectors:
-            if selector.startswith("."):
-                _selector = ".//*[@class='%s']" % selector.lstrip(".")
-            elif selector.startswith("#"):
-                _selector = ".//*[@id='%s']" % selector.lstrip("#")
-            else:
-                _selector = ".//%s" % selector
-            output += root.findall(_selector)
-        
-        print(output)
-
-        return output
 
 class PanZoomPostprocessor(Postprocessor):
     def __init__(self, config:dict, md = None, ):
@@ -77,13 +48,10 @@ class PanZoomPostprocessor(Postprocessor):
                 pattern = re.compile(f"{ID_PART1}{selector.lstrip('#')}{ID_PART2}")
             else:
                 pattern = re.compile(TAG(selector))
-                print(pattern)
-                print(re.match(pattern,text))
-            
             text = re.sub(pattern, sub, text, count=0)
             # re.search()
 
-        print(text)
+        # print(text)
         return text
         # return super().run(text)
 
