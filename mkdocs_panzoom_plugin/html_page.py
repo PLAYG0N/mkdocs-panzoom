@@ -1,7 +1,5 @@
 import json
 from bs4 import BeautifulSoup, SoupStrainer
-import lxml
-# import cchardet
 
 from mkdocs_panzoom_plugin.panzoom_box import *
 

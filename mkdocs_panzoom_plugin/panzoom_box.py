@@ -1,7 +1,3 @@
-
-from bs4 import BeautifulSoup
-from mkdocs import utils
-#from bs4.element import BeautifulSoup
 class PanZoomBox(object):
     _info_box_cache = {}
     _panzoom_box_cache = {}
