@@ -25,6 +25,7 @@ class PanZoomPlugin(BasePlugin):
         ("include_selectors", config_options.Type(list, default=[])),
         ("exclude_selectors", config_options.Type(list, default=[])),
         ("hint_location", config_options.Type(str, default="bottom")),
+        ("initial_zoom_level", config_options.Type(float, default=1.0)),
     )
     default_selectors = {".mermaid", ".d2"}
 

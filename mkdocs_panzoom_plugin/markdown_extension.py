@@ -23,6 +23,7 @@ class PanZoomExtension(Extension):
             'key': ['alt', 'Key to press to enable panzoom'],
             'selectors': [[".mermaid", ".d2", "img"], 'Selectors on which to enable panzoom'],
             'hint_location': ['bottom', 'Hint bottom/top'],
+            'initial_zoom_level': [1.0, 'Initial zoom level'],
         }
         super().__init__(**kwargs)
     
