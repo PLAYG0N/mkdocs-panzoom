@@ -45,6 +45,7 @@ markdown_extensions:
           class: mermaid
           format: !!python/name:pymdownx.superfences.fence_code_format
 
+
 # hooks:
   # - hooks/performance_debug.py
 
