@@ -20,7 +20,7 @@ class PanZoomExtension(Extension):
         self.config = {
             'full_screen': [False, 'Enables fullscreen'],
             'always_show_hint': [False, 'Permanently show hint'],
-            'key': ['alt', 'Key to press to enable panzoom'],
+            'key': ['alt', 'Key to hold to enable panzoom'],
             'selectors': [[".mermaid", ".d2", "img"], 'Selectors on which to enable panzoom'],
             'hint_location': ['bottom', 'Hint bottom/top'],
             'initial_zoom_level': [1.0, 'Initial zoom level'],

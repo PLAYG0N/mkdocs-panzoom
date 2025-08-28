@@ -37,11 +37,11 @@ def create_info_box(config):
     
     match key:
         case "alt":
-            hint_message = 'Press "Alt" / "Option" to enable Pan &amp; Zoom'
+            hint_message = 'Hold "Alt" / "Option" to enable Pan &amp; Zoom'
         case "ctrl":
-            hint_message = 'Press "Ctrl" to enable Pan &amp; Zoom'
+            hint_message = 'Hold "Ctrl" to enable Pan &amp; Zoom'
         case "shift":
-            hint_message = 'Press "Shift" to enable Pan &amp; Zoom'
+            hint_message = 'Hold "Shift" to enable Pan &amp; Zoom'
     
     return f"""<div class="{css_class}">
 {hint_message}

@@ -18,7 +18,7 @@ The key for the activation can be [configured or disabled](./index.md#use-differ
 
 ## Mouse
 
-Press ++alt++ and grab the diagram with your mouse to move it. The same applies to the zooming press ++alt++ and scroll.
+Hold ++alt++ and grab the diagram with your mouse to move it. The same applies to the zooming hold ++alt++ and scroll.
 
 ## Keyboard
 
