@@ -27,7 +27,7 @@ plugins:
 
 ## Usage
 
-Examples and usage are available in the [docs](https://playg0n.github.io/mkdocs-panzoom/).
+Examples and usage are available in the [docs](https://playg0n.github.io/mkdocs-panzoom/Usage/).
 
 ## Config
 
@@ -50,29 +50,72 @@ plugins:
 
 ### Hint
 
-This makes the hint on how to use it permanently visible.
+### Toggle
 
-```yaml
-plugins:
-  - panzoom:
-      always_show_hint: true # default false
-```
+=== "Toggleable (Default)"
+
+    This makes the hint on how to use it toggleable
+
+    ![toggleable](./assets/toggeled-hint.png){.pz-ignore}
+
+    ```yaml
+    plugins:
+      - panzoom:
+          always_show_hint: false # default false
+    ```
+
+=== "Always"
+
+    This makes the hint on how to use it permanently visible
+
+
+    ![toggleable](./assets/info-box-bottom.png){.pz-ignore}
+
+    ```yaml
+    plugins:
+      - panzoom:
+          always_show_hint: true # default false
+    ```
+
+### Location
 
 This changes the location of the hint
 
-```yaml
-plugins:
-   - panzoom:
-      hint_location: "top" # default bottom
-```
+=== "Bottom (Default)"
 
-Hide hint completely
+    Display hint at the bottom
 
-```yaml
-plugins:
-   - panzoom:
-      hint_location: "disabled" # default bottom
-```
+    ![toggleable](./assets/info-box-bottom.png){.pz-ignore}
+
+    ```yaml
+    plugins:
+      - panzoom:
+          hint_location: "bottom" # default bottom
+    ```
+
+=== "Top"
+
+    Display hint at the top
+
+    ![toggleable](./assets/info-box-top.png){.pz-ignore}
+
+    ```yaml
+    plugins:
+      - panzoom:
+          hint_location: "top" # default bottom
+    ```
+
+=== "Disabled"
+
+    Hide hint completely
+
+    ![toggleable](./assets/info-box-disabled.png){.pz-ignore}
+
+    ```yaml
+    plugins:
+      - panzoom:
+          hint_location: "disabled" # default bottom
+    ```
 
 ### Use different key
 
