@@ -63,4 +63,5 @@ plugins:
         - img
       # hint_location: top
       # hint_location: bottom
+      # hint_location: disabled
   - d2

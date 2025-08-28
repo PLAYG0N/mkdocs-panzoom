@@ -57,6 +57,10 @@ def create_panzoom_box(config, id):
         nav_class = "panzoom-nav panzoom-top-nav"
         placeholder_info_top = create_info_box(config=config)
         placeholder_info_bottom = ""
+    elif hint_location == "disabled":
+        nav_class = "panzoom-nav"
+        placeholder_info_top = ""
+        placeholder_info_bottom = ""
     else:
         nav_class = "panzoom-nav"
         placeholder_info_top = ""

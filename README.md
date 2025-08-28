@@ -67,6 +67,14 @@ plugins:
       hint_location: "top" # default bottom
 ```
 
+Hide hint completely
+
+```yaml
+plugins:
+   - panzoom:
+      hint_location: "disabled" # default bottom
+```
+
 ### Use different key
 
 Options for activation key are:
