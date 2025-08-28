@@ -73,7 +73,6 @@ function maximize(instance, box, max, min) {
 }
 
 function escapeFullScreen(e, box, max, min, instance) {
-
   if (e.keyCode == 27) {
     minimize(instance, box, max, min);
   }
@@ -96,6 +95,7 @@ function add_buttons(box, instance) {
   let min = box.querySelector(".panzoom-min");
   let info = box.querySelector(".panzoom-info");
   let info_box = box.querySelector(".panzoom-info-box");
+  let nav = box.querySelector(".panzoom-nav");
 
   reset.addEventListener("click", function (e) {
     panzoom_reset(instance, box); // Always reset to default browser zoom level
@@ -105,9 +105,16 @@ function add_buttons(box, instance) {
       if (box.dataset.info == "true") {
         box.dataset.info = false;
         info_box.classList.add("panzoom-hidden");
+
+        if (nav.classList.contains("panzoom-top-nav")) {
+          nav.classList.remove("panzoom-nav-infobox-top");
+        }
       } else {
         box.dataset.info = true;
         info_box.classList.remove("panzoom-hidden");
+        if (nav.classList.contains("panzoom-top-nav")) {
+          nav.classList.add("panzoom-nav-infobox-top");
+        }
       }
     });
   }
@@ -218,7 +225,6 @@ function activate_zoom_pan() {
           saveZoomState(box.id, transform);
         }, SAVE_DEBOUNCE_DELAY_MS);
       });
-
       instance.on('pan', function() {
         // Debounce saving to avoid excessive localStorage writes
         clearTimeout(panSaveTimeout);
