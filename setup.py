@@ -15,7 +15,7 @@ setup(
         author_email="playg0nofficial@gmail.com",
         license="MIT",
         python_requires=">=3.7",
-        install_requires=["mkdocs>=1.0.4", "beautifulsoup4>=4.9.0"],
+        install_requires=["mkdocs>=1.0.4"],
         # package_dir={"": "mkdocs_panzoom_plugin"},
         # package_data={"custom": ["*.css","*.js" ,"*LICENCE"]},
         include_package_data=True,
