@@ -28,9 +28,9 @@ def create_info_box(config):
     hint_location = config.get("hint_location", "bottom")
 
     if hint_location == "top":
-        css_class = "panzoom-info-box-top"
+        css_class = "panzoom-info-box panzoom-info-box-top"
     else:
-        css_class = "panzoom-info-box"
+        css_class = "panzoom-info-box panzoom-info-box-bottom"
     
     if not always_hint:
         css_class += " panzoom-hidden"
@@ -54,11 +54,11 @@ def create_panzoom_box(config, id):
     hint_location = config.get("hint_location", "bottom")
 
     if hint_location == "top":
-        nav_class = "panzoom-nav-infobox-top"
+        nav_class = "panzoom-nav panzoom-top-nav"
         placeholder_info_top = create_info_box(config=config)
         placeholder_info_bottom = ""
     else:
-        nav_class = "panzoom-top-nav"
+        nav_class = "panzoom-nav"
         placeholder_info_top = ""
         placeholder_info_bottom = create_info_box(config=config)
 
@@ -66,6 +66,8 @@ def create_panzoom_box(config, id):
 
     if not always_hint:
         nav_buttons += info_button
+    if hint_location == "top" and always_hint:
+        nav_class += " panzoom-nav-infobox-top"
 
     nav_buttons += reset_button
 

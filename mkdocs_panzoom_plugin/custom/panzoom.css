@@ -40,7 +40,7 @@ button:hover .panzoom-icon {
 .panzoom-min {
 }
 
-.panzoom-top-nav {
+.panzoom-nav {
     position: absolute;
     right: 10px;
     top: 10px;
@@ -53,15 +53,15 @@ button:hover .panzoom-icon {
 .panzoom-nav-infobox-top {
     position: absolute;
     right: 10px;
-    top: 10px;
-    top: 51px;
+    /* top: 10px; */
+    top: 50px;
     display: flex;
     justify-content: flex-end;
     gap: 5px;
     z-index: 3;
 }
 
-.panzoom-info-box {
+.panzoom-info-box-bottom {
     position: relative;
     padding-top: 15px;
     font-size: 1em;
