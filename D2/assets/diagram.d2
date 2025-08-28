@@ -1,0 +1,22 @@
+shape: sequence_diagram
+
+mkdocs: MkDocs {
+  link: https://www.mkdocs.org
+}
+plugin: mkdocs-d2-plugin {
+  link: https://github.com/landmaj/mkdocs-d2-plugin
+}
+d2: D2 {
+  link: https://d2lang.com
+}
+
+mkdocs -> mkdocs: build/serve
+mkdocs -> plugin: diagram definition
+
+subprocess: {
+  link: https://docs.python.org/3/library/subprocess.html
+  plugin -> d2.sub: compile
+  d2.sub -> plugin: svg
+}
+
+plugin -> mkdocs: svg
