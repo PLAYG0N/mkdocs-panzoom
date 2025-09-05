@@ -35,14 +35,14 @@ def create_info_box(config):
     if not always_hint:
         css_class += " panzoom-hidden"
     
-    match key:
-        case "alt":
-            hint_message = 'Hold "Alt" / "Option" to enable Pan &amp; Zoom'
-        case "ctrl":
-            hint_message = 'Hold "Ctrl" to enable Pan &amp; Zoom'
-        case "shift":
-            hint_message = 'Hold "Shift" to enable Pan &amp; Zoom'
-    
+    if key == "alt":
+        hint_message = 'Hold "Alt" / "Option" to enable pan &amp; zoom'
+    elif key == "ctrl":
+        hint_message = 'Hold "Ctrl" to enable pan &amp; zoom'
+    elif key == "shift":
+        hint_message = 'Hold "Shift" to enable pan &amp; zoom'
+    else:
+        hint_message = 'Use mouse to pan and zoom'
     return f"""<div class="{css_class}">
 {hint_message}
 </div>"""
