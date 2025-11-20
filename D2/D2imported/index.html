@@ -1,0 +1,1120 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://playg0n.github.io/mkdocs-panzoom/D2/D2imported/">
+      
+      
+        <link rel="prev" href="../../Usage/">
+      
+      
+        <link rel="next" href="../d2diagram/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.0">
+    
+    
+      
+        <title>Imported D2 Diagram - PanZoom Plugin for MkDocs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.618322db.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/panzoom.css">
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/mkdocs_d2_plugin.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <meta name="panzoom-theme" content="material">
+<meta name="panzoom-data" content='{"selectors": [".mermaid", "img", ".d2"], "initial_zoom_level": 1.0}'> </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#imported-d2-diagram" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="PanZoom Plugin for MkDocs" class="md-header__button md-logo" aria-label="PanZoom Plugin for MkDocs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 22v-2h3v-3h2v3.5c0 .39-.16.74-.46 1.04s-.65.46-1.04.46zM7 22H3.5c-.39 0-.74-.16-1.04-.46S2 20.89 2 20.5V17h2v3h3zM17 2h3.5c.39 0 .74.16 1.04.46s.46.65.46 1.04V7h-2V4h-3zM7 2v2H4v3H2V3.5c0-.39.16-.74.46-1.04S3.11 2 3.5 2zm3.5 4C13 6 15 8 15 10.5c0 .88-.25 1.7-.69 2.4l3.26 3.26-1.41 1.41-3.26-3.26c-.7.44-1.52.69-2.4.69C8 15 6 13 6 10.5S8 6 10.5 6m0 2a2.5 2.5 0 0 0 0 5 2.5 2.5 0 0 0 0-5"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PanZoom Plugin for MkDocs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Imported D2 Diagram
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/PLAYG0N/mkdocs-panzoom" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    PLAYG0N/mkdocs-panzoom
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../Usage/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Usage
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+    
+  
+  D2
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../Mermaid/bigmermaid/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Mermaid
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../images/largeimage/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Images
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="PanZoom Plugin for MkDocs" class="md-nav__button md-logo" aria-label="PanZoom Plugin for MkDocs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 22v-2h3v-3h2v3.5c0 .39-.16.74-.46 1.04s-.65.46-1.04.46zM7 22H3.5c-.39 0-.74-.16-1.04-.46S2 20.89 2 20.5V17h2v3h3zM17 2h3.5c.39 0 .74.16 1.04.46s.46.65.46 1.04V7h-2V4h-3zM7 2v2H4v3H2V3.5c0-.39.16-.74.46-1.04S3.11 2 3.5 2zm3.5 4C13 6 15 8 15 10.5c0 .88-.25 1.7-.69 2.4l3.26 3.26-1.41 1.41-3.26-3.26c-.7.44-1.52.69-2.4.69C8 15 6 13 6 10.5S8 6 10.5 6m0 2a2.5 2.5 0 0 0 0 5 2.5 2.5 0 0 0 0-5"/></svg>
+
+    </a>
+    PanZoom Plugin for MkDocs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/PLAYG0N/mkdocs-panzoom" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    PLAYG0N/mkdocs-panzoom
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Usage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Usage
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    D2
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Imported D2 Diagram
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../d2diagram/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    D2 Diagram
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Mermaid
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Mermaid
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mermaid/bigmermaid/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big Mermaid
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mermaid/clickables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clickables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mermaid/excluded/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Big Mermaid (excluded)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Mermaid/links/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clickable links
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Images
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Images
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../images/largeimage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Large Images
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="imported-d2-diagram">Imported D2 Diagram<a class="headerlink" href="#imported-d2-diagram" title="Permanent link">&para;</a></h1>
+<p>This was made with an image of the d2 diagram.</p>
+<p><div class="panzoom-box" data-key="alt" id="panzoom0" oncontextmenu="return false;">
+    
+    <nav class="panzoom-nav">
+    <button class="panzoom-info panzoom-button">
+    <svg class="panzoom-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+        <path d="M464 256A208 208 0 1 0 48 256a208 208 0 1 0 416 0zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256zm169.8-90.7c7.9-22.3 29.1-37.3 52.8-37.3l58.3 0c34.9 0 63.1 28.3 63.1 63.1c0 22.6-12.1 43.5-31.7 54.8L280 264.4c-.2 13-10.9 23.6-24 23.6c-13.3 0-24-10.7-24-24l0-13.5c0-8.6 4.6-16.5 12.1-20.8l44.3-25.4c4.7-2.7 7.6-7.7 7.6-13.1c0-8.4-6.8-15.1-15.1-15.1l-58.3 0c-3.4 0-6.4 2.1-7.5 5.3l-.4 1.2c-4.4 12.5-18.2 19-30.6 14.6s-19-18.2-14.6-30.6l.4-1.2zM224 352a32 32 0 1 1 64 0 32 32 0 1 1 -64 0z"></path>
+    </svg>
+</button><button class="panzoom-reset panzoom-button">
+    <svg class="panzoom-icon" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+        <path d="M125.7 160l50.3 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L48 224c-17.7 0-32-14.3-32-32L16 64c0-17.7 14.3-32 32-32s32 14.3 32 32l0 51.2L97.6 97.6c87.5-87.5 229.3-87.5 316.8 0s87.5 229.3 0 316.8s-229.3 87.5-316.8 0c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0c62.5 62.5 163.8 62.5 226.3 0s62.5-163.8 0-226.3s-163.8-62.5-226.3 0L125.7 160z"></path>
+    </svg>
+</button><button class="panzoom-max panzoom-button">
+    <svg class="panzoom-icon" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+        <path d="M32 32C14.3 32 0 46.3 0 64l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L32 32zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96z"></path>
+    </svg>
+</button><button class="panzoom-min panzoom-button panzoom-hidden">
+    <svg class="panzoom-icon" viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
+        <path d="M160 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 64-64 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l96 0c17.7 0 32-14.3 32-32l0-96zM32 320c-17.7 0-32 14.3-32 32s14.3 32 32 32l64 0 0 64c0 17.7 14.3 32 32 32s32-14.3 32-32l0-96c0-17.7-14.3-32-32-32l-96 0zM352 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 96c0 17.7 14.3 32 32 32l96 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-64 0 0-64zM320 320c-17.7 0-32 14.3-32 32l0 96c0 17.7 14.3 32 32 32s32-14.3 32-32l0-64 64 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-96 0z"></path>
+    </svg>
+</button>
+    </nav>
+    <div class="d2"><svg aria-label="Flow" data-d2-version="v0.7.1" preserveAspectRatio="xMinYMin meet" role="img" viewBox="0 0 655 851"><svg class="d2-6aed918052474b15a4b1161a5d7f9a57 d2-svg" height="851" viewBox="-89 -66 655 851" width="655"><rect class=" fill-N7" fill="#FFFFFF" height="851.000000" rx="0.000000" stroke-width="0" width="655.000000" x="-89.000000" y="-66.000000"></rect><style type="text/css">
+.d2-6aed918052474b15a4b1161a5d7f9a57 .text {
+	font-family: "d2-6aed918052474b15a4b1161a5d7f9a57-font-regular";
+}
+@font-face {
+	font-family: d2-6aed918052474b15a4b1161a5d7f9a57-font-regular;
+	src: url("data:application/font-woff;base64,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");
+}
+.appendix-icon {
+	filter: drop-shadow(0px 0px 32px rgba(31, 36, 58, 0.1));
+}
+.d2-6aed918052474b15a4b1161a5d7f9a57 .text-italic {
+	font-family: "d2-6aed918052474b15a4b1161a5d7f9a57-font-italic";
+}
+@font-face {
+	font-family: d2-6aed918052474b15a4b1161a5d7f9a57-font-italic;
+	src: url("data:application/font-woff;base64,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");
+}</style><style type="text/css">.shape {
+  shape-rendering: geometricPrecision;
+  stroke-linejoin: round;
+}
+.connection {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.blend {
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-N1{fill:#0A0F25;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-N2{fill:#676C7E;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-N3{fill:#9499AB;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-N4{fill:#CFD2DD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-N5{fill:#DEE1EB;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-N6{fill:#EEF1F8;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-N7{fill:#FFFFFF;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-B1{fill:#0D32B2;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-B2{fill:#0D32B2;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-B3{fill:#E3E9FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-B4{fill:#E3E9FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-B5{fill:#EDF0FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-B6{fill:#F7F8FE;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-AA2{fill:#4A6FF3;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-AA4{fill:#EDF0FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-AA5{fill:#F7F8FE;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-AB4{fill:#EDF0FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .fill-AB5{fill:#F7F8FE;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-N1{stroke:#0A0F25;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-N2{stroke:#676C7E;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-N3{stroke:#9499AB;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-N4{stroke:#CFD2DD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-N5{stroke:#DEE1EB;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-N6{stroke:#EEF1F8;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-N7{stroke:#FFFFFF;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-B1{stroke:#0D32B2;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-B2{stroke:#0D32B2;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-B3{stroke:#E3E9FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-B4{stroke:#E3E9FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-B5{stroke:#EDF0FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-B6{stroke:#F7F8FE;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-AA2{stroke:#4A6FF3;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-AA4{stroke:#EDF0FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-AA5{stroke:#F7F8FE;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-AB4{stroke:#EDF0FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .stroke-AB5{stroke:#F7F8FE;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-N1{background-color:#0A0F25;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-N2{background-color:#676C7E;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-N3{background-color:#9499AB;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-N4{background-color:#CFD2DD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-N5{background-color:#DEE1EB;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-N6{background-color:#EEF1F8;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-N7{background-color:#FFFFFF;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-B1{background-color:#0D32B2;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-B2{background-color:#0D32B2;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-B3{background-color:#E3E9FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-B4{background-color:#E3E9FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-B5{background-color:#EDF0FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-B6{background-color:#F7F8FE;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-AA2{background-color:#4A6FF3;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-AA4{background-color:#EDF0FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-AA5{background-color:#F7F8FE;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-AB4{background-color:#EDF0FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .background-color-AB5{background-color:#F7F8FE;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-N1{color:#0A0F25;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-N2{color:#676C7E;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-N3{color:#9499AB;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-N4{color:#CFD2DD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-N5{color:#DEE1EB;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-N6{color:#EEF1F8;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-N7{color:#FFFFFF;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-B1{color:#0D32B2;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-B2{color:#0D32B2;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-B3{color:#E3E9FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-B4{color:#E3E9FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-B5{color:#EDF0FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-B6{color:#F7F8FE;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-AA2{color:#4A6FF3;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-AA4{color:#EDF0FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-AA5{color:#F7F8FE;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-AB4{color:#EDF0FD;}
+		.d2-6aed918052474b15a4b1161a5d7f9a57 .color-AB5{color:#F7F8FE;}.appendix text.text{fill:#0A0F25}.md{--color-fg-default:#0A0F25;--color-fg-muted:#676C7E;--color-fg-subtle:#9499AB;--color-canvas-default:#FFFFFF;--color-canvas-subtle:#EEF1F8;--color-border-default:#0D32B2;--color-border-muted:#0D32B2;--color-neutral-muted:#EEF1F8;--color-accent-fg:#0D32B2;--color-accent-emphasis:#0D32B2;--color-attention-subtle:#676C7E;--color-danger-fg:red;}.sketch-overlay-B1{fill:url(#streaks-darker-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:lighten}.sketch-overlay-B2{fill:url(#streaks-darker-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:lighten}.sketch-overlay-B3{fill:url(#streaks-bright-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:darken}.sketch-overlay-B4{fill:url(#streaks-bright-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:darken}.sketch-overlay-B5{fill:url(#streaks-bright-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:darken}.sketch-overlay-B6{fill:url(#streaks-bright-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:darken}.sketch-overlay-AA2{fill:url(#streaks-dark-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:overlay}.sketch-overlay-AA4{fill:url(#streaks-bright-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:darken}.sketch-overlay-AA5{fill:url(#streaks-bright-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:darken}.sketch-overlay-AB4{fill:url(#streaks-bright-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:darken}.sketch-overlay-AB5{fill:url(#streaks-bright-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:darken}.sketch-overlay-N1{fill:url(#streaks-darker-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:lighten}.sketch-overlay-N2{fill:url(#streaks-dark-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:overlay}.sketch-overlay-N3{fill:url(#streaks-normal-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:color-burn}.sketch-overlay-N4{fill:url(#streaks-normal-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:color-burn}.sketch-overlay-N5{fill:url(#streaks-bright-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:darken}.sketch-overlay-N6{fill:url(#streaks-bright-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:darken}.sketch-overlay-N7{fill:url(#streaks-bright-d2-6aed918052474b15a4b1161a5d7f9a57);mix-blend-mode:darken}.light-code{display: block}.dark-code{display: none}</style><a href="https://www.mkdocs.org" {http://www.w3.org/1999/xlink}href="https://www.mkdocs.org"><g class="bWtkb2Nz"><g class="shape"><rect class=" stroke-B1 fill-B5" fill="#EDF0FD" height="66.000000" stroke="#0D32B2" style="stroke-width:2;" width="100.000000" x="12.000000" y="52.000000"></rect></g><text class="text fill-N1" fill="#0A0F25" style="text-anchor:middle;font-size:16px" x="62.000000" y="90.500000">MkDocs</text></g></a><a href="https://github.com/landmaj/mkdocs-d2-plugin" {http://www.w3.org/1999/xlink}href="https://github.com/landmaj/mkdocs-d2-plugin"><g class="cGx1Z2lu"><g class="shape"><rect class=" stroke-B1 fill-B5" fill="#EDF0FD" height="66.000000" stroke="#0D32B2" style="stroke-width:2;" width="166.000000" x="161.000000" y="52.000000"></rect></g><text class="text fill-N1" fill="#0A0F25" style="text-anchor:middle;font-size:16px" x="244.000000" y="90.500000">mkdocs-d2-plugin</text></g></a><a href="https://d2lang.com" {http://www.w3.org/1999/xlink}href="https://d2lang.com"><g class="ZDI="><g class="shape"><rect class=" stroke-B1 fill-B5" fill="#EDF0FD" height="66.000000" stroke="#0D32B2" style="stroke-width:2;" width="100.000000" x="348.000000" y="52.000000"></rect></g><text class="text fill-N1" fill="#0A0F25" style="text-anchor:middle;font-size:16px" x="398.000000" y="90.500000">D2</text></g></a><g class="KG1rZG9jcyAtLSApWzBd"><path class="connection stroke-B2" d="M 62.000000 120.000000 L 62.000000 683.000000" fill="none" mask="url(#d2-6aed918052474b15a4b1161a5d7f9a57)" stroke="#0D32B2" style="stroke-width:2;stroke-dasharray:12.000000,11.838767;"></path></g><g class="KHBsdWdpbiAtLSApWzBd"><path class="connection stroke-B2" d="M 244.000000 120.000000 L 244.000000 683.000000" fill="none" mask="url(#d2-6aed918052474b15a4b1161a5d7f9a57)" stroke="#0D32B2" style="stroke-width:2;stroke-dasharray:12.000000,11.838767;"></path></g><g class="KGQyIC0tIClbMF0="><path class="connection stroke-B2" d="M 398.000000 120.000000 L 398.000000 683.000000" fill="none" mask="url(#d2-6aed918052474b15a4b1161a5d7f9a57)" stroke="#0D32B2" style="stroke-width:2;stroke-dasharray:12.000000,11.838767;"></path></g><g class="ZDIuc3Vi"><g class="shape"><rect class=" stroke-B1 fill-B4" fill="#E3E9FD" height="110.000000" stroke="#0D32B2" style="stroke-width:2;" width="12.000000" x="392.000000" y="424.000000"></rect></g></g><a href="https://docs.python.org/3/library/subprocess.html" {http://www.w3.org/1999/xlink}href="https://docs.python.org/3/library/subprocess.html"><g class="c3VicHJvY2Vzcw=="><g class="shape blend"><rect class=" stroke-B1 fill-N5" fill="#DEE1EB" height="166.000000" stroke="#0D32B2" style="stroke-width:0;" width="228.000000" x="204.000000" y="380.000000"></rect></g><rect class=" fill-N5" fill="#DEE1EB" height="21.000000" width="77.000000" x="209.000000" y="385.000000"></rect><text class="text fill-N1" fill="#0A0F25" style="text-anchor:middle;font-size:16px" x="247.500000" y="401.000000">subprocess</text></g></a><g class="KG1rZG9jcyAtJmd0OyBta2RvY3MpWzBd"><marker id="mk-d2-6aed918052474b15a4b1161a5d7f9a57-3488378134" markerHeight="12.000000" markerUnits="userSpaceOnUse" markerWidth="10.000000" orient="auto" refX="7.000000" refY="6.000000" viewBox="0.000000 0.000000 10.000000 12.000000"> <polygon class="connection fill-B1" fill="#0D32B2" points="0.000000,0.000000 10.000000,6.000000 0.000000,12.000000" stroke-width="2"></polygon> </marker><path class="connection stroke-B1" d="M 64.000000 188.000000 L 132.000000 188.000000 S 142.000000 188.000000 142.000000 198.000000 L 142.000000 223.000000 S 142.000000 233.000000 132.000000 233.000000 L 66.000000 233.000000" fill="none" marker-end="url(#mk-d2-6aed918052474b15a4b1161a5d7f9a57-3488378134)" mask="url(#d2-6aed918052474b15a4b1161a5d7f9a57)" stroke="#0D32B2" style="stroke-width:2;"></path><text class="text-italic fill-N2" fill="#676C7E" style="text-anchor:middle;font-size:16px" x="142.000000" y="216.000000">build/serve</text></g><g class="KG1rZG9jcyAtJmd0OyBwbHVnaW4pWzBd"><path class="connection stroke-B1" d="M 64.000000 313.000000 L 240.000000 313.000000" fill="none" marker-end="url(#mk-d2-6aed918052474b15a4b1161a5d7f9a57-3488378134)" mask="url(#d2-6aed918052474b15a4b1161a5d7f9a57)" stroke="#0D32B2" style="stroke-width:2;"></path><text class="text-italic fill-N2" fill="#676C7E" style="text-anchor:middle;font-size:16px" x="153.000000" y="319.000000">diagram definition</text></g><g class="KHBsdWdpbiAtJmd0OyBkMi5zdWIpWzBd"><path class="connection stroke-B1" d="M 246.000000 434.000000 L 388.000000 434.000000" fill="none" marker-end="url(#mk-d2-6aed918052474b15a4b1161a5d7f9a57-3488378134)" mask="url(#d2-6aed918052474b15a4b1161a5d7f9a57)" stroke="#0D32B2" style="stroke-width:2;"></path><text class="text-italic fill-N2" fill="#676C7E" style="text-anchor:middle;font-size:16px" x="318.500000" y="440.000000">compile</text></g><g class="KGQyLnN1YiAtJmd0OyBwbHVnaW4pWzBd"><path class="connection stroke-B1" d="M 390.000000 524.000000 L 248.000000 524.000000" fill="none" marker-end="url(#mk-d2-6aed918052474b15a4b1161a5d7f9a57-3488378134)" mask="url(#d2-6aed918052474b15a4b1161a5d7f9a57)" stroke="#0D32B2" style="stroke-width:2;"></path><text class="text-italic fill-N2" fill="#676C7E" style="text-anchor:middle;font-size:16px" x="318.500000" y="530.000000">svg</text></g><g class="KHBsdWdpbiAtJmd0OyBta2RvY3MpWzBd"><path class="connection stroke-B1" d="M 242.000000 614.000000 L 66.000000 614.000000" fill="none" marker-end="url(#mk-d2-6aed918052474b15a4b1161a5d7f9a57-3488378134)" mask="url(#d2-6aed918052474b15a4b1161a5d7f9a57)" stroke="#0D32B2" style="stroke-width:2;"></path><text class="text-italic fill-N2" fill="#676C7E" style="text-anchor:middle;font-size:16px" x="153.500000" y="620.000000">svg</text></g><g class="appendix-icon" transform="translate(96 36)"><svg fill="none" height="32" viewBox="0 0 32 32" width="32">
+<g clip-path="url(#clip0_3440_35088111-d2-6aed918052474b15a4b1161a5d7f9a57-NVVWI33DOM)">
+<path d="M16 31.1109C24.3456 31.1109 31.1111 24.3454 31.1111 15.9998C31.1111 7.65415 24.3456 0.888672 16 0.888672C7.65436 0.888672 0.888885 7.65415 0.888885 15.9998C0.888885 24.3454 7.65436 31.1109 16 31.1109Z" fill="white" stroke="#DEE1EB"></path>
+<path d="M14.3909 16.7965C14.7364 17.2584 15.1772 17.6406 15.6834 17.9171C16.1896 18.1938 16.7494 18.3582 17.3248 18.3993C17.9001 18.4405 18.4777 18.3575 19.0181 18.1559C19.5586 17.9543 20.0492 17.6389 20.4571 17.2309L22.8708 14.8173C23.6036 14.0586 24.0089 13.0425 23.9998 11.9877C23.9906 10.933 23.5676 9.92404 22.8217 9.17821C22.0759 8.43237 21.067 8.00931 20.0123 8.00015C18.9575 7.99098 17.9413 8.39644 17.1827 9.1292L15.7988 10.505" stroke="#2E3346" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M17.609 15.1874C17.2635 14.7255 16.8227 14.3433 16.3165 14.0667C15.8103 13.7902 15.2505 13.6257 14.6752 13.5845C14.0998 13.5433 13.5223 13.6263 12.9819 13.8279C12.4414 14.0295 11.9506 14.345 11.5428 14.753L9.1292 17.1666C8.39644 17.9252 7.99098 18.9414 8.00015 19.9962C8.00931 21.0509 8.43237 22.0598 9.17821 22.8056C9.92405 23.5515 10.933 23.9745 11.9877 23.9837C13.0425 23.9928 14.0586 23.5875 14.8173 22.8547L16.193 21.4788" stroke="#2E3346" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</g>
+<defs>
+<clipPath id="clip0_3440_35088111-d2-6aed918052474b15a4b1161a5d7f9a57-NVVWI33DOM">
+<rect fill="white" height="32" width="32"></rect>
+</clipPath>
+</defs>
+</svg>
+</g><g class="appendix-icon" transform="translate(311 36)"><svg fill="none" height="32" viewBox="0 0 32 32" width="32">
+<g clip-path="url(#clip0_3440_35088111-d2-6aed918052474b15a4b1161a5d7f9a57-OBWHKZ3JNY)">
+<path d="M16 31.1109C24.3456 31.1109 31.1111 24.3454 31.1111 15.9998C31.1111 7.65415 24.3456 0.888672 16 0.888672C7.65436 0.888672 0.888885 7.65415 0.888885 15.9998C0.888885 24.3454 7.65436 31.1109 16 31.1109Z" fill="white" stroke="#DEE1EB"></path>
+<path d="M14.3909 16.7965C14.7364 17.2584 15.1772 17.6406 15.6834 17.9171C16.1896 18.1938 16.7494 18.3582 17.3248 18.3993C17.9001 18.4405 18.4777 18.3575 19.0181 18.1559C19.5586 17.9543 20.0492 17.6389 20.4571 17.2309L22.8708 14.8173C23.6036 14.0586 24.0089 13.0425 23.9998 11.9877C23.9906 10.933 23.5676 9.92404 22.8217 9.17821C22.0759 8.43237 21.067 8.00931 20.0123 8.00015C18.9575 7.99098 17.9413 8.39644 17.1827 9.1292L15.7988 10.505" stroke="#2E3346" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M17.609 15.1874C17.2635 14.7255 16.8227 14.3433 16.3165 14.0667C15.8103 13.7902 15.2505 13.6257 14.6752 13.5845C14.0998 13.5433 13.5223 13.6263 12.9819 13.8279C12.4414 14.0295 11.9506 14.345 11.5428 14.753L9.1292 17.1666C8.39644 17.9252 7.99098 18.9414 8.00015 19.9962C8.00931 21.0509 8.43237 22.0598 9.17821 22.8056C9.92405 23.5515 10.933 23.9745 11.9877 23.9837C13.0425 23.9928 14.0586 23.5875 14.8173 22.8547L16.193 21.4788" stroke="#2E3346" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</g>
+<defs>
+<clipPath id="clip0_3440_35088111-d2-6aed918052474b15a4b1161a5d7f9a57-OBWHKZ3JNY">
+<rect fill="white" height="32" width="32"></rect>
+</clipPath>
+</defs>
+</svg>
+</g><g class="appendix-icon" transform="translate(432 36)"><svg fill="none" height="32" viewBox="0 0 32 32" width="32">
+<g clip-path="url(#clip0_3440_35088111-d2-6aed918052474b15a4b1161a5d7f9a57-MQZA)">
+<path d="M16 31.1109C24.3456 31.1109 31.1111 24.3454 31.1111 15.9998C31.1111 7.65415 24.3456 0.888672 16 0.888672C7.65436 0.888672 0.888885 7.65415 0.888885 15.9998C0.888885 24.3454 7.65436 31.1109 16 31.1109Z" fill="white" stroke="#DEE1EB"></path>
+<path d="M14.3909 16.7965C14.7364 17.2584 15.1772 17.6406 15.6834 17.9171C16.1896 18.1938 16.7494 18.3582 17.3248 18.3993C17.9001 18.4405 18.4777 18.3575 19.0181 18.1559C19.5586 17.9543 20.0492 17.6389 20.4571 17.2309L22.8708 14.8173C23.6036 14.0586 24.0089 13.0425 23.9998 11.9877C23.9906 10.933 23.5676 9.92404 22.8217 9.17821C22.0759 8.43237 21.067 8.00931 20.0123 8.00015C18.9575 7.99098 17.9413 8.39644 17.1827 9.1292L15.7988 10.505" stroke="#2E3346" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M17.609 15.1874C17.2635 14.7255 16.8227 14.3433 16.3165 14.0667C15.8103 13.7902 15.2505 13.6257 14.6752 13.5845C14.0998 13.5433 13.5223 13.6263 12.9819 13.8279C12.4414 14.0295 11.9506 14.345 11.5428 14.753L9.1292 17.1666C8.39644 17.9252 7.99098 18.9414 8.00015 19.9962C8.00931 21.0509 8.43237 22.0598 9.17821 22.8056C9.92405 23.5515 10.933 23.9745 11.9877 23.9837C13.0425 23.9928 14.0586 23.5875 14.8173 22.8547L16.193 21.4788" stroke="#2E3346" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</g>
+<defs>
+<clipPath id="clip0_3440_35088111-d2-6aed918052474b15a4b1161a5d7f9a57-MQZA">
+<rect fill="white" height="32" width="32"></rect>
+</clipPath>
+</defs>
+</svg>
+</g><g class="appendix-icon" transform="translate(416 364)"><svg fill="none" height="32" viewBox="0 0 32 32" width="32">
+<g clip-path="url(#clip0_3440_35088111-d2-6aed918052474b15a4b1161a5d7f9a57-ON2WE4DSN5RWK43T)">
+<path d="M16 31.1109C24.3456 31.1109 31.1111 24.3454 31.1111 15.9998C31.1111 7.65415 24.3456 0.888672 16 0.888672C7.65436 0.888672 0.888885 7.65415 0.888885 15.9998C0.888885 24.3454 7.65436 31.1109 16 31.1109Z" fill="white" stroke="#DEE1EB"></path>
+<path d="M14.3909 16.7965C14.7364 17.2584 15.1772 17.6406 15.6834 17.9171C16.1896 18.1938 16.7494 18.3582 17.3248 18.3993C17.9001 18.4405 18.4777 18.3575 19.0181 18.1559C19.5586 17.9543 20.0492 17.6389 20.4571 17.2309L22.8708 14.8173C23.6036 14.0586 24.0089 13.0425 23.9998 11.9877C23.9906 10.933 23.5676 9.92404 22.8217 9.17821C22.0759 8.43237 21.067 8.00931 20.0123 8.00015C18.9575 7.99098 17.9413 8.39644 17.1827 9.1292L15.7988 10.505" stroke="#2E3346" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<path d="M17.609 15.1874C17.2635 14.7255 16.8227 14.3433 16.3165 14.0667C15.8103 13.7902 15.2505 13.6257 14.6752 13.5845C14.0998 13.5433 13.5223 13.6263 12.9819 13.8279C12.4414 14.0295 11.9506 14.345 11.5428 14.753L9.1292 17.1666C8.39644 17.9252 7.99098 18.9414 8.00015 19.9962C8.00931 21.0509 8.43237 22.0598 9.17821 22.8056C9.92405 23.5515 10.933 23.9745 11.9877 23.9837C13.0425 23.9928 14.0586 23.5875 14.8173 22.8547L16.193 21.4788" stroke="#2E3346" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</g>
+<defs>
+<clipPath id="clip0_3440_35088111-d2-6aed918052474b15a4b1161a5d7f9a57-ON2WE4DSN5RWK43T">
+<rect fill="white" height="32" width="32"></rect>
+</clipPath>
+</defs>
+</svg>
+</g><mask height="851" id="d2-6aed918052474b15a4b1161a5d7f9a57" maskUnits="userSpaceOnUse" width="655" x="-89" y="-66">
+<rect fill="white" height="851" width="655" x="-89" y="-66"></rect>
+<rect fill="black" height="21" width="78" x="103.000000" y="200.000000"></rect>
+<rect fill="black" height="21" width="126" x="90.000000" y="303.000000"></rect>
+<rect fill="black" height="21" width="57" x="290.000000" y="424.000000"></rect>
+<rect fill="black" height="21" width="27" x="305.000000" y="514.000000"></rect>
+<rect fill="black" height="21" width="27" x="140.000000" y="604.000000"></rect>
+</mask></svg></svg></div> 
+    <div class="panzoom-info-box panzoom-info-box-bottom panzoom-hidden">
+Hold "Alt" / "Option" to enable pan &amp; zoom
+</div>
+</div></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["content.code.copy", "navigation.indexes", "navigation.tabs", "navigation.tabs.sticky", "navigation.top"], "search": "../../assets/javascripts/workers/search.7a47a382.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.e71a0d61.min.js"></script>
+      
+        <script src="../../assets/javascripts/panzoom.min.js"></script>
+      
+        <script src="../../assets/javascripts/zoompan.js"></script>
+      
+    
+  </body>
+</html>
