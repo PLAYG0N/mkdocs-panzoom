@@ -167,3 +167,4 @@ docs/test/
 docs/.test/
 todo.md
 tests/
+mkdocs-test.yml

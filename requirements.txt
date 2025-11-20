@@ -2,7 +2,7 @@
 mkdocs>=1.1.2
 
 # Material theme
-mkdocs-material>=9.6.7
+mkdocs-material>=9.7.0
 
 # d2 diagram plugin
 mkdocs-d2-plugin
