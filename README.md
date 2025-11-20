@@ -18,6 +18,17 @@ plugins:
 ```
 
 > [!WARNING]
+>As of version 0.4.0 (performance optimizations) the following lines are needed:
+>
+>```yaml
+>markdown_extensions:
+>  - pymdownx.superfences:
+>      custom_fences:
+>        - name: mermaid
+>          class: mermaid
+>          format: !!python/name:pymdownx.superfences.fence_code_format
+>```
+>
 >Make sure to define the `site_url` otherwise it won't work!
 >
 >**Example**:
