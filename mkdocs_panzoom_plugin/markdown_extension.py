@@ -32,7 +32,6 @@ class PanZoomExtension(Extension):
             'always_show_hint': [False, 'Permanently show hint'],
             'key': ['alt', 'Key to hold to enable panzoom'],
             'selectors': [[".mermaid", ".d2"], 'Selectors on which to enable panzoom'],
-            # 'exclude_selectors': [[], 'Selectors to exlude (overrides selectors if present)'],
             'hint_location': ['bottom', 'Hint bottom/top'],
             'initial_zoom_level': [1.0, 'Initial zoom level'],
         }
