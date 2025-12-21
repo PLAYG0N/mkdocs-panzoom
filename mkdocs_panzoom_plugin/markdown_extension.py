@@ -6,14 +6,24 @@ from mkdocs_panzoom_plugin.panzoom_box import create_panzoom_box
 import xml.etree.ElementTree as etree
 import re
 
-CLASS_PART1 = r"(<(\w+)[^>]*class\s*=\s*[\"']([^\"']*\b)?"
+CLASS_PART1 = r"(<(\w+)[^>]*class\s*=\s*[\"'](?!([^\"']*\b)pz-ignore)([^\"']*\b)?"
 CLASS_PART2 = r"(\b[^\"']*)?[\"'][^>]*>(?:.|\n)*?</\2>)"
 
 ID_PART1 = r"(<(\w+)[^>]*id\s*=\s*[\"']"
 ID_PART2 = r"[\"'][^>]*>(?:.|\n)*?<\/\2>)"
 
+TAG_PART1 = r"((?:<("
+TAG_PART2 = r")(?![^>]*class\s*=\s*[\"']([^\"']*\b)pz-ignore)[^\/>]*>(?:.|\n)*?<\/\2>)|(?:<("
+TAG_PART3 = r")(?![^>]*class\s*=\s*[\"']([^\"']*\b)pz-ignore)[^>]*\/>))"
+
+def HTML_CLASS(html_class:str):
+    return f"{CLASS_PART1}{html_class.lstrip(".")}{CLASS_PART2}"
+
+def ID(id:str):
+    return f"{CLASS_PART1}{id.lstrip("#")}{CLASS_PART2}"
+
 def TAG(tag:str):
-    return f"((?:<({tag})[^\\/>]*>(?:.|\\n)*?<\\/\\2>)|(?:<({tag})[^>]*\\/>))"
+    return f"{TAG_PART1}{tag}{TAG_PART2}{tag}{TAG_PART3}"
 
 class PanZoomExtension(Extension):
     def __init__(self, **kwargs):
@@ -21,7 +31,8 @@ class PanZoomExtension(Extension):
             'full_screen': [False, 'Enables fullscreen'],
             'always_show_hint': [False, 'Permanently show hint'],
             'key': ['alt', 'Key to hold to enable panzoom'],
-            'selectors': [[".mermaid", ".d2", "img"], 'Selectors on which to enable panzoom'],
+            'selectors': [[".mermaid", ".d2"], 'Selectors on which to enable panzoom'],
+            # 'exclude_selectors': [[], 'Selectors to exlude (overrides selectors if present)'],
             'hint_location': ['bottom', 'Hint bottom/top'],
             'initial_zoom_level': [1.0, 'Initial zoom level'],
         }
@@ -44,9 +55,9 @@ class PanZoomPostprocessor(Postprocessor):
         sub = create_panzoom_box(config=self.config, id=0)
         for selector in self.selectors:
             if selector.startswith("."):
-                pattern =  re.compile(f"{CLASS_PART1}{selector.lstrip('.')}{CLASS_PART2}")
+                pattern =  re.compile(HTML_CLASS(selector))
             elif selector.startswith("#"):
-                pattern = re.compile(f"{ID_PART1}{selector.lstrip('#')}{ID_PART2}")
+                pattern = re.compile(ID(selector))
             else:
                 pattern = re.compile(TAG(selector))
             text = re.sub(pattern, sub, text, count=0)

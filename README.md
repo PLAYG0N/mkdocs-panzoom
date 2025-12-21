@@ -48,6 +48,10 @@ Examples and usage are available in the [docs](https://playg0n.github.io/mkdocs-
 Mermaid and D2 are included by default, but you can add any arbitrary selector or exclude the default ones.
 To enable images add the `img` tag like below.
 
+> [!WARNING]
+>
+> `exclude_selectors` is only to disable the default selectors `[".mermaid", ".d2"]`. If you want to exclude an item check [exclude items](#exclude-items).
+
 ```yaml
 plugins:
   - panzoom:
@@ -59,6 +63,11 @@ plugins:
         - ".mermaid"
         - ".d2"
 ```
+
+#### Exclude items
+
+To exclude a single item add the class `pz-ignore`.
+[Example for an image](https://playg0n.github.io/mkdocs-panzoom/images/largeimage.md#ignored-example)
 
 ### Hint
 
@@ -113,12 +122,8 @@ plugins:
 
 ### Exclude Pages
 
-```yml
-plugins:
-  - panzoom:
-      exclude:
-        - Path/to/page.md
-```
+> [!WARNING]
+> No longer works because of move to markdown extension (`v0.4.0`)
 
 ### Enable Fullscreen
 
