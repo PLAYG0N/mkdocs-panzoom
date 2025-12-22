@@ -17,10 +17,10 @@ TAG_PART2 = r")(?![^>]*class\s*=\s*[\"']([^\"']*\b)pz-ignore)[^\/>]*>(?:.|\n)*?<
 TAG_PART3 = r")(?![^>]*class\s*=\s*[\"']([^\"']*\b)pz-ignore)[^>]*\/>))"
 
 def HTML_CLASS(html_class:str):
-    return f"{CLASS_PART1}{html_class.lstrip(".")}{CLASS_PART2}"
+    return f"{CLASS_PART1}{html_class.lstrip('.')}{CLASS_PART2}"
 
 def ID(id:str):
-    return f"{CLASS_PART1}{id.lstrip("#")}{CLASS_PART2}"
+    return f"{CLASS_PART1}{id.lstrip('#')}{CLASS_PART2}"
 
 def TAG(tag:str):
     return f"{TAG_PART1}{tag}{TAG_PART2}{tag}{TAG_PART3}"
