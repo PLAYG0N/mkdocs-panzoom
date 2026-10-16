@@ -57,10 +57,10 @@ class PanZoomPlugin(BasePlugin):
         final_selectors = self.default_selectors.difference(excluded_selectors)
         final_selectors.update(included_selectors) 
 
-        if config.get("images",False):
+        if self.config.get("images",False):
             final_selectors.add("img")
-        if not config.get("mermaid",True):
-            final_selectors.remove(".mermaid")
+        if not self.config.get("mermaid",True):
+            final_selectors.discard(".mermaid")
 
         config.update({"selectors": list(final_selectors)})
         self.config.update({"selectors": list(final_selectors)})
